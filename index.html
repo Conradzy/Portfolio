@@ -116,9 +116,9 @@
       <a href="#journey" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Journey</a>
       <a href="#projects" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Projects</a>
     </div>
-    <a href="#contact" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:6px 6px 6px 22px; border-radius:999px; color:#0a0203; font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:14.5px; font-weight:600; background:#fff; box-shadow:0 8px 26px rgba(255,255,255,.18); transition:transform .2s, box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(255,255,255,.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 26px rgba(255,255,255,.18)'">
-      Get in touch
-      <span style="display:grid; place-items:center; width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#FF2A2A,#8B0000); color:#fff; font-size:15px; font-weight:700;">→</span>
+    <a href="#contact" class="cz-getintouch" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:6px 6px 6px 22px; border-radius:999px; color:#0a0203; font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:14.5px; font-weight:600; background:#fff; box-shadow:0 8px 26px rgba(255,255,255,.18); transition:transform .2s, box-shadow .2s; white-space:nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(255,255,255,.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 26px rgba(255,255,255,.18)'">
+      <span class="cz-getintouch-label">Get in touch</span>
+      <span style="display:grid; place-items:center; width:36px; height:36px; flex:none; border-radius:50%; background:linear-gradient(135deg,#FF2A2A,#8B0000); color:#fff; font-size:15px; font-weight:700;">→</span>
     </a>
   </nav>
 
@@ -152,14 +152,14 @@
     </div>
 
     <!-- BIG TYPING HEADLINE bottom-left -->
-    <div data-reveal style="position:absolute; left:clamp(20px,5vw,64px); right:clamp(20px,5vw,64px); bottom:170px; z-index:5; pointer-events:none;">
+    <div data-reveal class="cz-heroh1" style="position:absolute; left:clamp(20px,5vw,64px); right:clamp(20px,5vw,64px); bottom:170px; z-index:5; pointer-events:none;">
       <h1 style="margin:0; font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(46px,8.4vw,116px); line-height:.92; font-weight:700; letter-spacing:-.04em; color:#fff; max-width:780px; min-height:2.86em; display:flex; align-items:flex-end; text-wrap:balance;">
         <span><span id="cz-typed" style="background:linear-gradient(100deg,#ffffff,#ffd6d6 50%,#ff6868); background-size:200% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:cz-shimmer 7s linear infinite;">Aspiring Creative Technologist</span><span style="display:inline-block; width:.08em; height:.78em; transform:translateY(.06em); margin-left:.08em; background:#FF2A2A; box-shadow:0 0 12px #FF2A2A; animation:cz-blink 1s step-end infinite;"></span></span>
       </h1>
     </div>
 
     <!-- RIGHT-SIDE SLOGAN -->
-    <div data-reveal style="position:absolute; right:clamp(20px,5vw,64px); top:44%; z-index:5; width:min(360px, 36vw); pointer-events:none;">
+    <div data-reveal class="cz-rightslogan" style="position:absolute; right:clamp(20px,5vw,64px); top:44%; z-index:5; width:min(360px, 36vw); pointer-events:none;">
       <div style="font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(20px,2.1vw,28px); font-weight:600; line-height:1.18; color:#fff; letter-spacing:-.02em;">Building intelligent systems &amp; clean interfaces.</div>
       <div style="margin-top:14px; font-size:14.5px; line-height:1.6; color:rgba(255,255,255,.74); font-weight:400; max-width:340px;">From machine learning to motion design — I turn ideas into real digital experiences that feel inevitable.</div>
     </div>
@@ -449,8 +449,16 @@
       .cz-formrow { grid-template-columns: 1fr !important; }
       #cz-nav > div { gap: 12px !important; }
     }
-    @media (max-width: 560px) {
-      #cz-nav a:not(:first-child):not(:last-child) { display:none; }
+    @media (max-width: 760px) {
+      #cz-navlinks { display:none !important; }
+      section#home[data-sec="cz-hero"] { min-height: 880px !important; }
+      .cz-rightslogan { display:none !important; }
+      .cz-heroh1 { bottom: 230px !important; }
+      .cz-heroh1 h1 { font-size: clamp(38px,12vw,64px) !important; min-height: 0 !important; }
+    }
+    @media (max-width: 420px) {
+      .cz-getintouch { padding: 6px !important; }
+      .cz-getintouch-label { display:none !important; }
     }
   </style>
 </div>
