@@ -21,7 +21,7 @@
 }
 </script>
 <script type="module" src="sniper-scene.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -196,25 +196,17 @@
         <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">01 — ABOUT ME</span>
         <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(255,42,42,.5),transparent);"></span>
       </div>
-      <div class="cz-about" style="display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:start;">
+      <div class="cz-about" style="display:grid; grid-template-columns:1.12fr .88fr; gap:64px; align-items:center;">
         <div data-reveal>
-          <h2 style="margin:0 0 22px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em; line-height:1.08;">Building at the intersection of <span style="color:var(--accent2);">code</span>, <span style="color:var(--accent2);">design</span> &amp; <span style="color:var(--accent2);">intelligence</span>.</h2>
-          <p style="margin:0 0 18px; font-size:16px; line-height:1.7; color:#c4bfbf;">I am Raymond Conrad S. Napiñas, a BSIT student currently in 3rd year and incoming 4th year. I enjoy building systems that combine software development, machine learning, interface design, and visual creativity.</p>
-          <p style="margin:0; font-size:16px; line-height:1.7; color:#c4bfbf;">My work covers full-stack web development, mobile application design, machine learning experiments, graphic design, motion graphics, and video editing. My goal is to become a creative technologist who can build practical, intelligent, and visually engaging digital solutions.</p>
+          <h2 style="margin:0 0 22px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em; line-height:1.08;">Driven by <span style="color:var(--accent);">technology</span>, shaped by <span style="color:var(--accent);">creativity</span>.</h2>
+          <p style="margin:0 0 18px; font-size:16px; line-height:1.72; color:#4a1616;">Hi! I'm <strong>Raymond Conrad S. Napiñas</strong>, a fourth-year Information Technology student and a consistent academic honor student with a strong passion for technology and creativity. I am highly adaptable, hardworking, and capable of working under pressure, with hands-on experience in <strong>video editing, AI-assisted web development, machine learning, data mining, basic graphic design, and motion graphics</strong>. I continuously strive to improve my technical and creative skills while delivering quality work.</p>
+          <p style="margin:0; font-size:16px; line-height:1.72; color:#4a1616;">I am a dedicated and open-minded individual who values continuous learning, professionalism, and personal growth. I willingly embrace new challenges, welcome constructive criticism, and view mistakes and failures as opportunities to learn and improve. My goal is to contribute my skills, gain meaningful experience, and consistently deliver reliable and high-quality results.</p>
         </div>
-        <div data-reveal style="display:flex; flex-direction:column; gap:16px;">
-          <div style="padding:22px; border-radius:18px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s;" onmouseover="this.style.transform='translateX(6px)';this.style.borderColor='rgba(255,42,42,.4)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(255,255,255,.08)'">
-            <div style="display:flex; align-items:center; gap:12px;"><span style="display:grid; place-items:center; width:38px; height:38px; border-radius:11px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:13px; font-weight:700; font-family:ui-monospace,monospace;">&lt;/&gt;</span><h3 style="margin:0; font-size:17px; font-weight:700;">Developer Mindset</h3></div>
-            <p style="margin:12px 0 0; font-size:14px; line-height:1.6; color:#b3aeae;">Structured, practical engineering — from clean architecture to shipping real systems.</p>
+        <div data-reveal class="cz-about-portrait" aria-label="Portrait of Raymond Conrad S. Napiñas">
+          <div class="cz-about-photo-wrap">
+            <img src="assets/raymond.png" alt="Raymond Conrad S. Napiñas" class="cz-about-photo">
           </div>
-          <div style="padding:22px; border-radius:18px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s;" onmouseover="this.style.transform='translateX(6px)';this.style.borderColor='rgba(255,42,42,.4)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(255,255,255,.08)'">
-            <div style="display:flex; align-items:center; gap:12px;"><span style="display:grid; place-items:center; width:38px; height:38px; border-radius:11px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:15px; font-weight:700;">◈</span><h3 style="margin:0; font-size:17px; font-weight:700;">Creative Direction</h3></div>
-            <p style="margin:12px 0 0; font-size:14px; line-height:1.6; color:#b3aeae;">Motion, branding and visual storytelling that make interfaces feel intentional.</p>
-          </div>
-          <div style="padding:22px; border-radius:18px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s;" onmouseover="this.style.transform='translateX(6px)';this.style.borderColor='rgba(255,42,42,.4)'" onmouseout="this.style.transform='';this.style.borderColor='rgba(255,255,255,.08)'">
-            <div style="display:flex; align-items:center; gap:12px;"><span style="display:grid; place-items:center; width:38px; height:38px; border-radius:11px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:13px; font-weight:700; font-family:ui-monospace,monospace;">AI</span><h3 style="margin:0; font-size:17px; font-weight:700;">AI &amp; Machine Learning Curiosity</h3></div>
-            <p style="margin:12px 0 0; font-size:14px; line-height:1.6; color:#b3aeae;">Image classification, model training and experiments that push ideas into intelligent products.</p>
-          </div>
+          <div class="cz-about-shadow" aria-hidden="true"></div>
         </div>
       </div>
     </div>
@@ -394,10 +386,10 @@
         <h2 style="margin:18px auto 0; max-width:760px; font-size:clamp(30px,4.2vw,52px); font-weight:800; letter-spacing:-.03em; line-height:1.06;">Let's build something practical, intelligent, and visually sharp.</h2>
       </div>
       <div data-reveal style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:34px 0 40px;">
-        <a href="raymondnapinas12@gmail.com" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">✉ Email</a>
+        <a href="mailto:raymondnapinas12@gmail.com" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">✉ Email</a>
         <a href="https://github.com/Conradzy" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">⌥ GitHub</a>
-        <a href="https://www.facebook.com/raymond.napinas" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">f Facebook</a>
-        <a href="www.linkedin.com/in/raymond-napinas-a7a258390" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">in LinkedIn</a>
+        <a href="https://www.facebook.com/raymond.napinas" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">f Facebook</a>
+        <a href="https://www.linkedin.com/in/raymond-napinas-a7a258390" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">in LinkedIn</a>
       </div>
       <form id="cz-form" data-reveal style="max-width:620px; margin:0 auto; text-align:left; display:grid; gap:16px;">
         <div class="cz-formrow" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
@@ -442,9 +434,159 @@
   </div>
 
   <style>
+    /* Red + white visual system */
+    #cz-root,
+    #cz-root *,
+    #cz-root *::before,
+    #cz-root *::after {
+      font-family: 'Inter Tight', system-ui, sans-serif !important;
+    }
+
+    body,
+    #cz-root { background:#fff !important; }
+
+    #cz-nav {
+      background:rgba(176, 0, 18, .93) !important;
+      border-bottom-color:rgba(255,255,255,.24) !important;
+      box-shadow:0 10px 36px rgba(118,0,12,.18);
+    }
+    #cz-nav a { color:#fff !important; }
+    #cz-nav .cz-getintouch { color:#a90012 !important; }
+
+    #home {
+      background:
+        radial-gradient(65% 90% at 72% 45%, rgba(255,255,255,.2), transparent 62%),
+        linear-gradient(145deg,#ef233c 0%,#c90820 48%,#8d0011 100%) !important;
+    }
+
+    #about,
+    #skills,
+    #journey,
+    #contact {
+      background:
+        radial-gradient(70% 80% at 100% 0%, rgba(239,35,60,.11), transparent 58%),
+        linear-gradient(180deg,#fff 0%,#fff7f7 100%) !important;
+      color:#69000c !important;
+    }
+    #about p,
+    #skills p,
+    #journey p,
+    #contact p { color:#5a2026 !important; }
+    #about strong { color:#ad0014; font-weight:800; }
+
+    #sniper,
+    #tech,
+    #projects {
+      background:
+        radial-gradient(65% 75% at 80% 10%, rgba(255,255,255,.13), transparent 58%),
+        linear-gradient(145deg,#e31932 0%,#b60018 52%,#76000d 100%) !important;
+      color:#fff !important;
+    }
+    #sniper p,
+    #tech p,
+    #projects p { color:#fff1f2 !important; }
+
+    #skills [data-skill],
+    #journey [data-reveal][style*="border-radius"] {
+      background:#fff !important;
+      border-color:rgba(190,0,20,.18) !important;
+      box-shadow:0 18px 42px rgba(150,0,16,.08);
+    }
+
+    #tech .cz-chip {
+      color:#a80013 !important;
+      background:#fff !important;
+      border-color:rgba(255,255,255,.62) !important;
+      box-shadow:0 12px 28px rgba(91,0,10,.13);
+    }
+
+    #projects .cz-card {
+      color:#63000b !important;
+      background:#fff !important;
+      border-color:rgba(255,255,255,.6) !important;
+      box-shadow:0 14px 34px rgba(87,0,10,.12);
+    }
+    #projects .cz-card p { color:#5a2026 !important; }
+    #projects .cz-card span { color:#a90013; }
+    #projects .cz-card:not(.cz-card-gallery) .cz-cardtitle h3 { color:#fff !important; }
+    #projects .cz-card-gallery .cz-cardtitle h3 { color:#7a000e !important; }
+
+    #contact a,
+    #contact input,
+    #contact textarea {
+      color:#72000d !important;
+      background:#fff !important;
+      border-color:rgba(185,0,20,.22) !important;
+    }
+    #contact input::placeholder,
+    #contact textarea::placeholder { color:#8f5b60; }
+
+    footer {
+      color:#fff !important;
+      background:linear-gradient(145deg,#c6001a,#85000f) !important;
+      border-top-color:rgba(255,255,255,.22) !important;
+    }
+    footer p,
+    footer a,
+    footer div { color:#fff !important; }
+
+    #cz-mcard {
+      color:#70000d !important;
+      background:#fff !important;
+      border-color:rgba(190,0,20,.24) !important;
+    }
+    #cz-mcard p { color:#5a2026 !important; }
+
+    /* Floating About portrait */
+    .cz-about-portrait {
+      position:relative;
+      display:grid;
+      place-items:center;
+      min-height:520px;
+      padding:18px 10px 46px;
+      isolation:isolate;
+    }
+    .cz-about-photo-wrap {
+      position:relative;
+      z-index:2;
+      width:min(100%, 465px);
+      animation:cz-about-float 4.8s ease-in-out infinite;
+      filter:drop-shadow(0 24px 24px rgba(133,0,15,.16));
+      will-change:transform;
+    }
+    .cz-about-photo {
+      display:block;
+      width:100%;
+      height:auto;
+      object-fit:contain;
+    }
+    .cz-about-shadow {
+      position:absolute;
+      z-index:1;
+      left:50%;
+      bottom:20px;
+      width:min(70%, 330px);
+      height:34px;
+      border-radius:50%;
+      background:rgba(121,0,13,.28);
+      filter:blur(14px);
+      transform:translateX(-50%) scale(1);
+      animation:cz-about-shadow 4.8s ease-in-out infinite;
+    }
+    @keyframes cz-about-float {
+      0%,100% { transform:translate3d(0,0,0) rotate(-1deg); }
+      50% { transform:translate3d(0,-18px,0) rotate(1deg); }
+    }
+    @keyframes cz-about-shadow {
+      0%,100% { opacity:.55; transform:translateX(-50%) scale(1); }
+      50% { opacity:.3; transform:translateX(-50%) scale(.82); }
+    }
+
     @media (max-width: 860px) {
       .cz-herogrid { grid-template-columns: 1fr !important; }
       .cz-about { grid-template-columns: 1fr !important; gap: 32px !important; }
+      .cz-about-portrait { min-height:430px; }
+      .cz-about-photo-wrap { width:min(86vw, 430px); }
       .cz-stats { grid-template-columns: repeat(2,1fr) !important; }
       .cz-formrow { grid-template-columns: 1fr !important; }
       #cz-nav > div { gap: 12px !important; }
@@ -459,6 +601,11 @@
     @media (max-width: 420px) {
       .cz-getintouch { padding: 6px !important; }
       .cz-getintouch-label { display:none !important; }
+      .cz-about-portrait { min-height:350px; padding-bottom:32px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cz-about-photo-wrap,
+      .cz-about-shadow { animation:none !important; }
     }
   </style>
 </div>
