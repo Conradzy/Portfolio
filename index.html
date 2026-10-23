@@ -12,15 +12,6 @@
 <link rel="icon" type="image/png" href="assets/cz-logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
-<script type="module" src="sniper-scene.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; }
@@ -198,42 +189,52 @@
     </div>
   </section>
 
-  <!-- SNIPER 3D — DARK WITH RED -->
-  <section id="sniper" style="position:relative; min-height:118vh; overflow:hidden; background:radial-gradient(60% 70% at 50% 50%, rgba(23,23,23,.55) 0%, rgba(7,7,7,.6) 35%, rgba(0,0,0,.95) 75%), linear-gradient(180deg,#050505 0%, #030303 50%, #050505 100%);">
-    <!-- backdrop atmospherics -->
-    <div style="position:absolute; inset:0; background:radial-gradient(40% 35% at 18% 30%, rgba(87,87,87,.18), rgba(5,5,5,0) 60%), radial-gradient(50% 40% at 85% 75%, rgba(30,30,30,.22), rgba(5,5,5,0) 60%); pointer-events:none;"></div>
-    <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(87,87,87,.025) 0px, rgba(87,87,87,.025) 1px, transparent 1px, transparent 4px); pointer-events:none; opacity:.55;"></div>
-    <div style="position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(87,87,87,.4), transparent); animation:cz-scan 6s linear infinite; pointer-events:none;"></div>
-
-    <!-- corner mono labels -->
-    <div style="position:absolute; top:32px; left:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#969696; opacity:.65; pointer-events:none;">› SNIPER_MODE / AWP.MK1</div>
-    <div style="position:absolute; top:32px; right:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#969696; opacity:.65; pointer-events:none;">RANGE: ∞ · DRIFT: 0.00</div>
-    <div style="position:absolute; bottom:24px; left:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#969696; opacity:.45; pointer-events:none;">[ scroll to engage ]</div>
-    <div style="position:absolute; bottom:24px; right:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#969696; opacity:.45; pointer-events:none;">CAL .338 · v.1.0</div>
-
-    <!-- 3D canvas — pointer-events disabled so the scope cursor still hovers normal targets -->
-    <canvas id="cz-sniper-canvas" style="position:absolute; inset:0; width:100%; height:100%; display:block; z-index:1; pointer-events:none;"></canvas>
-
-    <!-- center text overlay -->
-    <div style="position:relative; z-index:3; min-height:118vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:120px clamp(20px,5vw,64px) 80px; text-align:center; pointer-events:none;">
-      <span data-reveal style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; letter-spacing:.32em; color:#8a8a8a; text-transform:uppercase; margin-bottom:32px; text-shadow:0 0 24px rgba(87,87,87,.6);">› PRECISION ENGINEERING</span>
-      <h2 data-reveal style="margin:0; font-family:'Space Grotesk', 'Inter Tight', sans-serif; font-size:clamp(44px, 8.5vw, 128px); font-weight:700; letter-spacing:-.045em; line-height:.94; max-width:1150px; text-wrap:balance; background:linear-gradient(180deg, #ffffff 0%, #e8e8e8 38%, #848484 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 38px rgba(87,87,87,.45)) drop-shadow(0 6px 30px rgba(0,0,0,.6));">Precise decisions drive accurate results.</h2>
-      <p data-reveal style="margin:36px auto 0; max-width:580px; font-size:clamp(15px,1.4vw,17px); line-height:1.65; color:#c9c9c9; font-weight:400; text-shadow:0 2px 14px rgba(0,0,0,.6);">Every project. Every line of code. Every pixel placed with intent — locked in, aimed, and shipped.</p>
-
-      <!-- center HUD reticle -->
-      <div data-reveal style="margin-top:54px; position:relative; width:140px; height:140px;">
-        <svg viewBox="0 0 140 140" width="140" height="140" style="display:block; filter:drop-shadow(0 0 14px rgba(87,87,87,.55));">
-          <circle cx="70" cy="70" r="60" fill="none" stroke="#575757" stroke-width="1.2" opacity=".7"/>
-          <circle cx="70" cy="70" r="38" fill="none" stroke="#575757" stroke-width=".8" opacity=".45" stroke-dasharray="3 5"/>
-          <circle cx="70" cy="70" r="8" fill="none" stroke="#575757" stroke-width="1.2"/>
-          <line x1="70" y1="2" x2="70" y2="48" stroke="#575757" stroke-width="1.4"/>
-          <line x1="70" y1="92" x2="70" y2="138" stroke="#575757" stroke-width="1.4"/>
-          <line x1="2" y1="70" x2="48" y2="70" stroke="#575757" stroke-width="1.4"/>
-          <line x1="92" y1="70" x2="138" y2="70" stroke="#575757" stroke-width="1.4"/>
-          <circle cx="70" cy="70" r="1.4" fill="#575757"/>
-        </svg>
-        <div style="position:absolute; inset:0; border-radius:50%; box-shadow:0 0 60px 6px rgba(87,87,87,.18); pointer-events:none; animation:cz-pulse 2.4s ease-in-out infinite;"></div>
-      </div>
+  <!-- TOOLS GALLERY -->
+  <section id="tools" aria-labelledby="cz-tools-heading">
+    <h2 id="cz-tools-heading" aria-label="The Tools Behind My Work"><span id="cz-tools-typed" aria-hidden="true">The Tools Behind My Work</span><span class="cz-tools-caret" aria-hidden="true"></span></h2>
+    <p class="cz-tools-hint">Scroll sideways, swipe, or drag to explore.</p>
+    <div id="cz-tools-gallery" tabindex="0" role="region" aria-label="Tools gallery. Use left and right arrow keys to browse.">
+      <figure class="cz-tool" style="--float-delay:-0s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/canva.png" alt="Canva 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>Canva</figcaption>
+      </figure>
+      <figure class="cz-tool" style="--float-delay:-0.55s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/capcut.png" alt="CapCut 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>CapCut</figcaption>
+      </figure>
+      <figure class="cz-tool" style="--float-delay:-1.1s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/github.png" alt="GitHub 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>GitHub</figcaption>
+      </figure>
+      <figure class="cz-tool" style="--float-delay:-1.6500000000000001s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/colab.png" alt="Google Colab 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>Google Colab</figcaption>
+      </figure>
+      <figure class="cz-tool" style="--float-delay:-2.2s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/codex.png" alt="Codex 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>Codex</figcaption>
+      </figure>
+      <figure class="cz-tool" style="--float-delay:-2.75s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/gemini.png" alt="Gemini 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>Gemini</figcaption>
+      </figure>
+      <figure class="cz-tool" style="--float-delay:-3.3000000000000003s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/qgis.png" alt="QGIS 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>QGIS</figcaption>
+      </figure>
+      <figure class="cz-tool" style="--float-delay:-3.8500000000000005s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/jupyter.png" alt="Jupyter 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>Jupyter</figcaption>
+      </figure>
+      <figure class="cz-tool" style="--float-delay:-4.4s">
+        <div class="cz-tool-stage"><div class="cz-tool-scale"><img src="assets/tools/claude.png" alt="Claude 3D icon" width="1280" height="1280" loading="lazy" decoding="async" draggable="false"></div><span class="cz-tool-shadow" aria-hidden="true"></span></div>
+        <figcaption>Claude</figcaption>
+      </figure>
+    </div>
+    <div class="cz-tools-controls">
+      <button type="button" id="cz-tools-prev" aria-label="Previous tool">←</button>
+      <span id="cz-tools-position" aria-live="polite">1 / 9</span>
+      <button type="button" id="cz-tools-next" aria-label="Next tool">→</button>
     </div>
   </section>
 
@@ -474,7 +475,6 @@
     #contact p { color:#2d2d2d !important; }
     #about strong { color:#262626; font-weight:800; }
 
-    #sniper,
     #tech,
     #projects {
       background:
@@ -482,7 +482,6 @@
         linear-gradient(145deg,#464646 0%,#282828 52%,#1a1a1a 100%) !important;
       color:#fff !important;
     }
-    #sniper p,
     #tech p,
     #projects p { color:#f4f4f4 !important; }
 
@@ -540,7 +539,7 @@
 
     /* Monochrome surfaces and readable accents on both backgrounds. */
     #cz-root { --accent:#222 !important; --accent2:#555 !important; --accentDeep:#000 !important; }
-    #home, #sniper, #tech, #projects, footer {
+    #home, #tech, #projects, footer {
       --accent:#777; --accent2:#eee; --accentDeep:#333;
     }
     #home { background:#050505 !important; isolation:isolate; }
@@ -563,7 +562,7 @@
     #about p { text-indent:2em; }
     #about strong { color:#111; }
     #about p, #skills p, #journey p, #contact p { color:#333 !important; }
-    #sniper, #tech, #projects, footer { background:linear-gradient(145deg,#161616,#050505) !important; }
+    #tech, #projects, footer { background:linear-gradient(145deg,#161616,#050505) !important; }
     #projects .cz-card { --accent:#222; --accent2:#333; --accentDeep:#000; color:#111 !important; }
     #projects .cz-card p, #projects .cz-card a, #projects .cz-card span,
     #cz-mcard p, #cz-mcard span { color:#333 !important; }
@@ -572,8 +571,12 @@
     #journey span[style*="border-radius:999px"] { color:#333 !important; }
     #skills [data-skill] > div > span { color:#fff; }
     #cz-mcard a { background:#222 !important; color:#fff !important; }
-    #cz-typed, #sniper h2 {
-      background-image:linear-gradient(120deg,#fff,#ddd 55%,#aaa) !important;
+    #home :is(h1, p, span, .cz-stat, .cz-stat div, .cz-rightslogan div),
+    #home > [data-reveal] > div { color:#fff !important; }
+    #cz-typed {
+      background:none !important;
+      -webkit-text-fill-color:#fff !important;
+      color:#fff !important;
     }
     /* Individual translate avoids competing with the cards' hover transforms. */
     .cz-reveal-pending { opacity:0; translate:0 64px; }
@@ -588,6 +591,48 @@
     @media (prefers-reduced-motion: reduce) {
       .cz-reveal-pending, .cz-reveal-visible { opacity:1; translate:none; transition:none !important; animation:none !important; }
       #home *, .cz-about-photo-wrap, .cz-about-shadow { animation:none !important; }
+    }
+
+
+    /* Original-color floating tools, on a clean white stage. */
+    #tools { background:#fff; color:#000; padding:100px 0 70px; overflow:hidden; }
+    #cz-tools-heading {
+      text-align:center; font-size:clamp(34px,5.4vw,74px); font-weight:800;
+      letter-spacing:-.045em; line-height:1.12; margin:0 auto; padding:0 22px;
+      max-width:1100px; min-height:2.24em; text-wrap:balance;
+    }
+    .cz-tools-caret { display:inline-block; height:.85em; width:3px; background:#000; margin-left:6px; animation:cz-blink 1s step-end infinite; }
+    .cz-tools-hint { text-align:center; font-size:14px; color:#555; margin:16px 20px 0; }
+    #cz-tools-gallery {
+      --tool-width:clamp(230px,32vw,440px);
+      display:flex; gap:clamp(12px,3vw,48px); overflow-x:auto; overflow-y:hidden;
+      padding:55px max(24px,calc((100% - var(--tool-width))/2)) 30px;
+      scroll-snap-type:x proximity; scrollbar-width:thin; scrollbar-color:#bbb #fff;
+      cursor:grab; touch-action:pan-x pan-y; outline-offset:-4px;
+    }
+    #cz-tools-gallery.is-dragging { cursor:grabbing; scroll-snap-type:none; }
+    .cz-tool { flex:0 0 var(--tool-width); margin:0; scroll-snap-align:center; text-align:center; user-select:none; }
+    .cz-tool-stage { position:relative; height:clamp(300px,39vw,520px); display:grid; place-items:center; }
+    .cz-tool-scale { width:86%; transform:scale(var(--tool-scale,.78)); transition:transform .16s ease-out; will-change:transform; z-index:1; }
+    .cz-tool img { display:block; width:100%; height:auto; object-fit:contain; animation:cz-tool-float 5s ease-in-out infinite; animation-delay:var(--float-delay); animation-play-state:paused; }
+    .cz-tool-shadow {
+      position:absolute; bottom:12px; left:24%; width:52%; height:25px; border-radius:50%;
+      background:radial-gradient(ellipse,rgba(0,0,0,.27),transparent 72%);
+      filter:blur(8px); animation:cz-tool-shadow 5s ease-in-out infinite;
+      animation-delay:var(--float-delay); animation-play-state:paused;
+    }
+    #tools.is-visible .cz-tool img, #tools.is-visible .cz-tool-shadow { animation-play-state:running; }
+    .cz-tool figcaption { font-size:18px; font-weight:600; letter-spacing:-.02em; margin-top:16px; }
+    .cz-tools-controls { display:flex; align-items:center; justify-content:center; gap:24px; margin-top:22px; }
+    .cz-tools-controls button { background:#fff; color:#000; border:1px solid #ccc; border-radius:50%; width:48px; height:48px; font-size:22px; cursor:pointer; transition:background .2s,color .2s; }
+    .cz-tools-controls button:hover { background:#000; color:#fff; }
+    .cz-tools-controls button:disabled { opacity:.3; cursor:default; }
+    #cz-tools-position { font-size:14px; min-width:48px; text-align:center; }
+    @keyframes cz-tool-float { 0%,100% { transform:translateY(0) rotate(-2deg); } 50% { transform:translateY(-16px) rotate(2deg); } }
+    @keyframes cz-tool-shadow { 0%,100% { transform:scale(1); opacity:.8; } 50% { transform:scale(.8); opacity:.45; } }
+    @media (prefers-reduced-motion:reduce) {
+      .cz-tool img, .cz-tool-shadow, .cz-tools-caret { animation:none !important; }
+      .cz-tool-scale { transition:none; }
     }
 
     /* Floating About portrait */

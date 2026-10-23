@@ -42,47 +42,102 @@ class CZPortfolio {
     this.initProjects();
     this.initForm();
     this.initInteractiveSurfaces();
-    this.initSniperScene();
+    this.initToolsGallery();
   }
 
-  initSniperScene() {
-    const canvas = document.getElementById('cz-sniper-canvas');
-    const section = document.getElementById('sniper');
-    if (!canvas || !section) return;
-    // Idempotent: if a previous mount lives on window, dispose it and reuse
-    if (window.__czSniper && typeof window.__czSniper.dispose === 'function') {
-      try { window.__czSniper.dispose(); } catch (e) {}
-      window.__czSniper = null;
-    }
-    if (window.__czSniperScrollHandler) {
-      window.removeEventListener('scroll', window.__czSniperScrollHandler);
-      window.__czSniperScrollHandler = null;
-    }
-    const mount = () => {
-      try { this._sniper = window.initSniperScene(canvas); window.__czSniper = this._sniper; console.log('[sniper] mounted'); }
-      catch (e) { console.error('[sniper] init failed', e); return; }
-      this._sniperUpdate = () => {
-        if (!this._sniper) return;
-        const rect = section.getBoundingClientRect();
-        const vh = window.innerHeight;
-        // 0 when section's top reaches viewport top (entering); 1 when bottom reaches viewport bottom.
-        // Use a portion of the section's height for the firing window so the bullet completes mid-section.
-        const fireSpan = rect.height * 0.55; // travel completes 55% through scrolling the section
-        const scrolled = Math.max(0, -rect.top); // how far we've scrolled past the section's top
-        const p = Math.max(0, Math.min(1, scrolled / fireSpan));
-        this._sniper.setProgress(p);
+  initToolsGallery() {
+    const section = document.getElementById('tools');
+    const gallery = document.getElementById('cz-tools-gallery');
+    const heading = document.getElementById('cz-tools-typed');
+    if (!section || !gallery || !heading) return;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const cards = Array.from(gallery.querySelectorAll('.cz-tool'));
+    const prev = document.getElementById('cz-tools-prev');
+    const next = document.getElementById('cz-tools-next');
+    const position = document.getElementById('cz-tools-position');
+    const title = 'The Tools Behind My Work';
+    const events = new AbortController();
+    let typingStarted = false, timer, frame, active = 0, drag = null;
+    const typeHeading = () => {
+      if (typingStarted) return;
+      typingStarted = true;
+      let count = 0;
+      const tick = () => {
+        count = motion.matches ? title.length : count + 1;
+        heading.textContent = title.slice(0, count);
+        if (count < title.length) timer = setTimeout(tick, 55);
       };
-      window.__czSniperScrollHandler = this._sniperUpdate;
-      window.addEventListener('scroll', this._sniperUpdate, { passive: true });
-      this._sniperUpdate();
+      tick();
     };
-    if (window.THREE && window.initSniperScene) { mount(); return; }
-    let tries = 0;
-    const iv = setInterval(() => {
-      tries++;
-      if (window.THREE && window.initSniperScene) { clearInterval(iv); mount(); }
-      else if (tries > 80) clearInterval(iv);
-    }, 100);
+    const update = () => {
+      frame = null;
+      const bounds = gallery.getBoundingClientRect();
+      const center = bounds.left + bounds.width / 2;
+      let nearest = Infinity;
+      cards.forEach((card, index) => {
+        const rect = card.getBoundingClientRect();
+        const distance = Math.abs(rect.left + rect.width / 2 - center);
+        const focus = Math.max(0, 1 - distance / (rect.width * 1.4));
+        card.style.setProperty('--tool-scale', (.76 + .38 * focus).toFixed(3));
+        if (distance < nearest) { nearest = distance; active = index; }
+      });
+      position.textContent = (active + 1) + ' / ' + cards.length;
+      prev.disabled = active === 0;
+      next.disabled = active === cards.length - 1;
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const go = index => {
+      const card = cards[Math.max(0, Math.min(cards.length - 1, index))];
+      const rect = card.getBoundingClientRect(), bounds = gallery.getBoundingClientRect();
+      gallery.scrollTo({ left: gallery.scrollLeft + rect.left + rect.width / 2 - bounds.left - bounds.width / 2,
+        behavior: motion.matches ? 'instant' : 'smooth' });
+    };
+    gallery.addEventListener('scroll', schedule, { passive:true, signal:events.signal });
+    window.addEventListener('resize', schedule, { passive:true, signal:events.signal });
+    prev.addEventListener('click', () => go(active - 1), { signal:events.signal });
+    next.addEventListener('click', () => go(active + 1), { signal:events.signal });
+    gallery.addEventListener('keydown', event => {
+      if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+      event.preventDefault();
+      go(event.key === 'Home' ? 0 : event.key === 'End' ? cards.length - 1 : active + (event.key === 'ArrowRight' ? 1 : -1));
+    }, { signal:events.signal });
+    gallery.addEventListener('pointerdown', event => {
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
+      drag = { x:event.clientX, left:gallery.scrollLeft };
+      gallery.setPointerCapture(event.pointerId);
+      gallery.classList.add('is-dragging');
+    }, { signal:events.signal });
+    gallery.addEventListener('pointermove', event => {
+      if (drag) gallery.scrollLeft = drag.left - (event.clientX - drag.x);
+    }, { signal:events.signal });
+    const endDrag = () => { if (!drag) return; drag = null; gallery.classList.remove('is-dragging'); update(); go(active); };
+    ['pointerup','pointercancel','lostpointercapture'].forEach(name =>
+      gallery.addEventListener(name, endDrag, { signal:events.signal }));
+    // Vertical wheel input browses the gallery; at either end normal page scrolling resumes.
+    gallery.addEventListener('wheel', event => {
+      if (event.ctrlKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
+      const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? gallery.clientWidth : 1);
+      const max = gallery.scrollWidth - gallery.clientWidth;
+      if ((delta < 0 && gallery.scrollLeft <= 1) || (delta > 0 && gallery.scrollLeft >= max - 1)) return;
+      event.preventDefault();
+      gallery.scrollBy({ left:delta, behavior:'instant' });
+    }, { passive:false, signal:events.signal });
+    let observer;
+    if ('IntersectionObserver' in window) {
+      if (!motion.matches) heading.textContent = '';
+      observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          section.classList.toggle('is-visible', entry.isIntersecting);
+          if (entry.isIntersecting) { typeHeading(); schedule(); }
+        });
+      }, { threshold:.1 });
+      observer.observe(section);
+    } else { section.classList.add('is-visible'); typeHeading(); }
+    motion.addEventListener('change', () => {
+      if (motion.matches) { clearTimeout(timer); heading.textContent = title; typingStarted = true; }
+    }, { signal:events.signal });
+    schedule();
+    this._toolsCleanup = () => { events.abort(); clearTimeout(timer); cancelAnimationFrame(frame); if (observer) observer.disconnect(); };
   }
 
   initInteractiveSurfaces() {
@@ -606,6 +661,7 @@ class CZPortfolio {
   }
 
   componentWillUnmount() {
+    if (this._toolsCleanup) this._toolsCleanup();
     clearTimeout(this._typeT);
     cancelAnimationFrame(this._techRAF);
     if (this._spMove) window.removeEventListener('pointermove', this._spMove);
