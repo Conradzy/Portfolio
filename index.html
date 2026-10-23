@@ -105,9 +105,8 @@
 
   <!-- NAVBAR -->
   <nav id="cz-nav" style="position:fixed; top:0; left:0; width:100%; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:22px clamp(20px,5vw,64px); transition:background .35s, backdrop-filter .35s, padding .35s, border-color .35s; background:transparent; border-bottom:1px solid rgba(255,255,255,0);">
-    <a href="#home" style="text-decoration:none; display:flex; align-items:center; gap:12px; color:#F8F8F8;">
-      <img src="assets/cz-logo.png" alt="CZ" style="height:36px; width:auto; display:block; filter:drop-shadow(0 4px 14px rgba(210,10,10,.45));">
-      <img src="assets/conradzz-wordmark.png" alt="Conradzz" style="height:28px; width:auto; display:block; filter:drop-shadow(0 4px 14px rgba(210,10,10,.4));">
+    <a href="#home" class="cz-navbar-logo" aria-label="Conradzz — Home" style="text-decoration:none; display:flex; align-items:center; color:#111;">
+      <span class="cz-logo-black">Conr</span><span class="cz-logo-red">adzz</span>
     </a>
     <div id="cz-navlinks" style="display:flex; gap:clamp(18px,3.2vw,46px); align-items:center;">
       <a href="#home" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Home</a>
@@ -199,8 +198,8 @@
       <div class="cz-about" style="display:grid; grid-template-columns:1.12fr .88fr; gap:64px; align-items:center;">
         <div data-reveal>
           <h2 style="margin:0 0 22px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em; line-height:1.08;">Driven by <span style="color:var(--accent);">technology</span>, shaped by <span style="color:var(--accent);">creativity</span>.</h2>
-          <p style="margin:0 0 18px; font-size:16px; line-height:1.72; color:#4a1616;">Hi! I'm <strong>Raymond Conrad S. Napiñas</strong>, a fourth-year Information Technology student and a consistent academic honor student with a strong passion for technology and creativity. I am highly adaptable, hardworking, and capable of working under pressure, with hands-on experience in <strong>video editing, AI-assisted web development, machine learning, data mining, basic graphic design, and motion graphics</strong>. I continuously strive to improve my technical and creative skills while delivering quality work.</p>
-          <p style="margin:0; font-size:16px; line-height:1.72; color:#4a1616;">I am a dedicated and open-minded individual who values continuous learning, professionalism, and personal growth. I willingly embrace new challenges, welcome constructive criticism, and view mistakes and failures as opportunities to learn and improve. My goal is to contribute my skills, gain meaningful experience, and consistently deliver reliable and high-quality results.</p>
+          <p style="margin:0 0 18px; font-size:16px; line-height:1.72; color:#4a1616; text-align:justify; text-justify:inter-word;">Hi! I'm <strong>Raymond Conrad S. Napiñas</strong>, a fourth-year Information Technology student and a consistent academic honor student with a strong passion for technology and creativity. I am highly adaptable, hardworking, and capable of working under pressure, with hands-on experience in <strong>video editing, AI-assisted web development, machine learning, data mining, basic graphic design, and motion graphics</strong>. I continuously strive to improve my technical and creative skills while delivering quality work.</p>
+          <p style="margin:0; font-size:16px; line-height:1.72; color:#4a1616; text-align:justify; text-justify:inter-word;">I am a dedicated and open-minded individual who values continuous learning, professionalism, and personal growth. I willingly embrace new challenges, welcome constructive criticism, and view mistakes and failures as opportunities to learn and improve. My goal is to contribute my skills, gain meaningful experience, and consistently deliver reliable and high-quality results.</p>
         </div>
         <div data-reveal class="cz-about-portrait" aria-label="Portrait of Raymond Conrad S. Napiñas">
           <div class="cz-about-photo-wrap">
@@ -446,12 +445,26 @@
     #cz-root { background:#fff !important; }
 
     #cz-nav {
-      background:rgba(176, 0, 18, .93) !important;
-      border-bottom-color:rgba(255,255,255,.24) !important;
-      box-shadow:0 10px 36px rgba(118,0,12,.18);
+      background:rgba(255,255,255,.96) !important;
+      border-bottom-color:rgba(20,20,20,.09) !important;
+      box-shadow:0 10px 36px rgba(55,0,7,.1);
+      backdrop-filter:blur(16px) !important;
     }
-    #cz-nav a { color:#fff !important; }
-    #cz-nav .cz-getintouch { color:#a90012 !important; }
+    #cz-nav a { color:#111 !important; }
+    #cz-nav .cz-navbar-logo {
+      gap:0;
+      font-size:clamp(24px,2.2vw,31px);
+      font-weight:900;
+      letter-spacing:-.055em;
+      line-height:1;
+    }
+    #cz-nav .cz-logo-black { color:#111 !important; }
+    #cz-nav .cz-logo-red { color:#d20a0a !important; }
+    #cz-nav .cz-getintouch {
+      color:#111 !important;
+      border:1px solid rgba(210,10,10,.18);
+      box-shadow:0 8px 26px rgba(118,0,12,.12) !important;
+    }
 
     #home {
       background:
