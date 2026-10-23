@@ -432,12 +432,12 @@
     #cz-root { background:#fff !important; }
 
     #cz-nav {
-      background:rgba(255,255,255,.96) !important;
-      border-bottom-color:rgba(20,20,20,.09) !important;
+      background:#000 !important;
+      border-bottom-color:rgba(255,255,255,.15) !important;
       box-shadow:0 10px 36px rgba(12,12,12,.1);
       backdrop-filter:blur(16px) !important;
     }
-    #cz-nav a { color:#111 !important; }
+    #cz-nav a { color:#fff !important; }
     #cz-nav .cz-navbar-logo {
       gap:0;
       font-size:clamp(24px,2.2vw,31px);
@@ -445,8 +445,8 @@
       letter-spacing:-.055em;
       line-height:1;
     }
-    #cz-nav .cz-logo-black { color:#111 !important; }
-    #cz-nav .cz-logo-red { color:#353535 !important; }
+    #cz-nav .cz-logo-black { color:#fff !important; }
+    #cz-nav .cz-logo-red { color:#fff !important; }
     #cz-nav .cz-getintouch {
       color:#111 !important;
       border:1px solid rgba(53,53,53,.18);
@@ -555,12 +555,9 @@
       filter:grayscale(1) brightness(1.35) contrast(1.05) !important;
       mix-blend-mode:normal !important;
     }
-    /* Asset files stay intact; their presentation follows the monochrome theme. */
-    img, video, #cz-sniper-canvas { filter:grayscale(1); }
-    #cz-loader img, footer img { filter:grayscale(1) brightness(2) !important; }
+    /* Keep the approved hero lighting; all other media retain their original colors. */
+    #home img { filter:grayscale(1); }
     #cz-particles > div { background:#fff !important; box-shadow:0 0 14px rgba(255,255,255,.8) !important; }
-    #cz-nav .cz-logo-red { color:#111 !important; }
-    #cz-nav { background:#fff !important; }
     #cz-spotlight { display:none !important; }
     #about, #skills, #journey, #contact { background:linear-gradient(#fff,#f6f6f6) !important; color:#111 !important; }
     #about p { text-indent:2em; }
