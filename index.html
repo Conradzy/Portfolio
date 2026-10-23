@@ -254,7 +254,7 @@
     </h2>
     <div id="cz-video-stage">
       <div id="cz-video-frame">
-        <iframe src="https://www.youtube-nocookie.com/embed/4rumCv7gjeE?rel=0&amp;playsinline=1"
+        <iframe src="https://www.youtube-nocookie.com/embed/4rumCv7gjeE?rel=0&amp;playsinline=1&amp;autoplay=1&amp;mute=1"
           title="Video Editing Sample — YouTube player"
           width="1920" height="1080" loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -571,6 +571,15 @@
     }
     #cz-skills-statement > span { grid-area:1 / 1; }
     .cz-statement-space { visibility:hidden; }
+    #cz-skills-typed::after,
+    #cz-skills-statement .cz-statement-space::after {
+      content:""; display:inline-block; width:2px; height:.9em;
+      margin-left:6px; vertical-align:-.08em; background:currentColor;
+    }
+    #cz-skills-typed::after { animation:cz-blink 1s step-end infinite; }
+    @media (prefers-reduced-motion:reduce) {
+      #cz-skills-typed::after { animation:none; }
+    }
     @media (max-width:760px) {
       #skills { min-height:60vh; padding:90px 7vw 130px; }
       #cz-skills-statement { width:100%; font-size:clamp(30px,6vw,45px); }
@@ -583,7 +592,7 @@
       font-size:45px; font-weight:400; line-height:1.2; letter-spacing:-.025em;
     }
     #cz-video-heading > span { grid-area:1 / 1; }
-    #cz-video-stage { position:relative; width:100%; aspect-ratio:16 / 9; }
+    #cz-video-stage { position:relative; width:calc(100% - 30px); margin-inline:15px; aspect-ratio:16 / 9; }
     #cz-video-frame {
       width:100%; height:100%; background:#000; overflow:hidden;
       border-radius:var(--video-radius,44px);
