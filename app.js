@@ -38,17 +38,18 @@ class CZPortfolio {
     this.initScroll();
     this.initReveal();
     this.initParticles();
-    this.initTech();
     this.initProjects();
     this.initForm();
     this.initInteractiveSurfaces();
     this.initToolsGallery();
-    this.initSkillsStatement();
+    this.initScrollTyping('cz-skills-statement', 'cz-skills-typed');
+    this.initScrollTyping('cz-video-heading', 'cz-video-typed');
+    this.initVideoExpansion();
   }
 
-  initSkillsStatement() {
-    const heading = document.getElementById('cz-skills-statement');
-    const text = document.getElementById('cz-skills-typed');
+  initScrollTyping(headingId, textId) {
+    const heading = document.getElementById(headingId);
+    const text = document.getElementById(textId);
     if (!heading || !text) return;
     const statement = heading.getAttribute('aria-label');
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -79,10 +80,39 @@ class CZPortfolio {
     }
     const onMotion = event => { if (event.matches) showFull(); };
     motion.addEventListener('change', onMotion);
-    this._skillsStatementCleanup = () => {
+    this._typingCleanups = this._typingCleanups || [];
+    this._typingCleanups.push(() => {
       clearTimeout(timer);
       if (observer) observer.disconnect();
       motion.removeEventListener('change', onMotion);
+    });
+  }
+
+  initVideoExpansion() {
+    const stage = document.getElementById('cz-video-stage');
+    const frame = document.getElementById('cz-video-frame');
+    if (!stage || !frame) return;
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let raf = null;
+    const update = () => {
+      raf = null;
+      const viewport = window.innerHeight;
+      const top = stage.getBoundingClientRect().top;
+      const progress = motion.matches ? 1 : Math.max(0, Math.min(1, (viewport * .95 - top) / (viewport * .8)));
+      const eased = progress * progress * (3 - 2 * progress);
+      frame.style.setProperty('--video-scale', (.6 + .4 * eased).toFixed(4));
+      frame.style.setProperty('--video-radius', (44 - 20 * eased).toFixed(1) + 'px');
+    };
+    const schedule = () => { if (raf === null) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', schedule, { passive:true });
+    window.addEventListener('resize', schedule, { passive:true });
+    motion.addEventListener('change', schedule);
+    update();
+    this._videoCleanup = () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      motion.removeEventListener('change', schedule);
     };
   }
 
@@ -429,80 +459,6 @@ class CZPortfolio {
     }
   }
 
-  initTech() {
-    this._techItems = [
-      ['Laravel', 'web'], ['PHP', 'web'], ['JavaScript', 'web'], ['HTML', 'web'], ['CSS', 'web'],
-      ['React', 'web'], ['Flutter', 'mobile'], ['Dart', 'mobile'], ['Python', 'aiml'], ['FastAPI', 'web'],
-      ['Java', 'web'], ['PostgreSQL', 'tools'], ['MySQL', 'tools'], ['phpMyAdmin', 'tools'], ['WAMP', 'tools'],
-      ['Laragon', 'tools'], ['GitHub', 'tools'], ['Vercel', 'tools'], ['Firebase', 'tools'], ['Supabase', 'tools'],
-      ['QGIS', 'gis'], ['ArcGIS', 'gis'], ['Canva', 'design'], ['After Effects', 'design'], ['CapCut', 'design'], ['Figma', 'design']
-    ];
-    this._filter = 'all';
-    this._offset = 0;
-    this._dragging = false;
-    this.renderTech();
-
-    const fb = this.el.filters;
-    if (fb) {
-      fb.querySelectorAll('[data-filter]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          this._filter = btn.getAttribute('data-filter');
-          fb.querySelectorAll('[data-filter]').forEach(b => {
-            const active = b === btn;
-            b.style.background = active ? 'linear-gradient(135deg,var(--accent),var(--accentDeep))' : 'rgba(255,255,255,.04)';
-            b.style.color = active ? '#fff' : '#cbcbcb';
-            b.style.borderColor = active ? 'transparent' : 'rgba(255,255,255,.12)';
-          });
-          this._offset = 0;
-          this.renderTech();
-        });
-      });
-    }
-
-    const car = this.el.carousel;
-    if (car) {
-      let startX = 0, startOff = 0;
-      car.addEventListener('pointerdown', (e) => { this._dragging = true; startX = e.clientX; startOff = this._offset; car.style.cursor = 'grabbing'; try { car.setPointerCapture(e.pointerId); } catch (x) {} });
-      car.addEventListener('pointermove', (e) => { if (!this._dragging) return; this._offset = startOff + (e.clientX - startX); });
-      const end = () => { this._dragging = false; car.style.cursor = 'grab'; };
-      car.addEventListener('pointerup', end);
-      car.addEventListener('pointercancel', end);
-      car.addEventListener('pointerleave', end);
-      car.addEventListener('wheel', (e) => { if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) { this._offset -= e.deltaY * 0.7; e.preventDefault(); } else { this._offset -= e.deltaX * 0.7; } }, { passive: false });
-    }
-
-    const loop = () => {
-      const t = this.el.track;
-      if (t) {
-        if (!this._dragging) this._offset -= 0.55;
-        const half = t.scrollWidth / 2;
-        if (half > 0) {
-          while (this._offset <= -half) this._offset += half;
-          while (this._offset > 0) this._offset -= half;
-        }
-        t.style.transform = 'translateX(' + this._offset + 'px)';
-      }
-      this._techRAF = requestAnimationFrame(loop);
-    };
-    this._techRAF = requestAnimationFrame(loop);
-  }
-
-  renderTech() {
-    const track = this.el.track; if (!track) return;
-    const list = this._techItems.filter(it => this._filter === 'all' || it[1] === this._filter);
-    const doubled = list.concat(list);
-    const colors = { web: '#575757', mobile: '#929292', aiml: '#797979', design: '#737373', tools: '#b9b9b9', gis: '#d2d2d2' };
-    track.innerHTML = doubled.map(it => {
-      const c = colors[it[1]] || '#575757';
-      return '<div class="cz-chip" style="flex:0 0 auto; display:flex; align-items:center; gap:10px; padding:14px 22px; border-radius:15px; background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015)); border:1px solid rgba(255,255,255,.1); font-size:15px; font-weight:600; white-space:nowrap; transition:transform .25s, border-color .25s, box-shadow .25s;">' +
-        '<span style="width:9px; height:9px; border-radius:50%; background:' + c + '; box-shadow:0 0 10px ' + c + ';"></span>' + it[0] + '</div>';
-    }).join('');
-    track.querySelectorAll('.cz-chip').forEach(ch => {
-      ch.addEventListener('mouseenter', () => { ch.style.transform = 'translateY(-5px) rotateX(8deg) rotateY(-6deg)'; ch.style.borderColor = 'rgba(87,87,87,.5)'; ch.style.boxShadow = '0 14px 34px rgba(53,53,53,.32)'; });
-      ch.addEventListener('mouseleave', () => { ch.style.transform = 'none'; ch.style.borderColor = 'rgba(255,255,255,.1)'; ch.style.boxShadow = 'none'; });
-    });
-  }
-
   projectData() {
     const ph = (l) => '__PH__' + l;
     return [
@@ -737,7 +693,8 @@ class CZPortfolio {
   }
 
   componentWillUnmount() {
-    if (this._skillsStatementCleanup) this._skillsStatementCleanup();
+    (this._typingCleanups || []).forEach(cleanup => cleanup());
+    if (this._videoCleanup) this._videoCleanup();
     if (this._toolsCleanup) this._toolsCleanup();
     clearTimeout(this._typeT);
     cancelAnimationFrame(this._techRAF);

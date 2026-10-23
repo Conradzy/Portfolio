@@ -246,27 +246,22 @@
     </div>
   </section>
 
-  <!-- TECH STACK — BLACK -->
-  <section id="tech" style="position:relative; padding:clamp(60px,8vw,110px) 0; background:#050505; overflow:hidden;">
-    <div style="max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,64px);">
-      <div data-reveal style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
-        <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">03 — TECH STACK</span>
-        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(87,87,87,.5),transparent);"></span>
-      </div>
-      <h2 data-reveal style="margin:0 0 24px; font-size:clamp(26px,3.4vw,42px); font-weight:800; letter-spacing:-.025em;">Tools I build with.</h2>
-      <div id="cz-filters" data-reveal style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px;">
-        <button data-filter="all" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); border:1px solid transparent; transition:all .2s;">All</button>
-        <button data-filter="web" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Web</button>
-        <button data-filter="mobile" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Mobile</button>
-        <button data-filter="aiml" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">AI/ML</button>
-        <button data-filter="design" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Design</button>
-        <button data-filter="tools" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Tools</button>
-        <button data-filter="gis" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">GIS</button>
+  <!-- VIDEO EDITING SAMPLES -->
+  <section id="video-samples" aria-labelledby="cz-video-heading">
+    <h2 id="cz-video-heading" aria-label="Video Editing Samples">
+      <span class="cz-statement-space" aria-hidden="true">Video Editing Samples</span>
+      <span id="cz-video-typed" aria-hidden="true">Video Editing Samples</span>
+    </h2>
+    <div id="cz-video-stage">
+      <div id="cz-video-frame">
+        <iframe src="https://www.youtube-nocookie.com/embed/4rumCv7gjeE?rel=0&amp;playsinline=1"
+          title="Video Editing Sample — YouTube player"
+          width="1920" height="1080" loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </div>
-    <div id="cz-carousel" style="position:relative; width:100%; cursor:grab; -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);">
-      <div id="cz-track" style="display:flex; gap:14px; width:max-content; padding:0 24px; will-change:transform;"></div>
-    </div>
+    <p class="cz-video-link"><a href="https://www.youtube.com/watch?v=4rumCv7gjeE" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
   </section>
 
   <!-- JOURNEY — RED -->
@@ -579,6 +574,34 @@
     @media (max-width:760px) {
       #skills { min-height:60vh; padding:90px 7vw 130px; }
       #cz-skills-statement { width:100%; font-size:clamp(30px,6vw,45px); }
+    }
+
+    /* Full-width video stage reserves its size while the player expands on approach. */
+    #video-samples { padding:90px 0 80px; background:#fff; color:#000; overflow:hidden; }
+    #cz-video-heading {
+      display:grid; margin:0 auto 64px; padding:0 24px; text-align:center;
+      font-size:45px; font-weight:400; line-height:1.2; letter-spacing:-.025em;
+    }
+    #cz-video-heading > span { grid-area:1 / 1; }
+    #cz-video-stage { position:relative; width:100%; aspect-ratio:16 / 9; }
+    #cz-video-frame {
+      width:100%; height:100%; background:#000; overflow:hidden;
+      border-radius:var(--video-radius,44px);
+      transform:scale(var(--video-scale,.6)); transform-origin:center top;
+      transition:transform .18s ease-out, border-radius .18s ease-out;
+      will-change:transform;
+      box-shadow:0 24px 70px rgba(0,0,0,.12);
+    }
+    #cz-video-frame:focus-within { transform:scale(1); }
+    #cz-video-frame iframe { display:block; width:100%; height:100%; border:0; }
+    .cz-video-link { text-align:center; margin:26px 20px 0; font-size:14px; }
+    .cz-video-link a { color:#333; text-underline-offset:4px; }
+    @media (max-width:760px) {
+      #video-samples { padding:70px 0 60px; }
+      #cz-video-heading { font-size:clamp(30px,6vw,45px); margin-bottom:44px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      #cz-video-frame { transform:scale(1); transition:none; }
     }
 
     /* Original-color floating tools, on a clean white stage. */
