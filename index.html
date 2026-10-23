@@ -232,9 +232,7 @@
       </figure>
     </div>
     <div class="cz-tools-controls">
-      <button type="button" id="cz-tools-prev" aria-label="Previous tool">←</button>
       <span id="cz-tools-position" aria-live="polite">1 / 9</span>
-      <button type="button" id="cz-tools-next" aria-label="Next tool">→</button>
     </div>
   </section>
 
@@ -607,13 +605,14 @@
       --tool-width:clamp(230px,32vw,440px);
       display:flex; gap:clamp(12px,3vw,48px); overflow-x:auto; overflow-y:hidden;
       padding:55px max(24px,calc((100% - var(--tool-width))/2)) 30px;
-      scroll-snap-type:x proximity; scrollbar-width:thin; scrollbar-color:#bbb #fff;
+      scroll-snap-type:none; scrollbar-width:none; -ms-overflow-style:none;
       cursor:grab; touch-action:pan-x pan-y; outline-offset:-4px;
     }
     #cz-tools-gallery.is-dragging { cursor:grabbing; scroll-snap-type:none; }
+    #cz-tools-gallery::-webkit-scrollbar { display:none; width:0; height:0; }
     .cz-tool { flex:0 0 var(--tool-width); margin:0; scroll-snap-align:center; text-align:center; user-select:none; }
     .cz-tool-stage { position:relative; height:clamp(300px,39vw,520px); display:grid; place-items:center; }
-    .cz-tool-scale { width:86%; transform:scale(var(--tool-scale,.78)); transition:transform .16s ease-out; will-change:transform; z-index:1; }
+    .cz-tool-scale { width:86%; transform:scale(var(--tool-scale,.78)); transition:transform .45s cubic-bezier(.22,1,.36,1); will-change:transform; z-index:1; }
     .cz-tool img { display:block; width:100%; height:auto; object-fit:contain; animation:cz-tool-float 5s ease-in-out infinite; animation-delay:var(--float-delay); animation-play-state:paused; }
     .cz-tool-shadow {
       position:absolute; bottom:12px; left:24%; width:52%; height:25px; border-radius:50%;
@@ -624,9 +623,6 @@
     #tools.is-visible .cz-tool img, #tools.is-visible .cz-tool-shadow { animation-play-state:running; }
     .cz-tool figcaption { font-size:18px; font-weight:600; letter-spacing:-.02em; margin-top:16px; }
     .cz-tools-controls { display:flex; align-items:center; justify-content:center; gap:24px; margin-top:22px; }
-    .cz-tools-controls button { background:#fff; color:#000; border:1px solid #ccc; border-radius:50%; width:48px; height:48px; font-size:22px; cursor:pointer; transition:background .2s,color .2s; }
-    .cz-tools-controls button:hover { background:#000; color:#fff; }
-    .cz-tools-controls button:disabled { opacity:.3; cursor:default; }
     #cz-tools-position { font-size:14px; min-width:48px; text-align:center; }
     @keyframes cz-tool-float { 0%,100% { transform:translateY(0) rotate(-2deg); } 50% { transform:translateY(-16px) rotate(2deg); } }
     @keyframes cz-tool-shadow { 0%,100% { transform:scale(1); opacity:.8; } 50% { transform:scale(.8); opacity:.45; } }

@@ -52,12 +52,45 @@ class CZPortfolio {
     if (!section || !gallery || !heading) return;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const cards = Array.from(gallery.querySelectorAll('.cz-tool'));
-    const prev = document.getElementById('cz-tools-prev');
-    const next = document.getElementById('cz-tools-next');
     const position = document.getElementById('cz-tools-position');
     const title = 'The Tools Behind My Work';
     const events = new AbortController();
     let typingStarted = false, timer, frame, active = 0, drag = null;
+    let glideFrame = null, glideTime = null, targetScroll = gallery.scrollLeft;
+    let glidePosition = gallery.scrollLeft;
+    const clampScroll = value => Math.max(0, Math.min(gallery.scrollWidth - gallery.clientWidth, value));
+    const stopGlide = () => {
+      cancelAnimationFrame(glideFrame);
+      glideFrame = null;
+      glideTime = null;
+      targetScroll = gallery.scrollLeft;
+    };
+    const glide = time => {
+      const elapsed = glideTime === null ? 16 : Math.min(50, time - glideTime);
+      glideTime = time;
+      targetScroll = clampScroll(targetScroll);
+      const remaining = targetScroll - glidePosition;
+      if (Math.abs(remaining) < .5 || motion.matches) {
+        gallery.scrollLeft = targetScroll;
+        glideFrame = null;
+        glideTime = null;
+        schedule();
+        return;
+      }
+      // Frame-rate-independent easing: each gesture gently accelerates and settles.
+      glidePosition += remaining * (1 - Math.exp(-elapsed / 180));
+      gallery.scrollLeft = glidePosition;
+      schedule();
+      glideFrame = requestAnimationFrame(glide);
+    };
+    const moveTo = value => {
+      targetScroll = clampScroll(value);
+      if (motion.matches) { gallery.scrollLeft = targetScroll; schedule(); }
+      else if (glideFrame === null) {
+        glidePosition = gallery.scrollLeft;
+        glideFrame = requestAnimationFrame(glide);
+      }
+    };
     const typeHeading = () => {
       if (typingStarted) return;
       typingStarted = true;
@@ -82,26 +115,22 @@ class CZPortfolio {
         if (distance < nearest) { nearest = distance; active = index; }
       });
       position.textContent = (active + 1) + ' / ' + cards.length;
-      prev.disabled = active === 0;
-      next.disabled = active === cards.length - 1;
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
     const go = index => {
       const card = cards[Math.max(0, Math.min(cards.length - 1, index))];
       const rect = card.getBoundingClientRect(), bounds = gallery.getBoundingClientRect();
-      gallery.scrollTo({ left: gallery.scrollLeft + rect.left + rect.width / 2 - bounds.left - bounds.width / 2,
-        behavior: motion.matches ? 'instant' : 'smooth' });
+      moveTo(gallery.scrollLeft + rect.left + rect.width / 2 - bounds.left - bounds.width / 2);
     };
     gallery.addEventListener('scroll', schedule, { passive:true, signal:events.signal });
-    window.addEventListener('resize', schedule, { passive:true, signal:events.signal });
-    prev.addEventListener('click', () => go(active - 1), { signal:events.signal });
-    next.addEventListener('click', () => go(active + 1), { signal:events.signal });
+    window.addEventListener('resize', () => { stopGlide(); schedule(); }, { passive:true, signal:events.signal });
     gallery.addEventListener('keydown', event => {
       if (!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
       event.preventDefault();
       go(event.key === 'Home' ? 0 : event.key === 'End' ? cards.length - 1 : active + (event.key === 'ArrowRight' ? 1 : -1));
     }, { signal:events.signal });
     gallery.addEventListener('pointerdown', event => {
+      stopGlide();
       if (event.pointerType !== 'mouse' || event.button !== 0) return;
       drag = { x:event.clientX, left:gallery.scrollLeft };
       gallery.setPointerCapture(event.pointerId);
@@ -113,14 +142,20 @@ class CZPortfolio {
     const endDrag = () => { if (!drag) return; drag = null; gallery.classList.remove('is-dragging'); update(); go(active); };
     ['pointerup','pointercancel','lostpointercapture'].forEach(name =>
       gallery.addEventListener(name, endDrag, { signal:events.signal }));
-    // Vertical wheel input browses the gallery; at either end normal page scrolling resumes.
+    // Slow both wheel axes and blend consecutive events into one continuous glide.
     gallery.addEventListener('wheel', event => {
-      if (event.ctrlKey || Math.abs(event.deltaX) >= Math.abs(event.deltaY)) return;
-      const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? gallery.clientWidth : 1);
+      if (event.ctrlKey || drag) return;
+      const raw = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+      const normalized = raw * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? gallery.clientWidth : 1);
+      const delta = Math.max(-100, Math.min(100, normalized * .45));
+      if (!delta) return;
       const max = gallery.scrollWidth - gallery.clientWidth;
-      if ((delta < 0 && gallery.scrollLeft <= 1) || (delta > 0 && gallery.scrollLeft >= max - 1)) return;
+      if ((delta < 0 && gallery.scrollLeft <= 1) || (delta > 0 && gallery.scrollLeft >= max - 1)) { stopGlide(); return; }
       event.preventDefault();
-      gallery.scrollBy({ left:delta, behavior:'instant' });
+      const base = glideFrame === null ? gallery.scrollLeft : targetScroll;
+      // Limit momentum buildup so a fast wheel gesture cannot race through all icons.
+      const limit = cards[0].getBoundingClientRect().width * .8;
+      moveTo(Math.max(gallery.scrollLeft - limit, Math.min(gallery.scrollLeft + limit, base + delta)));
     }, { passive:false, signal:events.signal });
     let observer;
     if ('IntersectionObserver' in window) {
@@ -134,10 +169,10 @@ class CZPortfolio {
       observer.observe(section);
     } else { section.classList.add('is-visible'); typeHeading(); }
     motion.addEventListener('change', () => {
-      if (motion.matches) { clearTimeout(timer); heading.textContent = title; typingStarted = true; }
+      if (motion.matches) { stopGlide(); clearTimeout(timer); heading.textContent = title; typingStarted = true; }
     }, { signal:events.signal });
     schedule();
-    this._toolsCleanup = () => { events.abort(); clearTimeout(timer); cancelAnimationFrame(frame); if (observer) observer.disconnect(); };
+    this._toolsCleanup = () => { stopGlide(); events.abort(); clearTimeout(timer); cancelAnimationFrame(frame); if (observer) observer.disconnect(); };
   }
 
   initInteractiveSurfaces() {
