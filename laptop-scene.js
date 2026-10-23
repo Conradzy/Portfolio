@@ -41,7 +41,7 @@ async function initLaptop() {
 
     // The supplied model's display is the quad at local X +/- .147,
     // Y .01536..18536, Z .00432. Keep its bezel and casing untouched.
-    // Fit the whole screenshot onto that display without stretching it.
+    // Cover the entire display, cropping the edges instead of adding letterboxing.
     const textureCanvas = document.createElement('canvas');
     textureCanvas.width = 2048;
     textureCanvas.height = Math.round(2048 * .17 / .294);
@@ -49,7 +49,7 @@ async function initLaptop() {
     context.fillStyle = '#000';
     context.fillRect(0, 0, textureCanvas.width, textureCanvas.height);
     const img = screenshot.image;
-    const fit = Math.min(textureCanvas.width / img.width, textureCanvas.height / img.height);
+    const fit = Math.max(textureCanvas.width / img.width, textureCanvas.height / img.height);
     const w = img.width * fit, h = img.height * fit;
     context.drawImage(img, (textureCanvas.width - w) / 2, (textureCanvas.height - h) / 2, w, h);
     screenshot.dispose();
@@ -73,8 +73,12 @@ async function initLaptop() {
     const scale = 3.5 / size.x;
     model.scale.multiplyScalar(scale);
     model.position.sub(center.multiplyScalar(scale));
-    floating.add(model);
-    floating.rotation.y = -.14;
+    // Separate user rotation from the floating motion so neither overwrites the other.
+    const turntable = new THREE.Group();
+    turntable.add(model);
+    floating.add(turntable);
+    let targetYaw = -.14, targetPitch = 0;
+    turntable.rotation.y = targetYaw;
 
     let raf = 0, previous = 0, elapsed = 0;
     const render = time => {
@@ -85,6 +89,9 @@ async function initLaptop() {
       const wave = motion.matches ? 0 : Math.sin(elapsed * .7);
       floating.position.y = .10 + wave * .075;
       floating.rotation.z = motion.matches ? 0 : Math.sin(elapsed * .4) * .012;
+      const ease = motion.matches ? 1 : .14;
+      turntable.rotation.y += (targetYaw - turntable.rotation.y) * ease;
+      turntable.rotation.x += (targetPitch - turntable.rotation.x) * ease;
       stage.style.setProperty('--laptop-shadow-scale', String(1 - wave * .07));
       renderer.render(scene, camera);
       if (!motion.matches) raf = requestAnimationFrame(render);
@@ -94,6 +101,51 @@ async function initLaptop() {
       previous = 0;
       if (visible && !document.hidden) raf = requestAnimationFrame(render);
     };
+    const canvas = renderer.domElement;
+    canvas.tabIndex = 0;
+    canvas.setAttribute('role', 'img');
+    canvas.setAttribute('aria-label', 'Interactive AniTime laptop. Drag to rotate and tilt. Arrow keys rotate and tilt; Home resets the view.');
+    canvas.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight ArrowUp ArrowDown Home');
+    let drag = null;
+    const resetView = () => {
+      targetYaw = -.14;
+      targetPitch = 0;
+      renderScene();
+    };
+    const endDrag = event => {
+      if (!drag || event.pointerId !== drag.id) return;
+      drag = null;
+      canvas.classList.remove('is-dragging');
+      if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    };
+    canvas.addEventListener('pointerdown', event => {
+      if (event.button !== 0 || drag) return;
+      drag = { id:event.pointerId, x:event.clientX, y:event.clientY };
+      canvas.setPointerCapture(event.pointerId);
+      canvas.focus({ preventScroll:true });
+      canvas.classList.add('is-dragging');
+    });
+    canvas.addEventListener('pointermove', event => {
+      if (!drag || drag.id !== event.pointerId) return;
+      targetYaw += (event.clientX - drag.x) * .008;
+      targetPitch = THREE.MathUtils.clamp(targetPitch + (event.clientY - drag.y) * .006, -.55, .55);
+      drag.x = event.clientX;
+      drag.y = event.clientY;
+      renderScene();
+    });
+    ['pointerup', 'pointercancel', 'lostpointercapture'].forEach(type => canvas.addEventListener(type, endDrag));
+    canvas.addEventListener('dblclick', resetView);
+    canvas.addEventListener('keydown', event => {
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home'].includes(event.key)) return;
+      event.preventDefault();
+      if (event.key === 'Home') { resetView(); return; }
+      if (event.key === 'ArrowLeft') targetYaw -= .15;
+      if (event.key === 'ArrowRight') targetYaw += .15;
+      if (event.key === 'ArrowUp') targetPitch -= .1;
+      if (event.key === 'ArrowDown') targetPitch += .1;
+      targetPitch = THREE.MathUtils.clamp(targetPitch, -.55, .55);
+      renderScene();
+    });
     const resize = () => {
       const width = host.clientWidth, height = host.clientHeight;
       if (!width || !height) return;

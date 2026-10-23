@@ -271,11 +271,12 @@
         <span class="cz-statement-space" aria-hidden="true">A showcase of websites built through creativity, dedication, technical expertise, and AI-assisted development, where human ingenuity meets innovation.</span>
         <span id="cz-websites-typed" aria-hidden="true">A showcase of websites built through creativity, dedication, technical expertise, and AI-assisted development, where human ingenuity meets innovation.</span>
       </h2>
-      <div id="cz-laptop-stage" role="img" aria-label="Floating 3D laptop displaying the AniTime website" data-reveal>
+      <div id="cz-laptop-stage" role="group" aria-label="Floating 3D laptop displaying the AniTime website" data-reveal>
         <div class="cz-laptop-glow" aria-hidden="true"></div>
         <div class="cz-laptop-shadow" aria-hidden="true"></div>
         <img class="cz-laptop-fallback" src="assets/anitime-screen.png" alt="" loading="lazy" width="1919" height="913">
-        <div id="cz-laptop-canvas" aria-hidden="true"></div>
+        <div id="cz-laptop-canvas"></div>
+        <span class="cz-laptop-hint" aria-hidden="true">Drag to rotate &amp; tilt · Double-click to reset</span>
       </div>
     </div>
   </section>
@@ -610,7 +611,15 @@
       filter:blur(8px); transform:scale(var(--laptop-shadow-scale,1));
     }
     #cz-laptop-canvas { position:absolute; inset:0; opacity:0; transition:opacity .7s ease; }
-    #cz-laptop-canvas canvas { display:block; width:100%; height:100%; }
+    #cz-laptop-canvas canvas { display:block; width:100%; height:100%; cursor:grab; touch-action:none; }
+    #cz-laptop-canvas canvas.is-dragging { cursor:grabbing; }
+    #cz-laptop-canvas canvas:focus-visible { outline:2px solid #fff; outline-offset:-6px; border-radius:28px; }
+    .cz-laptop-hint {
+      position:absolute; bottom:18px; inset-inline:12px; text-align:center;
+      font-size:12px; font-weight:400; letter-spacing:.02em; color:#ddd;
+      pointer-events:none; opacity:0; transition:opacity .5s ease;
+    }
+    .cz-laptop-ready .cz-laptop-hint { opacity:1; }
     .cz-laptop-fallback {
       position:absolute; left:12%; top:25%; width:76%; height:auto;
       border:8px solid #242424; border-radius:8px; box-shadow:0 24px 38px #0009;
