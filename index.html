@@ -254,7 +254,7 @@
     </h2>
     <div id="cz-video-stage">
       <div id="cz-video-frame">
-        <iframe src="https://www.youtube-nocookie.com/embed/4rumCv7gjeE?rel=0&amp;playsinline=1&amp;autoplay=1&amp;mute=1"
+        <iframe id="cz-video-player" src="https://www.youtube-nocookie.com/embed/4rumCv7gjeE?rel=0&amp;playsinline=1&amp;autoplay=0&amp;mute=1&amp;enablejsapi=1"
           title="Video Editing Sample — YouTube player"
           width="1920" height="1080" loading="lazy"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -594,7 +594,7 @@
     #cz-video-heading > span { grid-area:1 / 1; }
     #cz-video-stage { position:relative; width:calc(100% - 30px); margin-inline:15px; aspect-ratio:16 / 9; }
     #cz-video-frame {
-      width:100%; height:100%; background:#000; overflow:hidden;
+      position:absolute; inset:0; width:100%; height:100%; background:#000; overflow:hidden;
       border-radius:var(--video-radius,44px);
       transform:scale(var(--video-scale,.6)); transform-origin:center top;
       transition:transform .18s ease-out, border-radius .18s ease-out;
@@ -602,7 +602,7 @@
       box-shadow:0 24px 70px rgba(0,0,0,.12);
     }
     #cz-video-frame:focus-within { transform:scale(1); }
-    #cz-video-frame iframe { display:block; width:100%; height:100%; border:0; }
+    #cz-video-frame iframe { position:absolute; inset:0; display:block; width:100%; height:100%; border:0; }
     .cz-video-link { text-align:center; margin:26px 20px 0; font-size:14px; }
     .cz-video-link a { color:#333; text-underline-offset:4px; }
     @media (max-width:760px) {
@@ -616,7 +616,7 @@
     /* Original-color floating tools, on a clean white stage. */
     #tools { background:#fff; color:#000; padding:100px 0 70px; overflow:hidden; }
     #cz-tools-heading {
-      text-align:center; font-size:clamp(34px,5.4vw,74px); font-weight:800;
+      text-align:center; font-size:clamp(34px,5.4vw,74px); font-weight:400;
       letter-spacing:-.045em; line-height:1.12; margin:0 auto; padding:0 22px;
       max-width:1100px; min-height:2.24em; text-wrap:balance;
     }

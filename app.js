@@ -45,6 +45,7 @@ class CZPortfolio {
     this.initScrollTyping('cz-skills-statement', 'cz-skills-typed');
     this.initScrollTyping('cz-video-heading', 'cz-video-typed');
     this.initVideoExpansion();
+    this.initVideoPlayback();
   }
 
   initScrollTyping(headingId, textId) {
@@ -113,6 +114,70 @@ class CZPortfolio {
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
       motion.removeEventListener('change', schedule);
+    };
+  }
+
+  initVideoPlayback() {
+    const stage = document.getElementById('cz-video-stage');
+    const iframe = document.getElementById('cz-video-player');
+    if (!stage || !iframe || !('IntersectionObserver' in window)) return;
+    let visible = false, ready = false, loading = false, disposed = false, player;
+    const shouldPlay = () => visible && !document.hidden && !disposed;
+    const sync = () => {
+      if (!ready || disposed) return;
+      if (shouldPlay()) player.playVideo();
+      else player.pauseVideo();
+    };
+    const loadPlayer = () => {
+      if (loading || disposed) return;
+      loading = true;
+      if (!window.__czYouTubeAPI) {
+        window.__czYouTubeAPI = new Promise((resolve, reject) => {
+          if (window.YT && window.YT.Player) { resolve(window.YT); return; }
+          const previous = window.onYouTubeIframeAPIReady;
+          window.onYouTubeIframeAPIReady = () => {
+            resolve(window.YT);
+            if (typeof previous === 'function') previous();
+          };
+          const script = document.createElement('script');
+          script.src = 'https://www.youtube.com/iframe_api';
+          script.onerror = reject;
+          document.head.appendChild(script);
+        });
+      }
+      window.__czYouTubeAPI.then(YT => {
+        if (disposed) return;
+        player = new YT.Player(iframe, {
+          events: {
+            onReady: event => {
+              if (disposed) return;
+              player = event.target;
+              player.mute();
+              ready = true;
+              sync();
+            },
+            onStateChange: event => {
+              // A late play event must not keep an offscreen video running.
+              if (event.data === 1 && !shouldPlay()) event.target.pauseVideo();
+            }
+          }
+        });
+      }).catch(() => { /* The normal player controls and YouTube link remain available. */ });
+    };
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        visible = entry.isIntersecting && entry.intersectionRatio >= .2;
+        if (visible) loadPlayer();
+        sync();
+      });
+    }, { threshold:[0, .2] });
+    observer.observe(stage);
+    document.addEventListener('visibilitychange', sync);
+    this._videoPlaybackCleanup = () => {
+      disposed = true;
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', sync);
+      if (player && ready) player.pauseVideo();
     };
   }
 
@@ -695,6 +760,7 @@ class CZPortfolio {
   componentWillUnmount() {
     (this._typingCleanups || []).forEach(cleanup => cleanup());
     if (this._videoCleanup) this._videoCleanup();
+    if (this._videoPlaybackCleanup) this._videoPlaybackCleanup();
     if (this._toolsCleanup) this._toolsCleanup();
     clearTimeout(this._typeT);
     cancelAnimationFrame(this._techRAF);
