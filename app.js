@@ -43,6 +43,47 @@ class CZPortfolio {
     this.initForm();
     this.initInteractiveSurfaces();
     this.initToolsGallery();
+    this.initSkillsStatement();
+  }
+
+  initSkillsStatement() {
+    const heading = document.getElementById('cz-skills-statement');
+    const text = document.getElementById('cz-skills-typed');
+    if (!heading || !text) return;
+    const statement = heading.getAttribute('aria-label');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let timer, observer, started = false;
+    const showFull = () => {
+      clearTimeout(timer);
+      text.textContent = statement;
+      started = true;
+      if (observer) observer.disconnect();
+    };
+    const start = () => {
+      if (started) return;
+      started = true;
+      let count = 0;
+      const tick = () => {
+        text.textContent = statement.slice(0, ++count);
+        if (count < statement.length) timer = setTimeout(tick, 26);
+      };
+      tick();
+    };
+    if (motion.matches || !('IntersectionObserver' in window)) showFull();
+    else {
+      text.textContent = '';
+      observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => entry.isIntersecting)) { start(); observer.disconnect(); }
+      }, { threshold:.2 });
+      observer.observe(heading);
+    }
+    const onMotion = event => { if (event.matches) showFull(); };
+    motion.addEventListener('change', onMotion);
+    this._skillsStatementCleanup = () => {
+      clearTimeout(timer);
+      if (observer) observer.disconnect();
+      motion.removeEventListener('change', onMotion);
+    };
   }
 
   initToolsGallery() {
@@ -696,6 +737,7 @@ class CZPortfolio {
   }
 
   componentWillUnmount() {
+    if (this._skillsStatementCleanup) this._skillsStatementCleanup();
     if (this._toolsCleanup) this._toolsCleanup();
     clearTimeout(this._typeT);
     cancelAnimationFrame(this._techRAF);

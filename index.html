@@ -243,7 +243,10 @@
         <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">02 — SKILLS</span>
         <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(87,87,87,.5),transparent);"></span>
       </div>
-      <h2 data-reveal style="margin:0 0 44px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em;">A full-stack creative toolkit.</h2>
+      <h2 id="cz-skills-statement" aria-label="A diverse range of technical and creative skills, shaped by hands-on experience, continuous learning, and a passion for innovation.">
+        <span class="cz-statement-space" aria-hidden="true">A diverse range of technical and creative skills, shaped by hands-on experience, continuous learning, and a passion for innovation.</span>
+        <span id="cz-skills-typed" aria-hidden="true">A diverse range of technical and creative skills, shaped by hands-on experience, continuous learning, and a passion for innovation.</span>
+      </h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px;">
         <div data-reveal data-skill style="padding:26px; border-radius:20px; background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s, box-shadow .3s;">
           <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:13px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(53,53,53,.3);">ML</span><h3 style="margin:0; font-size:18px; font-weight:700;">Machine Learning &amp; Model Training</h3></div>
@@ -591,6 +594,18 @@
       #home *, .cz-about-photo-wrap, .cz-about-shadow { animation:none !important; }
     }
 
+
+    /* Invisible eight-column statement layout; reserve height while typing. */
+    #cz-skills-statement {
+      display:grid; width:66.666667%; margin:0 0 44px;
+      font-size:34px; font-weight:400; line-height:1.4;
+      letter-spacing:-.02em; color:#111;
+    }
+    #cz-skills-statement > span { grid-area:1 / 1; }
+    .cz-statement-space { visibility:hidden; }
+    @media (max-width:760px) {
+      #cz-skills-statement { width:100%; font-size:clamp(26px,4.5vw,34px); }
+    }
 
     /* Original-color floating tools, on a clean white stage. */
     #tools { background:#fff; color:#000; padding:100px 0 70px; overflow:hidden; }
