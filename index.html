@@ -25,13 +25,13 @@
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
-  body { margin: 0; background: #050505; color: #F8F8F8; font-family: 'Inter Tight', system-ui, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; cursor: none; }
-  body, body * { cursor: none; }
+  body { margin: 0; background: #050505; color: #F8F8F8; font-family: 'Inter Tight', system-ui, sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; cursor: auto; }
+  a, button, [data-interactive], .cz-card { cursor: pointer; }
   @media (hover: none) { body, body * { cursor: auto; } #cz-scope { display:none !important; } }
-  ::selection { background: #D20A0A; color: #fff; }
+  ::selection { background: #353535; color: #fff; }
   ::-webkit-scrollbar { width: 10px; }
-  ::-webkit-scrollbar-track { background: #0a0203; }
-  ::-webkit-scrollbar-thumb { background: linear-gradient(#8B0000,#3A0507); border-radius: 8px; }
+  ::-webkit-scrollbar-track { background: #040404; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(#1e1e1e,#101010); border-radius: 8px; }
   @keyframes cz-float1 { 0%,100%{ transform: translate3d(0,0,0) rotate(0deg);} 50%{ transform: translate3d(0,-34px,0) rotate(8deg);} }
   @keyframes cz-float2 { 0%,100%{ transform: translate3d(0,0,0) rotate(0deg);} 50%{ transform: translate3d(22px,26px,0) rotate(-10deg);} }
   @keyframes cz-float3 { 0%,100%{ transform: translateY(0) rotateX(0) rotateY(0);} 50%{ transform: translateY(-26px) rotateX(22deg) rotateY(18deg);} }
@@ -49,33 +49,33 @@
 </style>
 </head>
 <body>
-<div id="cz-root" style="--accent:#D20A0A; --accent2:#FF2A2A; --accentDeep:#8B0000; position:relative; width:100%; background:#050505;">
+<div id="cz-root" style="--accent:#353535; --accent2:#575757; --accentDeep:#1e1e1e; position:relative; width:100%; background:#050505;">
 
   <!-- LOADING SCREEN -->
-  <div id="cz-loader" style="position:fixed; inset:0; z-index:9999; background:radial-gradient(120% 80% at 50% 50%, #1a0306 0%, #050505 60%, #000 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px; overflow:hidden;">
-    <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,42,42,.04) 0px, rgba(255,42,42,.04) 1px, transparent 1px, transparent 3px); pointer-events:none;"></div>
-    <div style="position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(255,42,42,.55), transparent); animation:cz-scan 3s linear infinite; pointer-events:none;"></div>
-    <div style="position:absolute; top:24px; left:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#ff6b6b; opacity:.7;">CZ_SYS // v1.0.26</div>
-    <div style="position:absolute; top:24px; right:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#ff6b6b; opacity:.7;">SECURE BOOT • ENCRYPTED</div>
-    <div style="position:absolute; bottom:24px; left:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#ff6b6b; opacity:.5;">© 2026 RAYMOND CONRAD S. NAPIÑAS</div>
-    <div style="position:absolute; bottom:24px; right:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#ff6b6b; opacity:.5;">CREATIVE TECHNOLOGIST</div>
+  <div id="cz-loader" style="position:fixed; inset:0; z-index:9999; background:radial-gradient(120% 80% at 50% 50%, #080808 0%, #050505 60%, #000 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px; overflow:hidden;">
+    <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(87,87,87,.04) 0px, rgba(87,87,87,.04) 1px, transparent 1px, transparent 3px); pointer-events:none;"></div>
+    <div style="position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(87,87,87,.55), transparent); animation:cz-scan 3s linear infinite; pointer-events:none;"></div>
+    <div style="position:absolute; top:24px; left:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#8a8a8a; opacity:.7;">CZ_SYS // v1.0.26</div>
+    <div style="position:absolute; top:24px; right:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#8a8a8a; opacity:.7;">SECURE BOOT • ENCRYPTED</div>
+    <div style="position:absolute; bottom:24px; left:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#8a8a8a; opacity:.5;">© 2026 RAYMOND CONRAD S. NAPIÑAS</div>
+    <div style="position:absolute; bottom:24px; right:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#8a8a8a; opacity:.5;">CREATIVE TECHNOLOGIST</div>
 
     <div style="position:relative; width:120px; height:120px; display:grid; place-items:center;">
-      <div style="position:absolute; inset:0; border:1px solid rgba(255,42,42,.18); border-top-color:#FF2A2A; border-radius:50%; animation:cz-loaderspin 1.6s linear infinite;"></div>
-      <div style="position:absolute; inset:14px; border:1px solid rgba(255,42,42,.12); border-bottom-color:#D20A0A; border-radius:50%; animation:cz-loaderspin 2.4s linear infinite reverse;"></div>
-      <img src="assets/cz-logo.png" alt="CZ" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 0 18px rgba(210,10,10,.55)); animation:cz-glitch 4s infinite;">
+      <div style="position:absolute; inset:0; border:1px solid rgba(87,87,87,.18); border-top-color:#575757; border-radius:50%; animation:cz-loaderspin 1.6s linear infinite;"></div>
+      <div style="position:absolute; inset:14px; border:1px solid rgba(87,87,87,.12); border-bottom-color:#353535; border-radius:50%; animation:cz-loaderspin 2.4s linear infinite reverse;"></div>
+      <img src="assets/cz-logo.png" alt="CZ" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 0 18px rgba(53,53,53,.55)); animation:cz-glitch 4s infinite;">
     </div>
 
     <div style="text-align:center;">
       <div id="cz-loader-status" style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; letter-spacing:.18em; color:#fff;">INITIALIZING SYSTEM<span id="cz-loader-dots"><span style="display:inline-block; animation:cz-dotpulse 1.4s infinite;">.</span><span style="display:inline-block; animation:cz-dotpulse 1.4s infinite .2s;">.</span><span style="display:inline-block; animation:cz-dotpulse 1.4s infinite .4s;">.</span></span></div>
-      <div style="margin-top:8px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.16em; color:#ff8b8b; opacity:.7;" id="cz-loader-sub">handshake_complete › decrypting_assets</div>
+      <div style="margin-top:8px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.16em; color:#a4a4a4; opacity:.7;" id="cz-loader-sub">handshake_complete › decrypting_assets</div>
     </div>
 
     <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
-      <div style="width:min(560px, 70vw); height:6px; background:rgba(255,42,42,.12); border:1px solid rgba(255,42,42,.25); border-radius:999px; overflow:hidden; position:relative;">
-        <div id="cz-loader-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#8B0000,#FF2A2A); box-shadow:0 0 14px rgba(255,42,42,.7); transition:width .12s linear;"></div>
+      <div style="width:min(560px, 70vw); height:6px; background:rgba(87,87,87,.12); border:1px solid rgba(87,87,87,.25); border-radius:999px; overflow:hidden; position:relative;">
+        <div id="cz-loader-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#1e1e1e,#575757); box-shadow:0 0 14px rgba(87,87,87,.7); transition:width .12s linear;"></div>
       </div>
-      <div style="display:flex; gap:20px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.16em; color:#ff6b6b;">
+      <div style="display:flex; gap:20px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.16em; color:#8a8a8a;">
         <span id="cz-loader-pct">000%</span>
         <span style="opacity:.5;">|</span>
         <span id="cz-loader-task">mounting_components</span>
@@ -87,21 +87,7 @@
     <div id="cz-progress" style="height:100%; width:0%; background:linear-gradient(90deg,var(--accentDeep),var(--accent2)); box-shadow:0 0 14px var(--accent);"></div>
   </div>
 
-  <div id="cz-spotlight" style="position:fixed; top:0; left:0; width:520px; height:520px; margin:-260px 0 0 -260px; border-radius:50%; pointer-events:none; z-index:1; background:radial-gradient(circle, rgba(210,10,10,.16) 0%, rgba(210,10,10,.06) 35%, rgba(0,0,0,0) 70%); transform:translate(-999px,-999px); transition:opacity .3s;"></div>
-
-  <!-- SNIPER SCOPE CURSOR -->
-  <div id="cz-scope" style="position:fixed; top:0; left:0; width:54px; height:54px; margin:-27px 0 0 -27px; pointer-events:none; z-index:10000; transform:translate(-200px,-200px); transition:width .18s, height .18s, margin .18s, filter .18s;">
-    <svg width="100%" height="100%" viewBox="0 0 54 54" style="display:block; filter:drop-shadow(0 0 6px rgba(255,42,42,.55));">
-      <circle cx="27" cy="27" r="23" fill="none" stroke="#ff2a2a" stroke-width="1.4" opacity=".95"/>
-      <circle cx="27" cy="27" r="14" fill="none" stroke="#ff2a2a" stroke-width=".9" opacity=".6" stroke-dasharray="2 4"/>
-      <circle cx="27" cy="27" r="4" fill="none" stroke="#ff2a2a" stroke-width="1.2"/>
-      <line x1="27" y1="0" x2="27" y2="20" stroke="#ff2a2a" stroke-width="1.2"/>
-      <line x1="27" y1="34" x2="27" y2="54" stroke="#ff2a2a" stroke-width="1.2"/>
-      <line x1="0" y1="27" x2="20" y2="27" stroke="#ff2a2a" stroke-width="1.2"/>
-      <line x1="34" y1="27" x2="54" y2="27" stroke="#ff2a2a" stroke-width="1.2"/>
-      <circle cx="27" cy="27" r="1.1" fill="#ff2a2a"/>
-    </svg>
-  </div>
+  <div id="cz-spotlight" style="position:fixed; top:0; left:0; width:520px; height:520px; margin:-260px 0 0 -260px; border-radius:50%; pointer-events:none; z-index:1; background:radial-gradient(circle, rgba(53,53,53,.16) 0%, rgba(53,53,53,.06) 35%, rgba(0,0,0,0) 70%); transform:translate(-999px,-999px); transition:opacity .3s;"></div>
 
   <!-- NAVBAR -->
   <nav id="cz-nav" style="position:fixed; top:0; left:0; width:100%; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:22px clamp(20px,5vw,64px); transition:background .35s, backdrop-filter .35s, padding .35s, border-color .35s; background:transparent; border-bottom:1px solid rgba(255,255,255,0);">
@@ -115,45 +101,46 @@
       <a href="#journey" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Journey</a>
       <a href="#projects" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Projects</a>
     </div>
-    <a href="#contact" class="cz-getintouch" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:6px 6px 6px 22px; border-radius:999px; color:#0a0203; font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:14.5px; font-weight:600; background:#fff; box-shadow:0 8px 26px rgba(255,255,255,.18); transition:transform .2s, box-shadow .2s; white-space:nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(255,255,255,.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 26px rgba(255,255,255,.18)'">
+    <a href="#contact" class="cz-getintouch" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:6px 6px 6px 22px; border-radius:999px; color:#040404; font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:14.5px; font-weight:600; background:#fff; box-shadow:0 8px 26px rgba(255,255,255,.18); transition:transform .2s, box-shadow .2s; white-space:nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(255,255,255,.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 26px rgba(255,255,255,.18)'">
       <span class="cz-getintouch-label">Get in touch</span>
-      <span style="display:grid; place-items:center; width:36px; height:36px; flex:none; border-radius:50%; background:linear-gradient(135deg,#FF2A2A,#8B0000); color:#fff; font-size:15px; font-weight:700;">→</span>
+      <span style="display:grid; place-items:center; width:36px; height:36px; flex:none; border-radius:50%; background:linear-gradient(135deg,#575757,#1e1e1e); color:#fff; font-size:15px; font-weight:700;">→</span>
     </a>
   </nav>
 
   <!-- HERO -->
-  <section id="home" data-sec="cz-hero" style="position:relative; height:100vh; min-height:760px; overflow:hidden; border-bottom-left-radius:48px; border-bottom-right-radius:48px; background:radial-gradient(120% 90% at 50% 35%, #c01515 0%, #8B0000 22%, #3A0507 55%, #120305 80%, #050505 100%);">
+  <section id="home" data-sec="cz-hero" style="position:relative; height:100vh; min-height:760px; overflow:hidden; border-bottom-left-radius:48px; border-bottom-right-radius:48px; background:radial-gradient(120% 90% at 50% 35%, #393939 0%, #1e1e1e 22%, #101010 55%, #060606 80%, #050505 100%);">
+    <div class="cz-hero-glow" aria-hidden="true"></div>
     <!-- bg overlays -->
     <div style="position:absolute; inset:0; background:radial-gradient(80% 60% at 50% 100%, rgba(0,0,0,.7) 0%, rgba(0,0,0,0) 60%); pointer-events:none;"></div>
-    <div style="position:absolute; inset:0; background:radial-gradient(60% 50% at 50% 30%, rgba(255,42,42,.18) 0%, rgba(0,0,0,0) 70%); pointer-events:none;"></div>
+    <div style="position:absolute; inset:0; background:radial-gradient(60% 50% at 50% 30%, rgba(87,87,87,.18) 0%, rgba(0,0,0,0) 70%); pointer-events:none;"></div>
     <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(0,0,0,.05) 0px, rgba(0,0,0,.05) 1px, transparent 1px, transparent 3px); pointer-events:none; opacity:.5;"></div>
     <div id="cz-particles" style="position:absolute; inset:0; pointer-events:none; z-index:1;"></div>
 
     <!-- floating shapes -->
-    <div style="position:absolute; top:22%; left:5%; width:80px; height:80px; border-radius:22px; background:linear-gradient(145deg,rgba(255,42,42,.35),rgba(58,5,7,.15)); border:1px solid rgba(255,42,42,.3); animation:cz-float1 9s ease-in-out infinite; pointer-events:none; z-index:1;"></div>
-    <div style="position:absolute; bottom:22%; right:6%; width:54px; height:54px; border-radius:50%; background:radial-gradient(circle at 30% 30%,rgba(255,42,42,.55),rgba(139,0,0,.1)); animation:cz-float2 11s ease-in-out infinite; box-shadow:0 0 30px rgba(210,10,10,.35); pointer-events:none; z-index:1;"></div>
-    <div style="position:absolute; top:30%; right:14%; width:36px; height:36px; border:1px solid rgba(255,42,42,.35); background:rgba(139,0,0,.1); transform:rotate(45deg); animation:cz-float3 13s ease-in-out infinite; pointer-events:none; z-index:1;"></div>
+    <div style="position:absolute; top:22%; left:5%; width:80px; height:80px; border-radius:22px; background:linear-gradient(145deg,rgba(87,87,87,.35),rgba(16,16,16,.15)); border:1px solid rgba(87,87,87,.3); animation:cz-float1 9s ease-in-out infinite; pointer-events:none; z-index:1;"></div>
+    <div style="position:absolute; bottom:22%; right:6%; width:54px; height:54px; border-radius:50%; background:radial-gradient(circle at 30% 30%,rgba(87,87,87,.55),rgba(30,30,30,.1)); animation:cz-float2 11s ease-in-out infinite; box-shadow:0 0 30px rgba(53,53,53,.35); pointer-events:none; z-index:1;"></div>
+    <div style="position:absolute; top:30%; right:14%; width:36px; height:36px; border:1px solid rgba(87,87,87,.35); background:rgba(30,30,30,.1); transform:rotate(45deg); animation:cz-float3 13s ease-in-out infinite; pointer-events:none; z-index:1;"></div>
 
     <!-- PORTRAIT centered -->
     <div id="cz-portrait" style="position:absolute; left:50%; bottom:0; transform:translateX(-50%); height:88%; max-height:850px; aspect-ratio:1530/830; z-index:2; pointer-events:none; will-change:transform; animation:cz-floatPortrait 7s ease-in-out infinite;">
       <img src="assets/hero-red-portrait.png" alt="Raymond Conrad S. Napiñas" style="display:block; width:100%; height:100%; object-fit:cover; object-position:center 30%; -webkit-mask-image:radial-gradient(ellipse 55% 70% at 50% 45%, #000 50%, rgba(0,0,0,.85) 65%, transparent 92%); mask-image:radial-gradient(ellipse 55% 70% at 50% 45%, #000 50%, rgba(0,0,0,.85) 65%, transparent 92%); mix-blend-mode:luminosity; opacity:.95; filter:contrast(1.15) brightness(.95) saturate(1.1);">
     </div>
-    <!-- portrait second copy for richer color/bloom -->
-    <div style="position:absolute; left:50%; bottom:0; transform:translateX(-50%); height:88%; max-height:850px; aspect-ratio:1530/830; z-index:2; pointer-events:none; mix-blend-mode:multiply; opacity:.5;">
+    <!-- monochrome portrait bloom -->
+    <div style="position:absolute; left:50%; bottom:0; transform:translateX(-50%); height:88%; max-height:850px; aspect-ratio:1530/830; z-index:2; pointer-events:none; mix-blend-mode:screen; opacity:.12;">
       <img src="assets/hero-red-portrait.png" alt="" style="display:block; width:100%; height:100%; object-fit:cover; object-position:center 30%; -webkit-mask-image:radial-gradient(ellipse 50% 65% at 50% 45%, #000 45%, transparent 88%); mask-image:radial-gradient(ellipse 50% 65% at 50% 45%, #000 45%, transparent 88%);">
     </div>
     <!-- vignette over portrait bottom -->
-    <div style="position:absolute; left:0; right:0; bottom:0; height:34%; background:linear-gradient(180deg, rgba(5,3,3,0) 0%, rgba(5,3,3,.45) 60%, rgba(5,3,3,.85) 100%); z-index:3; pointer-events:none;"></div>
+    <div style="position:absolute; left:0; right:0; bottom:0; height:34%; background:linear-gradient(180deg, rgba(3,3,3,0) 0%, rgba(3,3,3,.45) 60%, rgba(3,3,3,.85) 100%); z-index:3; pointer-events:none;"></div>
 
     <!-- HEY, I'M A -->
     <div data-reveal style="position:absolute; left:clamp(20px,5vw,64px); top:30%; z-index:5;">
-      <div style="font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(20px,2.2vw,30px); font-weight:500; color:#f8e8e8; letter-spacing:-.01em;">Hey, I'm an</div>
+      <div style="font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(20px,2.2vw,30px); font-weight:500; color:#ebebeb; letter-spacing:-.01em;">Hey, I'm an</div>
     </div>
 
     <!-- BIG TYPING HEADLINE bottom-left -->
     <div data-reveal class="cz-heroh1" style="position:absolute; left:clamp(20px,5vw,64px); right:clamp(20px,5vw,64px); bottom:170px; z-index:5; pointer-events:none;">
       <h1 style="margin:0; font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(46px,8.4vw,116px); line-height:.92; font-weight:700; letter-spacing:-.04em; color:#fff; max-width:780px; min-height:2.86em; display:flex; align-items:flex-end; text-wrap:balance;">
-        <span><span id="cz-typed" style="background:linear-gradient(100deg,#ffffff,#ffd6d6 50%,#ff6868); background-size:200% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:cz-shimmer 7s linear infinite;">Aspiring Creative Technologist</span><span style="display:inline-block; width:.08em; height:.78em; transform:translateY(.06em); margin-left:.08em; background:#FF2A2A; box-shadow:0 0 12px #FF2A2A; animation:cz-blink 1s step-end infinite;"></span></span>
+        <span><span id="cz-typed" style="background:linear-gradient(100deg,#ffffff,#dfdfdf 50%,#888888); background-size:200% auto; -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; animation:cz-shimmer 7s linear infinite;">Aspiring Creative Technologist</span><span style="display:inline-block; width:.08em; height:.78em; transform:translateY(.06em); margin-left:.08em; background:#575757; box-shadow:0 0 12px #575757; animation:cz-blink 1s step-end infinite;"></span></span>
       </h1>
     </div>
 
@@ -166,22 +153,22 @@
     <!-- STATS row bottom -->
     <div data-reveal class="cz-stats" style="position:absolute; left:clamp(20px,5vw,64px); right:clamp(20px,5vw,64px); bottom:54px; z-index:6; display:grid; grid-template-columns:repeat(4,1fr); gap:24px;">
       <div class="cz-stat">
-        <div style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; color:#ff6b6b; font-weight:600; letter-spacing:.12em;">#01</div>
+        <div style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; color:#8a8a8a; font-weight:600; letter-spacing:.12em;">#01</div>
         <div style="display:flex; align-items:baseline; gap:8px; margin-top:6px;"><span data-count="7" style="font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(20px,2vw,28px); font-weight:700; line-height:1; color:#fff; letter-spacing:-.02em;">0</span></div>
         <div style="margin-top:6px; font-size:14px; color:rgba(255,255,255,.82); font-weight:500;">Websites Created</div>
       </div>
       <div class="cz-stat">
-        <div style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; color:#ff6b6b; font-weight:600; letter-spacing:.12em;">#02</div>
+        <div style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; color:#8a8a8a; font-weight:600; letter-spacing:.12em;">#02</div>
         <div style="display:flex; align-items:baseline; gap:8px; margin-top:6px;"><span data-count="4" style="font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(20px,2vw,28px); font-weight:700; line-height:1; color:#fff; letter-spacing:-.02em;">0</span></div>
         <div style="margin-top:6px; font-size:14px; color:rgba(255,255,255,.82); font-weight:500;">Mobile Apps Created</div>
       </div>
       <div class="cz-stat">
-        <div style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; color:#ff6b6b; font-weight:600; letter-spacing:.12em;">#03</div>
+        <div style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; color:#8a8a8a; font-weight:600; letter-spacing:.12em;">#03</div>
         <div style="display:flex; align-items:baseline; gap:8px; margin-top:6px;"><span data-count="21" style="font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(20px,2vw,28px); font-weight:700; line-height:1; color:#fff; letter-spacing:-.02em;">0</span></div>
         <div style="margin-top:6px; font-size:14px; color:rgba(255,255,255,.82); font-weight:500;">Video Edits</div>
       </div>
       <div class="cz-stat">
-        <div style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; color:#ff6b6b; font-weight:600; letter-spacing:.12em;">#04</div>
+        <div style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; color:#8a8a8a; font-weight:600; letter-spacing:.12em;">#04</div>
         <div style="display:flex; align-items:baseline; gap:8px; margin-top:6px;"><span data-count="17" style="font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:clamp(20px,2vw,28px); font-weight:700; line-height:1; color:#fff; letter-spacing:-.02em;">0</span></div>
         <div style="margin-top:6px; font-size:14px; color:rgba(255,255,255,.82); font-weight:500;">Graphic Designs</div>
       </div>
@@ -193,13 +180,13 @@
     <div style="max-width:1180px; margin:0 auto;">
       <div data-reveal style="display:flex; align-items:center; gap:14px; margin-bottom:40px;">
         <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">01 — ABOUT ME</span>
-        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(255,42,42,.5),transparent);"></span>
+        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(87,87,87,.5),transparent);"></span>
       </div>
       <div class="cz-about" style="display:grid; grid-template-columns:1.12fr .88fr; gap:64px; align-items:center;">
         <div data-reveal>
           <h2 style="margin:0 0 22px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em; line-height:1.08;">Driven by <span style="color:var(--accent);">technology</span>, shaped by <span style="color:var(--accent);">creativity</span>.</h2>
-          <p style="margin:0 0 18px; font-size:16px; line-height:1.72; color:#4a1616; text-align:justify; text-justify:inter-word;">Hi! I'm <strong>Raymond Conrad S. Napiñas</strong>, a fourth-year Information Technology student and a consistent academic honor student with a strong passion for technology and creativity. I am highly adaptable, hardworking, and capable of working under pressure, with hands-on experience in <strong>video editing, AI-assisted web development, machine learning, data mining, basic graphic design, and motion graphics</strong>. I continuously strive to improve my technical and creative skills while delivering quality work.</p>
-          <p style="margin:0; font-size:16px; line-height:1.72; color:#4a1616; text-align:justify; text-justify:inter-word;">I am a dedicated and open-minded individual who values continuous learning, professionalism, and personal growth. I willingly embrace new challenges, welcome constructive criticism, and view mistakes and failures as opportunities to learn and improve. My goal is to contribute my skills, gain meaningful experience, and consistently deliver reliable and high-quality results.</p>
+          <p style="margin:0 0 18px; font-size:16px; line-height:1.72; color:#212121; text-align:justify; text-justify:inter-word;">Hi! I'm <strong>Raymond Conrad S. Napiñas</strong>, a fourth-year Information Technology student and a consistent academic honor student with a strong passion for technology and creativity. I am highly adaptable, hardworking, and capable of working under pressure, with hands-on experience in <strong>video editing, AI-assisted web development, machine learning, data mining, basic graphic design, and motion graphics</strong>. I continuously strive to improve my technical and creative skills while delivering quality work.</p>
+          <p style="margin:0; font-size:16px; line-height:1.72; color:#212121; text-align:justify; text-justify:inter-word;">I am a dedicated and open-minded individual who values continuous learning, professionalism, and personal growth. I willingly embrace new challenges, welcome constructive criticism, and view mistakes and failures as opportunities to learn and improve. My goal is to contribute my skills, gain meaningful experience, and consistently deliver reliable and high-quality results.</p>
         </div>
         <div data-reveal class="cz-about-portrait" aria-label="Portrait of Raymond Conrad S. Napiñas">
           <div class="cz-about-photo-wrap">
@@ -212,80 +199,80 @@
   </section>
 
   <!-- SNIPER 3D — DARK WITH RED -->
-  <section id="sniper" style="position:relative; min-height:118vh; overflow:hidden; background:radial-gradient(60% 70% at 50% 50%, rgba(80,8,8,.55) 0%, rgba(20,3,5,.6) 35%, rgba(0,0,0,.95) 75%), linear-gradient(180deg,#050505 0%, #080202 50%, #050505 100%);">
+  <section id="sniper" style="position:relative; min-height:118vh; overflow:hidden; background:radial-gradient(60% 70% at 50% 50%, rgba(23,23,23,.55) 0%, rgba(7,7,7,.6) 35%, rgba(0,0,0,.95) 75%), linear-gradient(180deg,#050505 0%, #030303 50%, #050505 100%);">
     <!-- backdrop atmospherics -->
-    <div style="position:absolute; inset:0; background:radial-gradient(40% 35% at 18% 30%, rgba(255,42,42,.18), rgba(5,5,5,0) 60%), radial-gradient(50% 40% at 85% 75%, rgba(139,0,0,.22), rgba(5,5,5,0) 60%); pointer-events:none;"></div>
-    <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(255,42,42,.025) 0px, rgba(255,42,42,.025) 1px, transparent 1px, transparent 4px); pointer-events:none; opacity:.55;"></div>
-    <div style="position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(255,42,42,.4), transparent); animation:cz-scan 6s linear infinite; pointer-events:none;"></div>
+    <div style="position:absolute; inset:0; background:radial-gradient(40% 35% at 18% 30%, rgba(87,87,87,.18), rgba(5,5,5,0) 60%), radial-gradient(50% 40% at 85% 75%, rgba(30,30,30,.22), rgba(5,5,5,0) 60%); pointer-events:none;"></div>
+    <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(87,87,87,.025) 0px, rgba(87,87,87,.025) 1px, transparent 1px, transparent 4px); pointer-events:none; opacity:.55;"></div>
+    <div style="position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(87,87,87,.4), transparent); animation:cz-scan 6s linear infinite; pointer-events:none;"></div>
 
     <!-- corner mono labels -->
-    <div style="position:absolute; top:32px; left:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#ff7a7a; opacity:.65; pointer-events:none;">› SNIPER_MODE / AWP.MK1</div>
-    <div style="position:absolute; top:32px; right:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#ff7a7a; opacity:.65; pointer-events:none;">RANGE: ∞ · DRIFT: 0.00</div>
-    <div style="position:absolute; bottom:24px; left:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#ff7a7a; opacity:.45; pointer-events:none;">[ scroll to engage ]</div>
-    <div style="position:absolute; bottom:24px; right:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#ff7a7a; opacity:.45; pointer-events:none;">CAL .338 · v.1.0</div>
+    <div style="position:absolute; top:32px; left:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#969696; opacity:.65; pointer-events:none;">› SNIPER_MODE / AWP.MK1</div>
+    <div style="position:absolute; top:32px; right:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#969696; opacity:.65; pointer-events:none;">RANGE: ∞ · DRIFT: 0.00</div>
+    <div style="position:absolute; bottom:24px; left:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#969696; opacity:.45; pointer-events:none;">[ scroll to engage ]</div>
+    <div style="position:absolute; bottom:24px; right:clamp(20px,5vw,64px); font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.22em; color:#969696; opacity:.45; pointer-events:none;">CAL .338 · v.1.0</div>
 
     <!-- 3D canvas — pointer-events disabled so the scope cursor still hovers normal targets -->
     <canvas id="cz-sniper-canvas" style="position:absolute; inset:0; width:100%; height:100%; display:block; z-index:1; pointer-events:none;"></canvas>
 
     <!-- center text overlay -->
     <div style="position:relative; z-index:3; min-height:118vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:120px clamp(20px,5vw,64px) 80px; text-align:center; pointer-events:none;">
-      <span data-reveal style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; letter-spacing:.32em; color:#ff6b6b; text-transform:uppercase; margin-bottom:32px; text-shadow:0 0 24px rgba(255,42,42,.6);">› PRECISION ENGINEERING</span>
-      <h2 data-reveal style="margin:0; font-family:'Space Grotesk', 'Inter Tight', sans-serif; font-size:clamp(44px, 8.5vw, 128px); font-weight:700; letter-spacing:-.045em; line-height:.94; max-width:1150px; text-wrap:balance; background:linear-gradient(180deg, #ffffff 0%, #ffe2e2 38%, #ff6363 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 38px rgba(255,42,42,.45)) drop-shadow(0 6px 30px rgba(0,0,0,.6));">Precise decisions drive accurate results.</h2>
-      <p data-reveal style="margin:36px auto 0; max-width:580px; font-size:clamp(15px,1.4vw,17px); line-height:1.65; color:#cfc7c7; font-weight:400; text-shadow:0 2px 14px rgba(0,0,0,.6);">Every project. Every line of code. Every pixel placed with intent — locked in, aimed, and shipped.</p>
+      <span data-reveal style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; letter-spacing:.32em; color:#8a8a8a; text-transform:uppercase; margin-bottom:32px; text-shadow:0 0 24px rgba(87,87,87,.6);">› PRECISION ENGINEERING</span>
+      <h2 data-reveal style="margin:0; font-family:'Space Grotesk', 'Inter Tight', sans-serif; font-size:clamp(44px, 8.5vw, 128px); font-weight:700; letter-spacing:-.045em; line-height:.94; max-width:1150px; text-wrap:balance; background:linear-gradient(180deg, #ffffff 0%, #e8e8e8 38%, #848484 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 38px rgba(87,87,87,.45)) drop-shadow(0 6px 30px rgba(0,0,0,.6));">Precise decisions drive accurate results.</h2>
+      <p data-reveal style="margin:36px auto 0; max-width:580px; font-size:clamp(15px,1.4vw,17px); line-height:1.65; color:#c9c9c9; font-weight:400; text-shadow:0 2px 14px rgba(0,0,0,.6);">Every project. Every line of code. Every pixel placed with intent — locked in, aimed, and shipped.</p>
 
       <!-- center HUD reticle -->
       <div data-reveal style="margin-top:54px; position:relative; width:140px; height:140px;">
-        <svg viewBox="0 0 140 140" width="140" height="140" style="display:block; filter:drop-shadow(0 0 14px rgba(255,42,42,.55));">
-          <circle cx="70" cy="70" r="60" fill="none" stroke="#ff2a2a" stroke-width="1.2" opacity=".7"/>
-          <circle cx="70" cy="70" r="38" fill="none" stroke="#ff2a2a" stroke-width=".8" opacity=".45" stroke-dasharray="3 5"/>
-          <circle cx="70" cy="70" r="8" fill="none" stroke="#ff2a2a" stroke-width="1.2"/>
-          <line x1="70" y1="2" x2="70" y2="48" stroke="#ff2a2a" stroke-width="1.4"/>
-          <line x1="70" y1="92" x2="70" y2="138" stroke="#ff2a2a" stroke-width="1.4"/>
-          <line x1="2" y1="70" x2="48" y2="70" stroke="#ff2a2a" stroke-width="1.4"/>
-          <line x1="92" y1="70" x2="138" y2="70" stroke="#ff2a2a" stroke-width="1.4"/>
-          <circle cx="70" cy="70" r="1.4" fill="#ff2a2a"/>
+        <svg viewBox="0 0 140 140" width="140" height="140" style="display:block; filter:drop-shadow(0 0 14px rgba(87,87,87,.55));">
+          <circle cx="70" cy="70" r="60" fill="none" stroke="#575757" stroke-width="1.2" opacity=".7"/>
+          <circle cx="70" cy="70" r="38" fill="none" stroke="#575757" stroke-width=".8" opacity=".45" stroke-dasharray="3 5"/>
+          <circle cx="70" cy="70" r="8" fill="none" stroke="#575757" stroke-width="1.2"/>
+          <line x1="70" y1="2" x2="70" y2="48" stroke="#575757" stroke-width="1.4"/>
+          <line x1="70" y1="92" x2="70" y2="138" stroke="#575757" stroke-width="1.4"/>
+          <line x1="2" y1="70" x2="48" y2="70" stroke="#575757" stroke-width="1.4"/>
+          <line x1="92" y1="70" x2="138" y2="70" stroke="#575757" stroke-width="1.4"/>
+          <circle cx="70" cy="70" r="1.4" fill="#575757"/>
         </svg>
-        <div style="position:absolute; inset:0; border-radius:50%; box-shadow:0 0 60px 6px rgba(255,42,42,.18); pointer-events:none; animation:cz-pulse 2.4s ease-in-out infinite;"></div>
+        <div style="position:absolute; inset:0; border-radius:50%; box-shadow:0 0 60px 6px rgba(87,87,87,.18); pointer-events:none; animation:cz-pulse 2.4s ease-in-out infinite;"></div>
       </div>
     </div>
   </section>
 
   <!-- SKILLS — LIGHTER RED -->
-  <section id="skills" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(70% 60% at 80% 0%, rgba(255,80,80,.38) 0%, rgba(180,15,15,0) 55%), radial-gradient(60% 70% at 0% 100%, rgba(255,80,80,.28) 0%, rgba(150,15,15,0) 55%), linear-gradient(160deg,#3a0709 0%, #5a0e10 35%, #28060a 70%, #18050a 100%); overflow:hidden;">
+  <section id="skills" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(70% 60% at 80% 0%, rgba(117,117,117,.38) 0%, rgba(50,50,50,0) 55%), radial-gradient(60% 70% at 0% 100%, rgba(117,117,117,.28) 0%, rgba(44,44,44,0) 55%), linear-gradient(160deg,#121212 0%, #1e1e1e 35%, #0e0e0e 70%, #090909 100%); overflow:hidden;">
     <div style="max-width:1180px; margin:0 auto;">
       <div data-reveal style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
         <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">02 — SKILLS</span>
-        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(255,42,42,.5),transparent);"></span>
+        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(87,87,87,.5),transparent);"></span>
       </div>
       <h2 data-reveal style="margin:0 0 44px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em;">A full-stack creative toolkit.</h2>
       <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px;">
         <div data-reveal data-skill style="padding:26px; border-radius:20px; background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s, box-shadow .3s;">
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:13px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(210,10,10,.3);">ML</span><h3 style="margin:0; font-size:18px; font-weight:700;">Machine Learning &amp; Model Training</h3></div>
-          <p style="margin:0; font-size:14px; line-height:1.65; color:#b3aeae;">Binary &amp; image classification with CNNs, GNN training for road-constraint prediction, comparative algorithm testing, regression analysis, Random Forest regression, and model evaluation.</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:13px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(53,53,53,.3);">ML</span><h3 style="margin:0; font-size:18px; font-weight:700;">Machine Learning &amp; Model Training</h3></div>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#afafaf;">Binary &amp; image classification with CNNs, GNN training for road-constraint prediction, comparative algorithm testing, regression analysis, Random Forest regression, and model evaluation.</p>
         </div>
         <div data-reveal data-skill style="padding:26px; border-radius:20px; background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s, box-shadow .3s;">
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:12px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(210,10,10,.3);">&lt;/&gt;</span><h3 style="margin:0; font-size:18px; font-weight:700;">Full-Stack Web Development</h3></div>
-          <p style="margin:0; font-size:14px; line-height:1.65; color:#b3aeae;">Laravel as the main framework, PHP, JavaScript, HTML, CSS, database integration, WAMP, Laragon, PostgreSQL, phpMyAdmin/MySQL, Python backend, and basic FastAPI.</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:12px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(53,53,53,.3);">&lt;/&gt;</span><h3 style="margin:0; font-size:18px; font-weight:700;">Full-Stack Web Development</h3></div>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#afafaf;">Laravel as the main framework, PHP, JavaScript, HTML, CSS, database integration, WAMP, Laragon, PostgreSQL, phpMyAdmin/MySQL, Python backend, and basic FastAPI.</p>
         </div>
         <div data-reveal data-skill style="padding:26px; border-radius:20px; background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s, box-shadow .3s;">
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:12px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(210,10,10,.3);">APP</span><h3 style="margin:0; font-size:18px; font-weight:700;">Mobile App Development</h3></div>
-          <p style="margin:0; font-size:14px; line-height:1.65; color:#b3aeae;">Flutter, Dart, React-based mobile UI concepts, and end-to-end mobile UI/UX design for real user and rider flows.</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:12px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(53,53,53,.3);">APP</span><h3 style="margin:0; font-size:18px; font-weight:700;">Mobile App Development</h3></div>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#afafaf;">Flutter, Dart, React-based mobile UI concepts, and end-to-end mobile UI/UX design for real user and rider flows.</p>
         </div>
         <div data-reveal data-skill style="padding:26px; border-radius:20px; background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s, box-shadow .3s;">
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:12px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(210,10,10,.3);">GFX</span><h3 style="margin:0; font-size:18px; font-weight:700;">Graphic Design</h3></div>
-          <p style="margin:0; font-size:14px; line-height:1.65; color:#b3aeae;">Canva, Adobe After Effects, branding layouts, posters, UI visuals, and presentation design with a consistent visual language.</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:12px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(53,53,53,.3);">GFX</span><h3 style="margin:0; font-size:18px; font-weight:700;">Graphic Design</h3></div>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#afafaf;">Canva, Adobe After Effects, branding layouts, posters, UI visuals, and presentation design with a consistent visual language.</p>
         </div>
         <div data-reveal data-skill style="padding:26px; border-radius:20px; background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s, box-shadow .3s;">
           <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:14px; font-weight:800;">▶</span><h3 style="margin:0; font-size:18px; font-weight:700;">Motion Graphics &amp; Video Editing</h3></div>
-          <p style="margin:0; font-size:14px; line-height:1.65; color:#b3aeae;">CapCut, After Effects, short-form editing, transitions, and visual storytelling that keeps attention and feels cinematic.</p>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#afafaf;">CapCut, After Effects, short-form editing, transitions, and visual storytelling that keeps attention and feels cinematic.</p>
         </div>
         <div data-reveal data-skill style="padding:26px; border-radius:20px; background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s, box-shadow .3s;">
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:12px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(210,10,10,.3);">GIS</span><h3 style="margin:0; font-size:18px; font-weight:700;">GIS &amp; Mapping Tools</h3></div>
-          <p style="margin:0; font-size:14px; line-height:1.65; color:#b3aeae;">QGIS, ArcGIS, road mapping, geospatial data preparation, and route &amp; constraint visualization for spatial systems.</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:12px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(53,53,53,.3);">GIS</span><h3 style="margin:0; font-size:18px; font-weight:700;">GIS &amp; Mapping Tools</h3></div>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#afafaf;">QGIS, ArcGIS, road mapping, geospatial data preparation, and route &amp; constraint visualization for spatial systems.</p>
         </div>
         <div data-reveal data-skill style="padding:26px; border-radius:20px; background:linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.08); transition:transform .3s, border-color .3s, box-shadow .3s;">
-          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:13px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(210,10,10,.3);">JV</span><h3 style="margin:0; font-size:18px; font-weight:700;">Java Development</h3></div>
-          <p style="margin:0; font-size:14px; line-height:1.65; color:#b3aeae;">Java desktop GUI basics, NetBeans, OOP principles, and complete school system projects with real interfaces.</p>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;"><span style="display:grid; place-items:center; width:44px; height:44px; border-radius:13px; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); font-size:13px; font-weight:800; font-family:ui-monospace,monospace; box-shadow:0 8px 22px rgba(53,53,53,.3);">JV</span><h3 style="margin:0; font-size:18px; font-weight:700;">Java Development</h3></div>
+          <p style="margin:0; font-size:14px; line-height:1.65; color:#afafaf;">Java desktop GUI basics, NetBeans, OOP principles, and complete school system projects with real interfaces.</p>
         </div>
       </div>
     </div>
@@ -296,17 +283,17 @@
     <div style="max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,64px);">
       <div data-reveal style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
         <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">03 — TECH STACK</span>
-        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(255,42,42,.5),transparent);"></span>
+        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(87,87,87,.5),transparent);"></span>
       </div>
       <h2 data-reveal style="margin:0 0 24px; font-size:clamp(26px,3.4vw,42px); font-weight:800; letter-spacing:-.025em;">Tools I build with.</h2>
       <div id="cz-filters" data-reveal style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:30px;">
         <button data-filter="all" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); border:1px solid transparent; transition:all .2s;">All</button>
-        <button data-filter="web" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cfcaca; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Web</button>
-        <button data-filter="mobile" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cfcaca; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Mobile</button>
-        <button data-filter="aiml" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cfcaca; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">AI/ML</button>
-        <button data-filter="design" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cfcaca; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Design</button>
-        <button data-filter="tools" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cfcaca; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Tools</button>
-        <button data-filter="gis" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cfcaca; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">GIS</button>
+        <button data-filter="web" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Web</button>
+        <button data-filter="mobile" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Mobile</button>
+        <button data-filter="aiml" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">AI/ML</button>
+        <button data-filter="design" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Design</button>
+        <button data-filter="tools" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">Tools</button>
+        <button data-filter="gis" style="cursor:pointer; padding:9px 18px; border-radius:999px; font-size:13.5px; font-weight:600; font-family:inherit; color:#cbcbcb; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); transition:all .2s;">GIS</button>
       </div>
     </div>
     <div id="cz-carousel" style="position:relative; width:100%; cursor:grab; -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);">
@@ -315,11 +302,11 @@
   </section>
 
   <!-- JOURNEY — RED -->
-  <section id="journey" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(80% 60% at 100% 0%, rgba(255,42,42,.3) 0%, rgba(120,5,10,0) 55%), radial-gradient(60% 70% at 0% 100%, rgba(139,0,0,.32) 0%, rgba(60,5,10,0) 55%), linear-gradient(170deg,#2a060a 0%, #44090c 45%, #1a050a 100%); overflow:hidden;">
+  <section id="journey" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(80% 60% at 100% 0%, rgba(87,87,87,.3) 0%, rgba(30,30,30,0) 55%), radial-gradient(60% 70% at 0% 100%, rgba(30,30,30,.32) 0%, rgba(17,17,17,0) 55%), linear-gradient(170deg,#0e0e0e 0%, #161616 45%, #0a0a0a 100%); overflow:hidden;">
     <div style="max-width:1060px; margin:0 auto;">
       <div data-reveal style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
         <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">04 — BSIT JOURNEY</span>
-        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(255,42,42,.5),transparent);"></span>
+        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(87,87,87,.5),transparent);"></span>
       </div>
       <h2 data-reveal style="margin:0 0 56px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em;">From fundamentals to full-stack.</h2>
       <div id="cz-timeline" style="position:relative; padding-left:42px;">
@@ -330,8 +317,8 @@
           <span style="position:absolute; left:-36px; top:2px; width:18px; height:18px; border-radius:50%; background:#050505; border:2px solid var(--accent2); box-shadow:0 0 14px var(--accent);"></span>
           <div style="padding:24px; border-radius:18px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);">
             <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;"><span style="font-size:13px; font-weight:700; color:var(--accent2); letter-spacing:.05em;">1ST YEAR</span><h3 style="margin:0; font-size:19px; font-weight:700;">Foundation Year</h3></div>
-            <p style="margin:12px 0 14px; font-size:14.5px; line-height:1.65; color:#bdb8b8;">Started programming fundamentals, Java GUI, basic system design, and project discipline.</p>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;"><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">RLK Hotel Management</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">Gym Workout Program</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">PC Internet Cafe</span></div>
+            <p style="margin:12px 0 14px; font-size:14.5px; line-height:1.65; color:#b9b9b9;">Started programming fundamentals, Java GUI, basic system design, and project discipline.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;"><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">RLK Hotel Management</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">Gym Workout Program</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">PC Internet Cafe</span></div>
           </div>
         </div>
 
@@ -339,8 +326,8 @@
           <span style="position:absolute; left:-36px; top:2px; width:18px; height:18px; border-radius:50%; background:#050505; border:2px solid var(--accent2); box-shadow:0 0 14px var(--accent);"></span>
           <div style="padding:24px; border-radius:18px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);">
             <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;"><span style="font-size:13px; font-weight:700; color:var(--accent2); letter-spacing:.05em;">2ND YEAR</span><h3 style="margin:0; font-size:19px; font-weight:700;">Web Development &amp; System Building</h3></div>
-            <p style="margin:12px 0 14px; font-size:14.5px; line-height:1.65; color:#bdb8b8;">Built structured web systems using Laravel, PHP, database management, and workflow automation.</p>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;"><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">WasteWise</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">IRS CenterPoint</span></div>
+            <p style="margin:12px 0 14px; font-size:14.5px; line-height:1.65; color:#b9b9b9;">Built structured web systems using Laravel, PHP, database management, and workflow automation.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;"><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">WasteWise</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">IRS CenterPoint</span></div>
           </div>
         </div>
 
@@ -348,16 +335,16 @@
           <span style="position:absolute; left:-36px; top:2px; width:18px; height:18px; border-radius:50%; background:#050505; border:2px solid var(--accent2); box-shadow:0 0 14px var(--accent);"></span>
           <div style="padding:24px; border-radius:18px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08);">
             <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;"><span style="font-size:13px; font-weight:700; color:var(--accent2); letter-spacing:.05em;">3RD YEAR</span><h3 style="margin:0; font-size:19px; font-weight:700;">AI, Capstone &amp; Full-Stack Growth</h3></div>
-            <p style="margin:12px 0 14px; font-size:14.5px; line-height:1.65; color:#bdb8b8;">Expanded into machine learning, IoT-related ideas, full-stack development, mobile apps, hosted websites, and larger academic systems.</p>
-            <div style="display:flex; flex-wrap:wrap; gap:8px;"><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">FireOps</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">DropPoint Website</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">DropPoint Mobile</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(210,10,10,.13); border:1px solid rgba(255,42,42,.25); color:#ffc9c9;">SagingAI</span></div>
+            <p style="margin:12px 0 14px; font-size:14.5px; line-height:1.65; color:#b9b9b9;">Expanded into machine learning, IoT-related ideas, full-stack development, mobile apps, hosted websites, and larger academic systems.</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px;"><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">FireOps</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">DropPoint Website</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">DropPoint Mobile</span><span style="font-size:12.5px; padding:5px 12px; border-radius:999px; background:rgba(53,53,53,.13); border:1px solid rgba(87,87,87,.25); color:#d4d4d4;">SagingAI</span></div>
           </div>
         </div>
 
         <div data-reveal style="position:relative;">
           <span style="position:absolute; left:-36px; top:2px; width:18px; height:18px; border-radius:50%; background:linear-gradient(135deg,var(--accent2),var(--accentDeep)); border:2px solid var(--accent2); box-shadow:0 0 18px var(--accent); animation:cz-pulse 2.4s infinite;"></span>
-          <div style="padding:24px; border-radius:18px; background:linear-gradient(135deg,rgba(210,10,10,.14),rgba(255,255,255,.02)); border:1px solid rgba(255,42,42,.3);">
+          <div style="padding:24px; border-radius:18px; background:linear-gradient(135deg,rgba(53,53,53,.14),rgba(255,255,255,.02)); border:1px solid rgba(87,87,87,.3);">
             <div style="display:flex; flex-wrap:wrap; align-items:baseline; gap:10px;"><span style="font-size:13px; font-weight:700; color:var(--accent2); letter-spacing:.05em;">INCOMING 4TH YEAR</span><h3 style="margin:0; font-size:19px; font-weight:700;">Final Year</h3></div>
-            <p style="margin:12px 0 0; font-size:14.5px; line-height:1.65; color:#d6c9c9;">Preparing for deeper capstone development, research refinement, deployment, and professional growth.</p>
+            <p style="margin:12px 0 0; font-size:14.5px; line-height:1.65; color:#cccccc;">Preparing for deeper capstone development, research refinement, deployment, and professional growth.</p>
           </div>
         </div>
       </div>
@@ -369,7 +356,7 @@
     <div style="max-width:1240px; margin:0 auto;">
       <div data-reveal style="display:flex; align-items:center; gap:14px; margin-bottom:14px;">
         <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">05 — PROJECTS</span>
-        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(255,42,42,.5),transparent);"></span>
+        <span style="flex:1; height:1px; background:linear-gradient(90deg,rgba(87,87,87,.5),transparent);"></span>
       </div>
       <h2 data-reveal style="margin:0 0 50px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em;">Selected work, by school year.</h2>
       <div id="cz-grid"></div>
@@ -377,18 +364,18 @@
   </section>
 
   <!-- CONTACT — RED -->
-  <section id="contact" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(80% 70% at 50% 100%, rgba(255,80,80,.32) 0%, rgba(120,10,10,0) 55%), linear-gradient(170deg,#2a060a 0%, #44090c 50%, #1a050a 100%); overflow:hidden;">
-    <div style="position:absolute; inset:0; background:radial-gradient(80% 60% at 50% 0%, rgba(255,80,80,.35), rgba(5,5,5,0) 60%);"></div>
+  <section id="contact" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(80% 70% at 50% 100%, rgba(117,117,117,.32) 0%, rgba(33,33,33,0) 55%), linear-gradient(170deg,#0e0e0e 0%, #161616 50%, #0a0a0a 100%); overflow:hidden;">
+    <div style="position:absolute; inset:0; background:radial-gradient(80% 60% at 50% 0%, rgba(117,117,117,.35), rgba(5,5,5,0) 60%);"></div>
     <div style="position:relative; max-width:980px; margin:0 auto; text-align:center;">
       <div data-reveal>
         <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">06 — GET IN TOUCH</span>
         <h2 style="margin:18px auto 0; max-width:760px; font-size:clamp(30px,4.2vw,52px); font-weight:800; letter-spacing:-.03em; line-height:1.06;">Let's build something practical, intelligent, and visually sharp.</h2>
       </div>
       <div data-reveal style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:34px 0 40px;">
-        <a href="mailto:raymondnapinas12@gmail.com" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">✉ Email</a>
-        <a href="https://github.com/Conradzy" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">⌥ GitHub</a>
-        <a href="https://www.facebook.com/raymond.napinas" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">f Facebook</a>
-        <a href="https://www.linkedin.com/in/raymond-napinas-a7a258390" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e7e2e2; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e7e2e2'">in LinkedIn</a>
+        <a href="mailto:raymondnapinas12@gmail.com" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e3e3e3; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e3e3e3'">✉ Email</a>
+        <a href="https://github.com/Conradzy" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e3e3e3; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e3e3e3'">⌥ GitHub</a>
+        <a href="https://www.facebook.com/raymond.napinas" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e3e3e3; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e3e3e3'">f Facebook</a>
+        <a href="https://www.linkedin.com/in/raymond-napinas-a7a258390" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e3e3e3; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e3e3e3'">in LinkedIn</a>
       </div>
       <form id="cz-form" data-reveal style="max-width:620px; margin:0 auto; text-align:left; display:grid; gap:16px;">
         <div class="cz-formrow" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
@@ -396,44 +383,44 @@
           <input name="email" type="email" placeholder="Email" required style="width:100%; padding:15px 18px; border-radius:13px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#fff; font-size:15px; font-family:inherit; outline:none; transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent2)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
         </div>
         <textarea name="message" placeholder="Message" rows="4" required style="width:100%; padding:15px 18px; border-radius:13px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#fff; font-size:15px; font-family:inherit; outline:none; resize:vertical; transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent2)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></textarea>
-        <button type="submit" style="cursor:pointer; padding:16px; border-radius:13px; border:none; font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); box-shadow:0 12px 34px rgba(210,10,10,.32); transition:transform .2s, box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 18px 44px rgba(210,10,10,.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 12px 34px rgba(210,10,10,.32)'">Send Message</button>
-        <div id="cz-formmsg" style="display:none; text-align:center; font-size:14px; color:#9be59b; font-weight:500;">Thanks — your message has been noted. I'll get back to you soon.</div>
+        <button type="submit" style="cursor:pointer; padding:16px; border-radius:13px; border:none; font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); box-shadow:0 12px 34px rgba(53,53,53,.32); transition:transform .2s, box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 18px 44px rgba(53,53,53,.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 12px 34px rgba(53,53,53,.32)'">Send Message</button>
+        <div id="cz-formmsg" style="display:none; text-align:center; font-size:14px; color:#d0d0d0; font-weight:500;">Thanks — your message has been noted. I'll get back to you soon.</div>
       </form>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer style="border-top:1px solid rgba(255,42,42,.18); padding:54px clamp(20px,5vw,64px) 36px; background:#050505;">
+  <footer style="border-top:1px solid rgba(87,87,87,.18); padding:54px clamp(20px,5vw,64px) 36px; background:#050505;">
     <div style="max-width:1180px; margin:0 auto; display:flex; flex-wrap:wrap; gap:30px; justify-content:space-between; align-items:flex-start;">
       <div style="max-width:340px;">
         <div style="display:flex; align-items:center; gap:12px;">
-          <img src="assets/cz-logo.png" alt="CZ" style="height:42px; width:auto; display:block; filter:drop-shadow(0 4px 14px rgba(210,10,10,.45));">
-          <img src="assets/conradzz-wordmark.png" alt="Conradzz" style="height:32px; width:auto; display:block; filter:drop-shadow(0 4px 14px rgba(210,10,10,.4));">
+          <img src="assets/cz-logo.png" alt="CZ" style="height:42px; width:auto; display:block; filter:drop-shadow(0 4px 14px rgba(53,53,53,.45));">
+          <img src="assets/conradzz-wordmark.png" alt="Conradzz" style="height:32px; width:auto; display:block; filter:drop-shadow(0 4px 14px rgba(53,53,53,.4));">
         </div>
-        <p style="margin:14px 0 0; font-size:14px; line-height:1.6; color:#9c9696;">Built with code, creativity, and continuous learning.</p>
+        <p style="margin:14px 0 0; font-size:14px; line-height:1.6; color:#979797;">Built with code, creativity, and continuous learning.</p>
       </div>
       <div style="display:flex; gap:clamp(20px,5vw,56px); flex-wrap:wrap;">
         <div style="display:flex; flex-direction:column; gap:10px;">
           <span style="font-size:12px; letter-spacing:.18em; color:var(--accent2); font-weight:700;">NAVIGATE</span>
-          <a href="#home" style="text-decoration:none; color:#b8b3b3; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b8b3b3'">Home</a>
-          <a href="#about" style="text-decoration:none; color:#b8b3b3; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b8b3b3'">About</a>
-          <a href="#skills" style="text-decoration:none; color:#b8b3b3; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b8b3b3'">Skills</a>
-          <a href="#projects" style="text-decoration:none; color:#b8b3b3; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b8b3b3'">Projects</a>
-          <a href="#contact" style="text-decoration:none; color:#b8b3b3; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b8b3b3'">Contact</a>
+          <a href="#home" style="text-decoration:none; color:#b4b4b4; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b4b4b4'">Home</a>
+          <a href="#about" style="text-decoration:none; color:#b4b4b4; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b4b4b4'">About</a>
+          <a href="#skills" style="text-decoration:none; color:#b4b4b4; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b4b4b4'">Skills</a>
+          <a href="#projects" style="text-decoration:none; color:#b4b4b4; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b4b4b4'">Projects</a>
+          <a href="#contact" style="text-decoration:none; color:#b4b4b4; font-size:14px; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#b4b4b4'">Contact</a>
         </div>
       </div>
     </div>
-    <div style="max-width:1180px; margin:36px auto 0; padding-top:22px; border-top:1px solid rgba(255,255,255,.06); font-size:13px; color:#7d7878;">© 2026 Raymond Conrad S. Napiñas. All rights reserved.</div>
+    <div style="max-width:1180px; margin:36px auto 0; padding-top:22px; border-top:1px solid rgba(255,255,255,.06); font-size:13px; color:#797979;">© 2026 Raymond Conrad S. Napiñas. All rights reserved.</div>
   </footer>
 
   <!-- MODAL -->
   <div id="cz-modal" style="display:none; position:fixed; inset:0; z-index:200; align-items:center; justify-content:center; padding:24px;">
-    <div id="cz-mbd" style="position:absolute; inset:0; background:rgba(3,2,2,.82); backdrop-filter:blur(6px); opacity:0; transition:opacity .3s;"></div>
-    <div id="cz-mcard" style="position:relative; width:100%; max-width:920px; max-height:88vh; overflow-y:auto; border-radius:24px; background:linear-gradient(180deg,#140406,#0a0203); border:1px solid rgba(255,42,42,.25); box-shadow:0 40px 120px rgba(0,0,0,.7), 0 0 60px rgba(210,10,10,.2); transform:translateY(24px) scale(.98); opacity:0; transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .3s;"></div>
+    <div id="cz-mbd" style="position:absolute; inset:0; background:rgba(2,2,2,.82); backdrop-filter:blur(6px); opacity:0; transition:opacity .3s;"></div>
+    <div id="cz-mcard" style="position:relative; width:100%; max-width:920px; max-height:88vh; overflow-y:auto; border-radius:24px; background:linear-gradient(180deg,#080808,#040404); border:1px solid rgba(87,87,87,.25); box-shadow:0 40px 120px rgba(0,0,0,.7), 0 0 60px rgba(53,53,53,.2); transform:translateY(24px) scale(.98); opacity:0; transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .3s;"></div>
   </div>
 
   <style>
-    /* Red + white visual system */
+    /* Black + white visual system */
     #cz-root,
     #cz-root *,
     #cz-root *::before,
@@ -447,7 +434,7 @@
     #cz-nav {
       background:rgba(255,255,255,.96) !important;
       border-bottom-color:rgba(20,20,20,.09) !important;
-      box-shadow:0 10px 36px rgba(55,0,7,.1);
+      box-shadow:0 10px 36px rgba(12,12,12,.1);
       backdrop-filter:blur(16px) !important;
     }
     #cz-nav a { color:#111 !important; }
@@ -459,17 +446,17 @@
       line-height:1;
     }
     #cz-nav .cz-logo-black { color:#111 !important; }
-    #cz-nav .cz-logo-red { color:#d20a0a !important; }
+    #cz-nav .cz-logo-red { color:#353535 !important; }
     #cz-nav .cz-getintouch {
       color:#111 !important;
-      border:1px solid rgba(210,10,10,.18);
-      box-shadow:0 8px 26px rgba(118,0,12,.12) !important;
+      border:1px solid rgba(53,53,53,.18);
+      box-shadow:0 8px 26px rgba(26,26,26,.12) !important;
     }
 
     #home {
       background:
         radial-gradient(65% 90% at 72% 45%, rgba(255,255,255,.2), transparent 62%),
-        linear-gradient(145deg,#ef233c 0%,#c90820 48%,#8d0011 100%) !important;
+        linear-gradient(145deg,#505050 0%,#333333 48%,#1f1f1f 100%) !important;
     }
 
     #about,
@@ -477,66 +464,66 @@
     #journey,
     #contact {
       background:
-        radial-gradient(70% 80% at 100% 0%, rgba(239,35,60,.11), transparent 58%),
-        linear-gradient(180deg,#fff 0%,#fff7f7 100%) !important;
-      color:#69000c !important;
+        radial-gradient(70% 80% at 100% 0%, rgba(80,80,80,.11), transparent 58%),
+        linear-gradient(180deg,#fff 0%,#f9f9f9 100%) !important;
+      color:#171717 !important;
     }
     #about p,
     #skills p,
     #journey p,
-    #contact p { color:#5a2026 !important; }
-    #about strong { color:#ad0014; font-weight:800; }
+    #contact p { color:#2d2d2d !important; }
+    #about strong { color:#262626; font-weight:800; }
 
     #sniper,
     #tech,
     #projects {
       background:
         radial-gradient(65% 75% at 80% 10%, rgba(255,255,255,.13), transparent 58%),
-        linear-gradient(145deg,#e31932 0%,#b60018 52%,#76000d 100%) !important;
+        linear-gradient(145deg,#464646 0%,#282828 52%,#1a1a1a 100%) !important;
       color:#fff !important;
     }
     #sniper p,
     #tech p,
-    #projects p { color:#fff1f2 !important; }
+    #projects p { color:#f4f4f4 !important; }
 
     #skills [data-skill],
     #journey [data-reveal][style*="border-radius"] {
       background:#fff !important;
-      border-color:rgba(190,0,20,.18) !important;
-      box-shadow:0 18px 42px rgba(150,0,16,.08);
+      border-color:rgba(42,42,42,.18) !important;
+      box-shadow:0 18px 42px rgba(33,33,33,.08);
     }
 
     #tech .cz-chip {
-      color:#a80013 !important;
+      color:#252525 !important;
       background:#fff !important;
       border-color:rgba(255,255,255,.62) !important;
-      box-shadow:0 12px 28px rgba(91,0,10,.13);
+      box-shadow:0 12px 28px rgba(20,20,20,.13);
     }
 
     #projects .cz-card {
-      color:#63000b !important;
+      color:#161616 !important;
       background:#fff !important;
       border-color:rgba(255,255,255,.6) !important;
-      box-shadow:0 14px 34px rgba(87,0,10,.12);
+      box-shadow:0 14px 34px rgba(19,19,19,.12);
     }
-    #projects .cz-card p { color:#5a2026 !important; }
-    #projects .cz-card span { color:#a90013; }
+    #projects .cz-card p { color:#2d2d2d !important; }
+    #projects .cz-card span { color:#252525; }
     #projects .cz-card:not(.cz-card-gallery) .cz-cardtitle h3 { color:#fff !important; }
-    #projects .cz-card-gallery .cz-cardtitle h3 { color:#7a000e !important; }
+    #projects .cz-card-gallery .cz-cardtitle h3 { color:#1b1b1b !important; }
 
     #contact a,
     #contact input,
     #contact textarea {
-      color:#72000d !important;
+      color:#191919 !important;
       background:#fff !important;
-      border-color:rgba(185,0,20,.22) !important;
+      border-color:rgba(41,41,41,.22) !important;
     }
     #contact input::placeholder,
-    #contact textarea::placeholder { color:#8f5b60; }
+    #contact textarea::placeholder { color:#666666; }
 
     footer {
       color:#fff !important;
-      background:linear-gradient(145deg,#c6001a,#85000f) !important;
+      background:linear-gradient(145deg,#2c2c2c,#1d1d1d) !important;
       border-top-color:rgba(255,255,255,.22) !important;
     }
     footer p,
@@ -544,11 +531,67 @@
     footer div { color:#fff !important; }
 
     #cz-mcard {
-      color:#70000d !important;
+      color:#191919 !important;
       background:#fff !important;
-      border-color:rgba(190,0,20,.24) !important;
+      border-color:rgba(42,42,42,.24) !important;
     }
-    #cz-mcard p { color:#5a2026 !important; }
+    #cz-mcard p { color:#2d2d2d !important; }
+
+
+    /* Monochrome surfaces and readable accents on both backgrounds. */
+    #cz-root { --accent:#222 !important; --accent2:#555 !important; --accentDeep:#000 !important; }
+    #home, #sniper, #tech, #projects, footer {
+      --accent:#777; --accent2:#eee; --accentDeep:#333;
+    }
+    #home { background:#050505 !important; isolation:isolate; }
+    .cz-hero-glow {
+      position:absolute; inset:8% 0 4%; z-index:0; pointer-events:none;
+      background:radial-gradient(ellipse 25% 42% at 50% 45%,rgba(255,255,255,.52),rgba(255,255,255,.16) 48%,transparent 78%),
+        radial-gradient(ellipse 45% 35% at 50% 65%,rgba(255,255,255,.16),transparent 80%);
+      filter:blur(30px);
+    }
+    #home > div:nth-child(3) { background:none !important; }
+    #cz-portrait img {
+      filter:grayscale(1) brightness(1.35) contrast(1.05) !important;
+      mix-blend-mode:normal !important;
+    }
+    /* Asset files stay intact; their presentation follows the monochrome theme. */
+    img, video, #cz-sniper-canvas { filter:grayscale(1); }
+    #cz-loader img, footer img { filter:grayscale(1) brightness(2) !important; }
+    #cz-particles > div { background:#fff !important; box-shadow:0 0 14px rgba(255,255,255,.8) !important; }
+    #cz-nav .cz-logo-red { color:#111 !important; }
+    #cz-nav { background:#fff !important; }
+    #cz-spotlight { display:none !important; }
+    #about, #skills, #journey, #contact { background:linear-gradient(#fff,#f6f6f6) !important; color:#111 !important; }
+    #about p { text-indent:2em; }
+    #about strong { color:#111; }
+    #about p, #skills p, #journey p, #contact p { color:#333 !important; }
+    #sniper, #tech, #projects, footer { background:linear-gradient(145deg,#161616,#050505) !important; }
+    #projects .cz-card { --accent:#222; --accent2:#333; --accentDeep:#000; color:#111 !important; }
+    #projects .cz-card p, #projects .cz-card a, #projects .cz-card span,
+    #cz-mcard p, #cz-mcard span { color:#333 !important; }
+    #projects .cz-card-gallery .cz-cardtitle h3 { color:#111 !important; }
+    #projects .cz-slide-badge { color:#fff !important; }
+    #journey span[style*="border-radius:999px"] { color:#333 !important; }
+    #skills [data-skill] > div > span { color:#fff; }
+    #cz-mcard a { background:#222 !important; color:#fff !important; }
+    #cz-typed, #sniper h2 {
+      background-image:linear-gradient(120deg,#fff,#ddd 55%,#aaa) !important;
+    }
+    /* Individual translate avoids competing with the cards' hover transforms. */
+    .cz-reveal-pending { opacity:0; translate:0 64px; }
+    .cz-reveal-visible {
+      opacity:1; translate:0 0;
+      animation:cz-scroll-reveal .9s cubic-bezier(.16,1,.3,1) var(--reveal-delay,0ms) backwards;
+    }
+    @keyframes cz-scroll-reveal {
+      from { opacity:0; translate:0 64px; }
+      to { opacity:1; translate:0 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cz-reveal-pending, .cz-reveal-visible { opacity:1; translate:none; transition:none !important; animation:none !important; }
+      #home *, .cz-about-photo-wrap, .cz-about-shadow { animation:none !important; }
+    }
 
     /* Floating About portrait */
     .cz-about-portrait {
@@ -564,7 +607,7 @@
       z-index:2;
       width:min(100%, 465px);
       animation:cz-about-float 4.8s ease-in-out infinite;
-      filter:drop-shadow(0 24px 24px rgba(133,0,15,.16));
+      filter:drop-shadow(0 24px 24px rgba(29,29,29,.16));
       will-change:transform;
     }
     .cz-about-photo {
@@ -581,7 +624,7 @@
       width:min(70%, 330px);
       height:34px;
       border-radius:50%;
-      background:rgba(121,0,13,.28);
+      background:rgba(27,27,27,.28);
       filter:blur(14px);
       transform:translateX(-50%) scale(1);
       animation:cz-about-shadow 4.8s ease-in-out infinite;
