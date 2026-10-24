@@ -84,12 +84,16 @@ async function initLaptop() {
     const render = time => {
       raf = 0;
       if (!visible || document.hidden) { previous = 0; return; }
-      if (previous) elapsed += Math.min(time - previous, 50) / 1000;
+      const delta = previous ? Math.min(time - previous, 50) / 1000 : 1 / 60;
+      elapsed += delta;
       previous = time;
       const wave = motion.matches ? 0 : Math.sin(elapsed * .7);
       floating.position.y = .10 + wave * .075;
       floating.rotation.z = motion.matches ? 0 : Math.sin(elapsed * .4) * .012;
-      const ease = motion.matches ? 1 : .14;
+      // An 18-second, +/-15 degree sway eases naturally at each turning point.
+      // Keep it on the floating parent so manual rotation/tilt stays independent.
+      floating.rotation.y = motion.matches ? 0 : Math.sin(elapsed * Math.PI / 9) * Math.PI / 12;
+      const ease = motion.matches ? 1 : 1 - Math.exp(-delta * 9);
       turntable.rotation.y += (targetYaw - turntable.rotation.y) * ease;
       turntable.rotation.x += (targetPitch - turntable.rotation.x) * ease;
       stage.style.setProperty('--laptop-shadow-scale', String(1 - wave * .07));
@@ -97,9 +101,14 @@ async function initLaptop() {
       if (!motion.matches) raf = requestAnimationFrame(render);
     };
     renderScene = () => {
-      cancelAnimationFrame(raf);
-      previous = 0;
-      if (visible && !document.hidden) raf = requestAnimationFrame(render);
+      if (!visible || document.hidden) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+        previous = 0;
+        return;
+      }
+      // Pointer movement must not restart the animation clock on every event.
+      if (!raf) raf = requestAnimationFrame(render);
     };
     const canvas = renderer.domElement;
     canvas.tabIndex = 0;
@@ -165,6 +174,8 @@ async function initLaptop() {
     renderer.domElement.addEventListener('webglcontextlost', event => {
       event.preventDefault();
       cancelAnimationFrame(raf);
+      raf = 0;
+      previous = 0;
       stage.classList.remove('cz-laptop-ready');
     });
     renderer.domElement.addEventListener('webglcontextrestored', () => {
