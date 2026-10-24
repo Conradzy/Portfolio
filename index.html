@@ -312,7 +312,7 @@
       <div class="cz-education-copy" data-reveal>
         <h2 id="cz-education-heading">Education</h2>
         <div class="cz-education-school">
-          <img src="assets/dnsc-logo.png" alt="DNSC logo" width="1254" height="1254" loading="lazy" decoding="async">
+          <a class="cz-education-logo-link" href="https://www.facebook.com/officialdnsc" aria-label="Davao Del Norte State College on Facebook"><img src="assets/dnsc-logo.png" alt="DNSC logo" width="1254" height="1254" loading="lazy" decoding="async"></a>
           <p class="cz-education-statement"><span>4th Year Information Technology</span><span>at Davao Del Norte State College</span></p>
         </div>
       </div>
@@ -711,7 +711,9 @@
     .cz-education-statement { min-width:0; margin:0; font-family:'Inter Tight',sans-serif; font-size:26px; font-weight:400; line-height:1.45; letter-spacing:-.025em; }
     .cz-education-statement > span { display:block; }
     .cz-education-school { display:flex; align-items:center; gap:20px; }
-    .cz-education-school img { flex:0 0 68px; width:68px; height:68px; object-fit:contain; transition:transform .3s ease; }
+    .cz-education-logo-link { display:block; flex:0 0 68px; width:68px; height:68px; border-radius:50%; }
+    .cz-education-logo-link:focus-visible { outline:2px solid #111; outline-offset:5px; }
+    .cz-education-school img { display:block; width:100%; height:100%; object-fit:contain; transition:transform .3s ease; }
     @media (hover:hover) {
       .cz-education-school img:hover { transform:scale(1.06); }
     }
@@ -723,7 +725,7 @@
       #cz-education-heading { font-size:40px; }
       .cz-education-statement { font-size:clamp(18px,4.5vw,24px); }
       .cz-education-school { gap:16px; }
-      .cz-education-school img { flex-basis:56px; width:56px; height:56px; }
+      .cz-education-logo-link { flex-basis:56px; width:56px; height:56px; }
     }
     @media (prefers-reduced-motion:reduce) {
       .cz-education-school img { transition:none; }
