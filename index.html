@@ -300,6 +300,23 @@
     </div>
   </section>
 
+  <!-- EDUCATION -->
+  <section id="education" aria-labelledby="cz-education-heading">
+    <div class="cz-education-layout">
+      <div class="cz-education-photo" data-reveal>
+        <button id="cz-education-portrait" type="button" aria-label="Wave hello with Raymond's portrait" aria-pressed="false" aria-describedby="cz-education-hint">
+          <img class="cz-education-rest" src="assets/education-portrait.png" alt="Raymond smiling in a suit" width="1122" height="1402" loading="lazy" decoding="async" draggable="false">
+          <img class="cz-education-wave" src="assets/education-wave.png" alt="" aria-hidden="true" width="1086" height="1448" loading="lazy" decoding="async" draggable="false">
+        </button>
+        <p id="cz-education-hint">Hover or tap to say hello</p>
+      </div>
+      <div class="cz-education-copy" data-reveal>
+        <h2 id="cz-education-heading">Education</h2>
+        <p class="cz-education-statement">4th Year Information Technology <span class="cz-education-school"><span>at Davao Del Norte State College</span><img src="assets/dnsc-logo.png" alt="DNSC logo" width="1254" height="1254" loading="lazy" decoding="async"></span></p>
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT — RED -->
   <section id="contact" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(80% 70% at 50% 100%, rgba(117,117,117,.32) 0%, rgba(33,33,33,0) 55%), linear-gradient(170deg,#0e0e0e 0%, #161616 50%, #0a0a0a 100%); overflow:hidden;">
     <div style="position:absolute; inset:0; background:radial-gradient(80% 60% at 50% 0%, rgba(117,117,117,.35), rgba(5,5,5,0) 60%);"></div>
@@ -674,6 +691,34 @@
     @media (prefers-reduced-motion:reduce) {
       #cz-mobile-typed::after { animation:none; }
       #cz-phone-canvas, .cz-phone-fallback { transition:none; }
+    }
+
+    /* Two original-color portrait poses crossfade without shifting the layout. */
+    #education { background:#fff; color:#111; padding:100px 5vw 80px; scroll-margin-top:80px; }
+    .cz-education-layout { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:clamp(32px,5vw,90px); align-items:center; max-width:1600px; margin:0 auto; }
+    .cz-education-photo { min-width:0; width:100%; max-width:560px; justify-self:center; }
+    #cz-education-portrait { position:relative; display:block; width:100%; aspect-ratio:4 / 5; padding:0; border:0; border-radius:20px; background:transparent; cursor:pointer; touch-action:manipulation; }
+    #cz-education-portrait:focus-visible { outline:2px solid #111; outline-offset:8px; }
+    #cz-education-portrait img { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; object-position:center bottom; pointer-events:none; user-select:none; transition:opacity .55s ease, transform .7s cubic-bezier(.22,1,.36,1); }
+    .cz-education-rest { opacity:1; transform:translateY(0) scale(1); }
+    .cz-education-wave { opacity:0; transform:translateY(10px) scale(.985); }
+    #cz-education-portrait.is-waving .cz-education-rest { opacity:0; transform:translateY(6px) scale(.99); }
+    #cz-education-portrait.is-waving .cz-education-wave { opacity:1; transform:translateY(0) scale(1); }
+    #cz-education-hint { margin:20px 0 0; font-size:12px; color:#666; text-align:center; }
+    #cz-education-heading { margin:0 0 24px; font-family:'Inter Tight',sans-serif; font-size:18px; font-weight:500; letter-spacing:.04em; }
+    .cz-education-statement { margin:0; font-family:'Inter Tight',sans-serif; font-size:36px; font-weight:400; line-height:1.3; letter-spacing:-.025em; }
+    .cz-education-school { display:flex; align-items:center; gap:20px; margin-top:12px; }
+    .cz-education-school img { flex:0 0 68px; width:68px; height:68px; object-fit:contain; }
+    @media (max-width:900px) {
+      #education { padding:80px 6vw; }
+      .cz-education-layout { grid-template-columns:1fr; gap:48px; }
+      .cz-education-photo { max-width:440px; }
+      .cz-education-statement { font-size:clamp(28px,4.5vw,36px); }
+      .cz-education-school { gap:16px; }
+      .cz-education-school img { flex-basis:56px; width:56px; height:56px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      #cz-education-portrait img { transition:none; transform:none !important; }
     }
 
     /* Original-color floating tools, on a clean white stage. */

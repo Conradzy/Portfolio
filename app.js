@@ -48,6 +48,35 @@ class CZPortfolio {
     this.initScrollTyping('cz-mobile-statement', 'cz-mobile-typed');
     this.initVideoExpansion();
     this.initVideoPlayback();
+    this.initEducationPortrait();
+  }
+
+  initEducationPortrait() {
+    const portrait = document.getElementById('cz-education-portrait');
+    const wave = portrait?.querySelector('.cz-education-wave');
+    if (!portrait || !wave) return;
+    const events = new AbortController();
+    let requested = false;
+    const update = () => {
+      // Keep the resting pose visible until the alternate image has loaded.
+      const show = requested && wave.complete && wave.naturalWidth > 0;
+      portrait.classList.toggle('is-waving', show);
+      portrait.setAttribute('aria-pressed', String(show));
+    };
+    const setWaving = value => { requested = value; update(); };
+    wave.addEventListener('load', update, { signal:events.signal });
+    portrait.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'mouse') setWaving(true);
+    }, { signal:events.signal });
+    portrait.addEventListener('pointerleave', event => {
+      if (event.pointerType === 'mouse') setWaving(false);
+    }, { signal:events.signal });
+    // Touch users tap to toggle; keyboard users can use Enter or Space.
+    portrait.addEventListener('click', event => {
+      if (event.pointerType !== 'mouse' || event.detail === 0) setWaving(!requested);
+    }, { signal:events.signal });
+    portrait.addEventListener('blur', () => setWaving(false), { signal:events.signal });
+    this._educationCleanup = () => events.abort();
   }
 
   initScrollTyping(headingId, textId) {
@@ -778,6 +807,7 @@ class CZPortfolio {
     if (this._videoCleanup) this._videoCleanup();
     if (this._videoPlaybackCleanup) this._videoPlaybackCleanup();
     if (this._toolsCleanup) this._toolsCleanup();
+    if (this._educationCleanup) this._educationCleanup();
     clearTimeout(this._typeT);
     cancelAnimationFrame(this._techRAF);
     if (this._spMove) window.removeEventListener('pointermove', this._spMove);
