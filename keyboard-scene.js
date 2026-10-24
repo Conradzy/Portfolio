@@ -164,7 +164,7 @@ async function initKeyboard() {
       if (active === index) return;
       active = index;
       canvas.style.cursor = index >= 0 ? 'pointer' : 'default';
-      status.textContent = index >= 0 ? tools[index][0] : '29 tools. One creative workflow.';
+      status.textContent = index >= 0 ? tools[index][0] : '';
       stage.dataset.activeKey = index >= 0 ? tools[index][1] : '';
       if (schedule) wake();
     };
