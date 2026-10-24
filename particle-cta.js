@@ -3,7 +3,6 @@
 // of positions in JavaScript. RGB channels stay equal for a purely white palette.
 const panel = document.getElementById('cz-cta-panel');
 const host = document.getElementById('cz-cta-particles');
-const motionButton = document.getElementById('cz-cta-motion');
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let visible = false, started = false, galleryOpen = false, wake = () => {};
 
@@ -99,18 +98,13 @@ async function initParticles() {
     const target = new THREE.Vector2();
     const pointer = new THREE.Vector2();
     let raf = 0, previous = 0, elapsed = 0, lost = false;
-    let paused = reducedMotion.matches;
     const canRender = () => visible && !document.hidden && !galleryOpen && !lost;
-    const updateButton = () => {
-      motionButton.setAttribute('aria-pressed', String(paused));
-      motionButton.setAttribute('aria-label', paused ? 'Play particle animation' : 'Pause particle animation');
-    };
     const render = now => {
       raf = 0;
       if (!canRender()) { previous = 0; return; }
       const delta = previous ? Math.min((now - previous) / 1000, .05) : 1 / 60;
       previous = now;
-      if (!paused) {
+      if (!reducedMotion.matches) {
         // Slow every pulse, deformation and idle rotation to 32% of its old speed.
         // Cursor easing uses real time so it remains responsive while trailing softly.
         elapsed += delta * .32;
@@ -124,7 +118,7 @@ async function initParticles() {
         uniforms.uTime.value = elapsed;
       }
       renderer.render(scene, camera);
-      if (!paused) raf = requestAnimationFrame(render);
+      if (!reducedMotion.matches) raf = requestAnimationFrame(render);
     };
     wake = () => {
       if (!canRender()) {
@@ -139,7 +133,7 @@ async function initParticles() {
     // Stop following at the current position without returning to the center.
     const holdPointer = () => { target.copy(pointer); };
     panel.addEventListener('pointermove', event => {
-      if (event.pointerType === 'touch' || paused) return;
+      if (event.pointerType === 'touch' || reducedMotion.matches) return;
       const rect = panel.getBoundingClientRect();
       target.set(
         THREE.MathUtils.clamp((event.clientX - rect.left) / rect.width * 2 - 1, -1, 1),
@@ -149,16 +143,8 @@ async function initParticles() {
     panel.addEventListener('pointerleave', holdPointer);
     panel.addEventListener('pointercancel', holdPointer);
     window.addEventListener('blur', holdPointer);
-    motionButton.addEventListener('click', () => {
-      paused = !paused;
-      holdPointer();
-      updateButton();
-      wake();
-    });
     reducedMotion.addEventListener('change', () => {
-      paused = reducedMotion.matches;
       holdPointer();
-      updateButton();
       wake();
     });
     document.addEventListener('visibilitychange', () => { holdPointer(); wake(); });
@@ -180,24 +166,19 @@ async function initParticles() {
       event.preventDefault();
       lost = true;
       panel.classList.remove('is-ready');
-      motionButton.hidden = true;
       wake();
     });
     canvas.addEventListener('webglcontextrestored', () => {
       lost = false;
       panel.classList.add('is-ready');
-      motionButton.hidden = false;
       resize();
     });
-    updateButton();
     resize();
     panel.classList.add('is-ready');
-    motionButton.hidden = false;
   } catch (error) {
     renderer?.dispose();
     host.replaceChildren();
     panel.classList.remove('is-ready');
-    motionButton.hidden = true;
     console.warn('Particle CTA unavailable:', error);
   }
 }
