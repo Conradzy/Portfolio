@@ -21,6 +21,8 @@ async function initParticles() {
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-100, 100, 82, -82, .1, 600);
     camera.position.z = 250;
+    // Triple the previous apparent size without pushing particles through the camera.
+    camera.zoom = 3;
     const entity = new THREE.Group();
     // Enlarge the complete particle form, including its flowing filaments.
     entity.scale.setScalar(2.5);
@@ -114,8 +116,8 @@ async function initParticles() {
         elapsed += delta * .32;
         pointer.lerp(target, 1 - Math.exp(-2.4 * delta));
         entity.position.set(
-          pointer.x * camera.right * .75,
-          pointer.y * camera.top * .65 + Math.sin(elapsed * .35) * 2,
+          pointer.x * camera.right / camera.zoom * .75,
+          (pointer.y * camera.top * .65 + Math.sin(elapsed * .35) * 2) / camera.zoom,
           0
         );
         entity.rotation.set(pointer.y * -.12, pointer.x * .2 + elapsed * .045, Math.sin(elapsed * .16) * .06);
