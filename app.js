@@ -45,6 +45,7 @@ class CZPortfolio {
     this.initScrollTyping('cz-skills-statement', 'cz-skills-typed');
     this.initScrollTyping('cz-video-heading', 'cz-video-typed');
     this.initScrollTyping('cz-websites-statement', 'cz-websites-typed');
+    this.initScrollTyping('cz-mobile-statement', 'cz-mobile-typed');
     this.initVideoExpansion();
     this.initVideoPlayback();
   }
