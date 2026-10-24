@@ -96,7 +96,10 @@ async function initParticles() {
     }
 
     const target = new THREE.Vector2();
+    const followTarget = new THREE.Vector2();
     const pointer = new THREE.Vector2();
+    const turn = new THREE.Vector3();
+    const turnTarget = new THREE.Vector3();
     let raf = 0, previous = 0, elapsed = 0, lost = false;
     const canRender = () => visible && !document.hidden && !galleryOpen && !lost;
     const render = now => {
@@ -106,15 +109,21 @@ async function initParticles() {
       previous = now;
       if (!reducedMotion.matches) {
         // Slow every pulse, deformation and idle rotation to 32% of its old speed.
-        // Cursor easing uses real time so it remains responsive while trailing softly.
+        // Two eased stages create a soft delayed follow without queuing pointer events.
         elapsed += delta * .32;
-        pointer.lerp(target, 1 - Math.exp(-2.4 * delta));
+        followTarget.lerp(target, 1 - Math.exp(-3 * delta));
+        pointer.lerp(followTarget, 1 - Math.exp(-1.6 * delta));
         entity.position.set(
           pointer.x * camera.right / camera.zoom * .75,
           (pointer.y * camera.top * .65 + Math.sin(elapsed * .35) * 2) / camera.zoom,
           0
         );
-        entity.rotation.set(pointer.y * -.12, pointer.x * .2 + elapsed * .045, Math.sin(elapsed * .16) * .06);
+        // Turn and bank into the direction of travel, then gently settle as it arrives.
+        const lagX = followTarget.x - pointer.x;
+        const lagY = followTarget.y - pointer.y;
+        turnTarget.set(-pointer.y * .22 - lagY * .18, pointer.x * .35 + lagX * .22, -lagX * .12);
+        turn.lerp(turnTarget, 1 - Math.exp(-2.2 * delta));
+        entity.rotation.set(turn.x, turn.y + elapsed * .045, turn.z + Math.sin(elapsed * .16) * .06);
         uniforms.uTime.value = elapsed;
       }
       renderer.render(scene, camera);
@@ -131,7 +140,7 @@ async function initParticles() {
       }
     };
     // Stop following at the current position without returning to the center.
-    const holdPointer = () => { target.copy(pointer); };
+    const holdPointer = () => { target.copy(pointer); followTarget.copy(pointer); };
     panel.addEventListener('pointermove', event => {
       if (event.pointerType === 'touch' || reducedMotion.matches) return;
       const rect = panel.getBoundingClientRect();
