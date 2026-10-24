@@ -765,20 +765,19 @@
     }
 
     /* Four columns for the numbered skill, eight for its description. */
-    #expertise { background:#000; color:#fff; padding:110px 5vw 120px; scroll-margin-top:80px; font-family:'Inter Tight',sans-serif; }
+    #expertise { background:#fff; color:#000; padding:110px 5vw 120px; scroll-margin-top:80px; font-family:'Inter Tight',sans-serif; }
     .cz-expertise-inner { max-width:1600px; margin:0 auto; }
     #cz-expertise-heading { display:grid; margin:0 0 64px; font-size:clamp(36px,4.5vw,64px); font-weight:500; line-height:1.15; letter-spacing:-.04em; }
     #cz-expertise-heading > span { grid-area:1 / 1; }
     #cz-expertise-typed::after, #cz-expertise-heading .cz-statement-space::after { content:""; display:inline-block; width:2px; height:.9em; margin-left:6px; background:currentColor; vertical-align:-.08em; }
     #cz-expertise-typed::after { animation:cz-blink 1s step-end infinite; }
     .cz-expertise-list { list-style:none; margin:0; padding:0; }
-    .cz-expertise-row { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; padding:42px 0; border-top:1px solid #ffffff30; }
-    .cz-expertise-row:last-child { border-bottom:1px solid #ffffff30; }
-    .cz-expertise-skill { grid-column:span 4; display:flex; align-items:baseline; gap:clamp(14px,1.6vw,26px); padding-right:20px; }
-    .cz-expertise-number { flex-shrink:0; font-size:clamp(36px,3.5vw,52px); font-weight:900; line-height:1; letter-spacing:-.055em; font-variant-numeric:tabular-nums; }
+    .cz-expertise-row { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; padding:42px 0; align-items:center; }
+    .cz-expertise-skill { grid-column:span 4; display:flex; align-items:center; gap:clamp(14px,1.6vw,26px); padding-right:20px; }
+    .cz-expertise-number { flex-shrink:0; font-size:clamp(42px,4vw,60px); font-weight:900; line-height:1; letter-spacing:-.055em; font-variant-numeric:tabular-nums; }
     .cz-expertise-skill h3 { margin:0; font-size:clamp(26px,2.3vw,36px); font-weight:800; line-height:1.12; letter-spacing:-.035em; overflow-wrap:break-word; }
-    .cz-expertise-row > p { grid-column:span 8; margin:0; color:#d5d5d5; font-size:18px; font-weight:400; line-height:1.75; }
-    .cz-expertise-row strong { color:#fff; font-weight:650; }
+    .cz-expertise-row > p { grid-column:span 8; margin:0; color:#000; font-size:18px; font-weight:400; line-height:1.75; text-align:justify; text-align-last:left; }
+    .cz-expertise-row strong { color:#000; font-weight:650; }
     @media (max-width:900px) {
       #expertise { padding:80px 6vw; }
       #cz-expertise-heading { margin-bottom:40px; }
