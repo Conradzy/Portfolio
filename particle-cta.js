@@ -22,6 +22,8 @@ async function initParticles() {
     const camera = new THREE.OrthographicCamera(-100, 100, 82, -82, .1, 600);
     camera.position.z = 250;
     const entity = new THREE.Group();
+    // Enlarge the complete particle form, including its flowing filaments.
+    entity.scale.setScalar(2);
     scene.add(entity);
 
     const count = innerWidth <= 650 ? 15000 : 30000;
@@ -107,10 +109,15 @@ async function initParticles() {
       const delta = previous ? Math.min((now - previous) / 1000, .05) : 1 / 60;
       previous = now;
       if (!paused) {
-        elapsed += delta;
-        pointer.lerp(target, 1 - Math.exp(-3.8 * delta));
-        const horizontalTravel = Math.min(32, Math.max(5, camera.right - 78));
-        entity.position.set(pointer.x * horizontalTravel, pointer.y * 12 + Math.sin(elapsed * .35) * 2, 0);
+        // Slow every pulse, deformation and idle rotation to 32% of its old speed.
+        // Cursor easing uses real time so it remains responsive while trailing softly.
+        elapsed += delta * .32;
+        pointer.lerp(target, 1 - Math.exp(-2.4 * delta));
+        entity.position.set(
+          pointer.x * camera.right * .75,
+          pointer.y * camera.top * .65 + Math.sin(elapsed * .35) * 2,
+          0
+        );
         entity.rotation.set(pointer.y * -.12, pointer.x * .2 + elapsed * .045, Math.sin(elapsed * .16) * .06);
         uniforms.uTime.value = elapsed;
       }
