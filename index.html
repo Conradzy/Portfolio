@@ -352,6 +352,20 @@
     </div>
   </section>
 
+  <!-- INTERACTIVE TECH STACK -->
+  <section id="tech-stack" aria-labelledby="cz-stack-heading">
+    <h2 id="cz-stack-heading" aria-label="Tech Stack">
+      <span class="cz-statement-space" aria-hidden="true">Tech Stack</span>
+      <span id="cz-stack-typed" aria-hidden="true">Tech Stack</span>
+    </h2>
+    <div id="cz-keyboard-stage">
+      <div class="cz-keyboard-shadow" aria-hidden="true"></div>
+      <img class="cz-keyboard-fallback" src="assets/keyboard/reference.png" alt="Developer keyboard with 29 tools: PHP, JavaScript, TypeScript, Python, HTML, CSS, Dart, C++, NumPy, Pandas, Scikit-learn, PyTorch, Matplotlib, Laravel, Next.js, Django, FastAPI, Flutter, Google Cloud, PostgreSQL, Supabase, WAMP, phpMyAdmin, Firebase, Figma, Arduino, Cisco, Bootstrap, and Vercel." width="1783" height="881" loading="lazy">
+      <div id="cz-keyboard-canvas"></div>
+    </div>
+    <p id="cz-keyboard-active" aria-live="polite" aria-atomic="true">29 tools. One creative workflow.</p>
+  </section>
+
   <!-- CONTACT — RED -->
   <section id="contact" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(80% 70% at 50% 100%, rgba(117,117,117,.32) 0%, rgba(33,33,33,0) 55%), linear-gradient(170deg,#0e0e0e 0%, #161616 50%, #0a0a0a 100%); overflow:hidden;">
     <div style="position:absolute; inset:0; background:radial-gradient(80% 60% at 50% 0%, rgba(117,117,117,.35), rgba(5,5,5,0) 60%);"></div>
@@ -809,6 +823,30 @@
       .cz-expertise-row:hover .cz-expertise-number { transform:none; }
     }
 
+    /* A real, individually pressable 3D keyboard. */
+    #tech-stack { display:flex; flex-direction:column; align-items:center; background:#fff; color:#000; padding:100px 3vw 40px; overflow:hidden; scroll-margin-top:80px; }
+    #cz-stack-heading { display:grid; margin:0; text-align:center; font-family:'Inter Tight',sans-serif; font-size:clamp(40px,5.5vw,76px); font-weight:400; line-height:1.12; letter-spacing:-.045em; }
+    #cz-stack-heading > span { grid-area:1 / 1; }
+    #cz-stack-typed::after, #cz-stack-heading .cz-statement-space::after { content:""; display:inline-block; width:2px; height:.9em; margin-left:6px; background:currentColor; vertical-align:-.08em; }
+    #cz-stack-typed::after { animation:cz-blink 1s step-end infinite; }
+    #cz-keyboard-stage { position:relative; width:100%; max-width:1580px; aspect-ratio:2.1; margin-top:36px; isolation:isolate; }
+    .cz-keyboard-shadow { position:absolute; left:8%; right:8%; top:78%; height:12%; background:radial-gradient(ellipse,#0003,transparent 70%); filter:blur(18px); pointer-events:none; }
+    #cz-keyboard-canvas { position:absolute; inset:0; opacity:0; transition:opacity .6s ease; }
+    #cz-keyboard-canvas canvas { display:block; width:100%; height:100%; touch-action:pan-y; outline-offset:-8px; border-radius:20px; }
+    #cz-keyboard-canvas canvas:focus-visible { outline:2px solid #555; }
+    .cz-keyboard-fallback { position:absolute; inset:0; width:100%; height:100%; object-fit:contain; }
+    .cz-keyboard-ready #cz-keyboard-canvas { opacity:1; }
+    .cz-keyboard-ready .cz-keyboard-fallback { visibility:hidden; }
+    #cz-keyboard-active { min-height:1.5em; margin:8px 0 0; font-size:14px; font-weight:500; letter-spacing:.02em; color:#333; text-align:center; }
+    @media (max-width:650px) {
+      #tech-stack { padding:80px 2vw 32px; }
+      #cz-keyboard-stage { aspect-ratio:.82; margin-top:28px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      #cz-stack-typed::after { animation:none; }
+      #cz-keyboard-canvas { transition:none; }
+    }
+
     /* Original-color floating tools, on a clean white stage. */
     #tools { background:#fff; color:#000; padding:100px 0 70px; overflow:hidden; }
     #cz-tools-heading {
@@ -926,5 +964,6 @@
 <script src="app.js"></script>
 <script type="module" src="laptop-scene.js"></script>
 <script type="module" src="phone-scene.js"></script>
+<script type="module" src="keyboard-scene.js"></script>
 </body>
 </html>

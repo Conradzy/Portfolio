@@ -47,6 +47,7 @@ class CZPortfolio {
     this.initScrollTyping('cz-websites-statement', 'cz-websites-typed');
     this.initScrollTyping('cz-mobile-statement', 'cz-mobile-typed');
     this.initScrollTyping('cz-expertise-heading', 'cz-expertise-typed');
+    this.initScrollTyping('cz-stack-heading', 'cz-stack-typed');
     this.initVideoExpansion();
     this.initVideoPlayback();
     this.initEducationPortrait();
