@@ -3,6 +3,7 @@
 const stage = document.getElementById('cz-keyboard-stage');
 const host = document.getElementById('cz-keyboard-canvas');
 const status = document.getElementById('cz-keyboard-active');
+const label = document.getElementById('cz-keyboard-label');
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const tools = [
   ['PHP', 'php', '#858bdc', '#111'],
@@ -160,11 +161,25 @@ async function initKeyboard() {
     });
     let active = -1, selected = 0, columns = 10, raf = 0, previous = 0, touchTimer;
     let elapsed = 0, hoverPoint = null, contextLost = false;
+    const fitLabel = () => {
+      // Keep the 300px desktop treatment, shrinking only when a tool name needs it.
+      status.style.removeProperty('--keyboard-label-size');
+      if (!label.textContent) return;
+      const textWidth = label.getBoundingClientRect().width;
+      const availableWidth = status.clientWidth - 8;
+      if (availableWidth > 0 && textWidth > availableWidth) {
+        const fontSize = parseFloat(getComputedStyle(status).fontSize);
+        status.style.setProperty('--keyboard-label-size', Math.floor(fontSize * availableWidth / textWidth) + 'px');
+      }
+    };
+    // Refit after the real font arrives, not just against its fallback metrics.
+    document.fonts.load('700 300px Poppins').then(fitLabel).catch(() => {});
     const setActive = (index, schedule = true) => {
       if (active === index) return;
       active = index;
       canvas.style.cursor = index >= 0 ? 'pointer' : 'default';
-      status.textContent = index >= 0 ? tools[index][0] : '';
+      label.textContent = index >= 0 ? tools[index][0] : '';
+      fitLabel();
       stage.dataset.activeKey = index >= 0 ? tools[index][1] : '';
       if (schedule) wake();
     };
@@ -185,11 +200,11 @@ async function initKeyboard() {
       // Animate the parent, leaving the mechanical travel of each key independent.
       if (!motion.matches) elapsed += delta;
       const wave = seconds => motion.matches ? 0 : Math.sin(elapsed * Math.PI * 2 / seconds);
-      const lift = wave(10);
-      board.position.set(.06 * wave(16), .14 * lift, 0);
-      board.rotation.set(.025 * wave(14), .055 * wave(18), .015 * wave(12));
-      stage.style.setProperty('--keyboard-shadow-scale', (1 - .045 * lift).toFixed(4));
-      stage.style.setProperty('--keyboard-shadow-opacity', (.8 - .1 * lift).toFixed(4));
+      const lift = wave(18);
+      board.position.set(.018 * wave(24), .045 * lift, 0);
+      board.rotation.set(.008 * wave(22), .016 * wave(26), .005 * wave(20));
+      stage.style.setProperty('--keyboard-shadow-scale', (1 - .015 * lift).toFixed(4));
+      stage.style.setProperty('--keyboard-shadow-opacity', (.8 - .035 * lift).toFixed(4));
       // Recheck a stationary mouse as the board gently moves underneath it.
       if (hoverPoint) setActive(pick(hoverPoint), false);
       let moving = false;
