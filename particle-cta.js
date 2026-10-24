@@ -21,8 +21,8 @@ async function initParticles() {
     const scene = new THREE.Scene();
     const camera = new THREE.OrthographicCamera(-100, 100, 82, -82, .1, 600);
     camera.position.z = 250;
-    // Triple the previous apparent size without pushing particles through the camera.
-    camera.zoom = 3;
+    // Magnify the form without pushing particles through the camera.
+    camera.zoom = 1.5;
     const entity = new THREE.Group();
     // Enlarge the complete particle form, including its flowing filaments.
     entity.scale.setScalar(2.5);
