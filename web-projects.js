@@ -39,5 +39,12 @@ export const webProjects = [
     repository: 'https://github.com/Conradzy/Easy-Enroll-MNHS-',
     image: 'assets/web-projects/easy-enroll.png',
     crop: [0, 122 / 1080, 1905 / 1920, 910 / 1080]
+  },
+  {
+    id: 'campus-store', title: 'Campus Store POS', category: 'Point of sale', role: 'Practice project',
+    description: 'A simple point-of-sale application built as a personal practice project for a campus convenience store. It explores product browsing, cart management, and order totals through a clean, easy-to-use interface.',
+    repository: 'https://github.com/Conradzy/napinascampusconveniencestore',
+    image: 'assets/web-projects/campus-store.png',
+    crop: [0, 122 / 1080, 1905 / 1920, 910 / 1080]
   }
 ];

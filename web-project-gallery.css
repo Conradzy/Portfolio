@@ -101,6 +101,10 @@
   .cz-web-gallery-dot { width:24px; }
 }
 @media (max-height:650px) { .cz-web-gallery-shell { min-height:650px; } }
+@media (max-width:360px) {
+  .cz-web-gallery-help { display:none; }
+  .cz-web-gallery-pagination { margin-inline:auto; }
+}
 @media (prefers-reduced-motion:reduce) {
   #cz-web-gallery { transition:none; transform:none; }
   .cz-web-gallery-dot::after { transition:none; }
