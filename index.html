@@ -319,6 +319,38 @@
     </div>
   </section>
 
+  <!-- AREAS OF EXPERTISE -->
+  <section id="expertise" aria-labelledby="cz-expertise-heading">
+    <div class="cz-expertise-inner">
+      <h2 id="cz-expertise-heading" aria-label="Areas of Expertise">
+        <span class="cz-statement-space" aria-hidden="true">Areas of Expertise</span>
+        <span id="cz-expertise-typed" aria-hidden="true">Areas of Expertise</span>
+      </h2>
+      <ol class="cz-expertise-list">
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">01</span><h3>Video Editing</h3></div>
+          <p>With several years of experience in video editing, I specialize in motion graphics, short-form content, educational videos, and promotional materials. As an intermediate <strong>CapCut Pro</strong> editor, I combine creativity and technical skills to produce engaging, high-quality video content.</p>
+        </li>
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">02</span><h3>Full-stack Web App Development</h3></div>
+          <p>I have developed several full-stack web applications showcased on GitHub, covering frontend, backend, and database development. My primary tech stack includes <strong>Next.js, PHP, PostgreSQL, Supabase, and JavaScript</strong>, enabling me to build responsive, functional, and user-friendly applications.</p>
+        </li>
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">03</span><h3>Mobile App Development</h3></div>
+          <p>I have developed mobile applications using <strong>Flutter Dart, React, and Firebase</strong>, with experience in building responsive interfaces, implementing app functionality, and managing cloud-based databases to deliver seamless and user-friendly mobile experiences.</p>
+        </li>
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">04</span><h3>AI/Machine Learning &amp; Data Mining</h3></div>
+          <p>I have hands-on experience in <strong>data mining, machine learning, and AI</strong>, using Python, Google Colab, Jupyter Notebook, Scikit-learn, NumPy, Pandas, and PyTorch. My skills include regression, forecasting, predictive modeling, clustering, classification, and relationship analysis to extract meaningful insights from datasets. I have also integrated data mining techniques into several projects.</p>
+        </li>
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">05</span><h3>Basic Graphic Design</h3></div>
+          <p>I have experience in basic graphic design using <strong>Canva</strong>, applying color theory, proper contrast, and harmonious color combinations to create visually appealing and creative designs. I focus on producing engaging, well-balanced, and aesthetically pleasing visual content.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
   <!-- CONTACT — RED -->
   <section id="contact" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(80% 70% at 50% 100%, rgba(117,117,117,.32) 0%, rgba(33,33,33,0) 55%), linear-gradient(170deg,#0e0e0e 0%, #161616 50%, #0a0a0a 100%); overflow:hidden;">
     <div style="position:absolute; inset:0; background:radial-gradient(80% 60% at 50% 0%, rgba(117,117,117,.35), rgba(5,5,5,0) 60%);"></div>
@@ -730,6 +762,33 @@
     @media (prefers-reduced-motion:reduce) {
       .cz-education-school img { transition:none; }
       #cz-education-portrait img { transition:none; transform:none !important; }
+    }
+
+    /* Four columns for the numbered skill, eight for its description. */
+    #expertise { background:#000; color:#fff; padding:110px 5vw 120px; scroll-margin-top:80px; font-family:'Inter Tight',sans-serif; }
+    .cz-expertise-inner { max-width:1600px; margin:0 auto; }
+    #cz-expertise-heading { display:grid; margin:0 0 64px; font-size:clamp(36px,4.5vw,64px); font-weight:500; line-height:1.15; letter-spacing:-.04em; }
+    #cz-expertise-heading > span { grid-area:1 / 1; }
+    #cz-expertise-typed::after, #cz-expertise-heading .cz-statement-space::after { content:""; display:inline-block; width:2px; height:.9em; margin-left:6px; background:currentColor; vertical-align:-.08em; }
+    #cz-expertise-typed::after { animation:cz-blink 1s step-end infinite; }
+    .cz-expertise-list { list-style:none; margin:0; padding:0; }
+    .cz-expertise-row { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; padding:42px 0; border-top:1px solid #ffffff30; }
+    .cz-expertise-row:last-child { border-bottom:1px solid #ffffff30; }
+    .cz-expertise-skill { grid-column:span 4; display:flex; align-items:baseline; gap:clamp(14px,1.6vw,26px); padding-right:20px; }
+    .cz-expertise-number { flex-shrink:0; font-size:clamp(36px,3.5vw,52px); font-weight:900; line-height:1; letter-spacing:-.055em; font-variant-numeric:tabular-nums; }
+    .cz-expertise-skill h3 { margin:0; font-size:clamp(26px,2.3vw,36px); font-weight:800; line-height:1.12; letter-spacing:-.035em; overflow-wrap:break-word; }
+    .cz-expertise-row > p { grid-column:span 8; margin:0; color:#d5d5d5; font-size:18px; font-weight:400; line-height:1.75; }
+    .cz-expertise-row strong { color:#fff; font-weight:650; }
+    @media (max-width:900px) {
+      #expertise { padding:80px 6vw; }
+      #cz-expertise-heading { margin-bottom:40px; }
+      .cz-expertise-row { grid-template-columns:1fr; gap:22px; padding:32px 0; }
+      .cz-expertise-skill, .cz-expertise-row > p { grid-column:1; }
+      .cz-expertise-skill { padding-right:0; }
+      .cz-expertise-row > p { font-size:16px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      #cz-expertise-typed::after { animation:none; }
     }
 
     /* Original-color floating tools, on a clean white stage. */
