@@ -19,7 +19,7 @@ dialog.innerHTML = `
     </div>
     <footer class="cz-web-gallery-footer">
       <p id="cz-web-gallery-help" class="cz-web-gallery-help">Scroll or swipe to explore.<br>Drag a laptop to rotate.</p>
-      <div class="cz-web-gallery-pagination"><span id="cz-web-gallery-count">01 / 05</span><nav class="cz-web-gallery-dots" aria-label="Choose a project"></nav></div>
+      <div class="cz-web-gallery-pagination"><span id="cz-web-gallery-count">01 / ${String(webProjects.length).padStart(2,'0')}</span><nav class="cz-web-gallery-dots" aria-label="Choose a project"></nav></div>
     </footer>
     <p class="cz-web-gallery-announcement" aria-live="polite" aria-atomic="true"></p>
   </div>`;

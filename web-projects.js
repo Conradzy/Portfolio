@@ -32,5 +32,12 @@ export const webProjects = [
     description: 'A web application for organized waste collection, with pickup scheduling and tools for residents, collectors, and administrators. It promotes responsible disposal and better waste segregation in the community.',
     repository: 'https://github.com/Conradzy/laravel-project-wastewise',
     image: 'assets/web-projects/wastewise.png'
+  },
+  {
+    id: 'easy-enroll', title: 'Easy-Enroll', category: 'Education', role: 'Commissioned project',
+    description: 'A small-scale enrollment web application commissioned for a Grade 12 senior high school research project at Maragusan National High School (MNHS). Designed to simplify online enrollment and organize student records.',
+    repository: 'https://github.com/Conradzy/Easy-Enroll-MNHS-',
+    image: 'assets/web-projects/easy-enroll.png',
+    crop: [0, 122 / 1080, 1905 / 1920, 910 / 1080]
   }
 ];
