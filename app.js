@@ -279,9 +279,23 @@ class CZPortfolio {
     const endDrag = () => { if (!drag) return; drag = null; gallery.classList.remove('is-dragging'); update(); go(active); };
     ['pointerup','pointercancel','lostpointercapture'].forEach(name =>
       gallery.addEventListener(name, endDrag, { signal:events.signal }));
+    // Capture wheel gestures across the page, but only while the whole tool
+    // (including its caption) fits below the fixed navigation. Never lock the
+    // page when a short viewport cannot show the complete card.
+    const toolsFitViewport = () => {
+      if (!cards.length || this.el.modal?.style.display === 'flex') return false;
+      const card = cards[active].getBoundingClientRect();
+      const navBottom = document.getElementById('cz-nav')?.getBoundingClientRect().bottom || 0;
+      return card.top >= Math.max(0, navBottom) + 12 && card.bottom <= window.innerHeight - 12;
+    };
+    window.addEventListener('scroll', () => {
+      if (glideFrame !== null && !toolsFitViewport()) stopGlide();
+    }, { passive:true, signal:events.signal });
     // Slow both wheel axes and blend consecutive events into one continuous glide.
-    gallery.addEventListener('wheel', event => {
-      if (event.ctrlKey || drag) return;
+    window.addEventListener('wheel', event => {
+      if (event.defaultPrevented || event.ctrlKey || drag || !toolsFitViewport()) return;
+      // Leave form controls and other independently scrollable UI alone.
+      if (event.target instanceof Element && event.target.closest('input, textarea, select, [contenteditable="true"], [role="dialog"]')) return;
       const raw = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
       const normalized = raw * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? gallery.clientWidth : 1);
       const delta = Math.max(-100, Math.min(100, normalized * .45));
