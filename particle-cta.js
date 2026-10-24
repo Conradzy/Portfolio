@@ -23,7 +23,7 @@ async function initParticles() {
     camera.position.z = 250;
     const entity = new THREE.Group();
     // Enlarge the complete particle form, including its flowing filaments.
-    entity.scale.setScalar(2);
+    entity.scale.setScalar(2.5);
     scene.add(entity);
 
     const count = innerWidth <= 650 ? 15000 : 30000;
@@ -134,7 +134,8 @@ async function initParticles() {
         raf = requestAnimationFrame(render);
       }
     };
-    const resetPointer = () => { target.set(0, 0); };
+    // Stop following at the current position without returning to the center.
+    const holdPointer = () => { target.copy(pointer); };
     panel.addEventListener('pointermove', event => {
       if (event.pointerType === 'touch' || paused) return;
       const rect = panel.getBoundingClientRect();
@@ -143,22 +144,22 @@ async function initParticles() {
         THREE.MathUtils.clamp(1 - (event.clientY - rect.top) / rect.height * 2, -1, 1)
       );
     }, { passive:true });
-    panel.addEventListener('pointerleave', resetPointer);
-    panel.addEventListener('pointercancel', resetPointer);
-    window.addEventListener('blur', resetPointer);
+    panel.addEventListener('pointerleave', holdPointer);
+    panel.addEventListener('pointercancel', holdPointer);
+    window.addEventListener('blur', holdPointer);
     motionButton.addEventListener('click', () => {
       paused = !paused;
-      resetPointer();
+      holdPointer();
       updateButton();
       wake();
     });
     reducedMotion.addEventListener('change', () => {
       paused = reducedMotion.matches;
-      resetPointer();
+      holdPointer();
       updateButton();
       wake();
     });
-    document.addEventListener('visibilitychange', () => { resetPointer(); wake(); });
+    document.addEventListener('visibilitychange', () => { holdPointer(); wake(); });
     const resize = () => {
       const width = host.clientWidth, height = host.clientHeight;
       if (!width || !height) return;
