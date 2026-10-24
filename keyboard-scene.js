@@ -159,15 +159,16 @@ async function initKeyboard() {
       board.add(hit); return hit;
     });
     let active = -1, selected = 0, columns = 10, raf = 0, previous = 0, touchTimer;
-    const setActive = index => {
+    let elapsed = 0, hoverPoint = null, contextLost = false;
+    const setActive = (index, schedule = true) => {
       if (active === index) return;
       active = index;
       canvas.style.cursor = index >= 0 ? 'pointer' : 'default';
       status.textContent = index >= 0 ? tools[index][0] : '29 tools. One creative workflow.';
       stage.dataset.activeKey = index >= 0 ? tools[index][1] : '';
-      wake();
+      if (schedule) wake();
     };
-    clearActive = () => { clearTimeout(touchTimer); setActive(-1); };
+    clearActive = () => { clearTimeout(touchTimer); hoverPoint = null; setActive(-1); };
     const pick = event => {
       const b = canvas.getBoundingClientRect();
       pointer.set((event.clientX-b.left)/b.width*2-1, -(event.clientY-b.top)/b.height*2+1);
@@ -177,9 +178,20 @@ async function initKeyboard() {
     };
     const render = time => {
       raf = 0;
-      if (!visible || document.hidden) { previous = 0; return; }
+      if (!visible || document.hidden || contextLost) { previous = 0; return; }
       const delta = previous ? Math.min((time-previous)/1000, 1/30) : 1/60;
       previous = time;
+      // Independent, slow sine waves blend the lift and tilt without abrupt reversals.
+      // Animate the parent, leaving the mechanical travel of each key independent.
+      if (!motion.matches) elapsed += delta;
+      const wave = seconds => motion.matches ? 0 : Math.sin(elapsed * Math.PI * 2 / seconds);
+      const lift = wave(10);
+      board.position.set(.06 * wave(16), .14 * lift, 0);
+      board.rotation.set(.025 * wave(14), .055 * wave(18), .015 * wave(12));
+      stage.style.setProperty('--keyboard-shadow-scale', (1 - .045 * lift).toFixed(4));
+      stage.style.setProperty('--keyboard-shadow-opacity', (.8 - .1 * lift).toFixed(4));
+      // Recheck a stationary mouse as the board gently moves underneath it.
+      if (hoverPoint) setActive(pick(hoverPoint), false);
       let moving = false;
       keys.forEach((key,index) => {
         const target = index === active ? -.19 : 0;
@@ -198,18 +210,23 @@ async function initKeyboard() {
         key.socket.material.emissiveIntensity = .3 + Math.abs(key.offset)*3;
       });
       renderer.render(scene, camera);
-      if (moving) raf = requestAnimationFrame(render);
+      if (moving || !motion.matches) raf = requestAnimationFrame(render);
       else previous = 0;
     };
     wake = () => {
-      if (!visible || document.hidden) { cancelAnimationFrame(raf); raf = 0; previous = 0; return; }
+      if (!visible || document.hidden || contextLost) { cancelAnimationFrame(raf); raf = 0; previous = 0; return; }
       if (!raf) raf = requestAnimationFrame(render);
     };
-    canvas.addEventListener('pointermove', event => { if (event.pointerType !== 'touch') setActive(pick(event)); });
+    canvas.addEventListener('pointermove', event => {
+      if (event.pointerType === 'touch') return;
+      hoverPoint = { clientX:event.clientX, clientY:event.clientY };
+      setActive(pick(hoverPoint));
+    });
     canvas.addEventListener('pointerleave', clearActive);
     canvas.addEventListener('pointercancel', clearActive);
     canvas.addEventListener('pointerdown', event => {
       clearTimeout(touchTimer);
+      hoverPoint = event.pointerType === 'mouse' ? { clientX:event.clientX, clientY:event.clientY } : null;
       const index = pick(event);
       if (index >= 0) { selected = index; setActive(index); }
     });
@@ -220,6 +237,7 @@ async function initKeyboard() {
     canvas.addEventListener('keydown', event => {
       if (!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End',' ','Enter','Escape'].includes(event.key)) return;
       event.preventDefault();
+      hoverPoint = null;
       if (event.key === 'Escape') { clearActive(); return; }
       if (event.key === 'Home') selected = 0;
       if (event.key === 'End') selected = keys.length-1;
@@ -262,10 +280,10 @@ async function initKeyboard() {
     motion.addEventListener('change', wake);
     document.addEventListener('visibilitychange', () => { if (document.hidden) clearActive(); wake(); });
     canvas.addEventListener('webglcontextlost', event => {
-      event.preventDefault(); cancelAnimationFrame(raf); raf = 0;
+      event.preventDefault(); contextLost = true; clearActive(); wake();
       stage.classList.remove('cz-keyboard-ready');
     });
-    canvas.addEventListener('webglcontextrestored', () => { stage.classList.add('cz-keyboard-ready'); resize(); });
+    canvas.addEventListener('webglcontextrestored', () => { contextLost = false; stage.classList.add('cz-keyboard-ready'); resize(); });
     resize();
     stage.classList.add('cz-keyboard-ready');
   } catch (error) {
