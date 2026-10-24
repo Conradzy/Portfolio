@@ -322,6 +322,7 @@
   <!-- AREAS OF EXPERTISE -->
   <section id="expertise" aria-labelledby="cz-expertise-heading">
     <div class="cz-expertise-inner">
+      <div class="cz-expertise-intro"><span>CREATIVE × TECHNICAL</span><span>05 areas. One curious mind.</span></div>
       <h2 id="cz-expertise-heading" aria-label="Areas of Expertise">
         <span class="cz-statement-space" aria-hidden="true">Areas of Expertise</span>
         <span id="cz-expertise-typed" aria-hidden="true">Areas of Expertise</span>
@@ -766,28 +767,46 @@
 
     /* Four columns for the numbered skill, eight for its description. */
     #expertise { background:#fff; color:#000; padding:110px 5vw 120px; scroll-margin-top:80px; font-family:'Inter Tight',sans-serif; }
-    .cz-expertise-inner { max-width:1600px; margin:0 auto; }
-    #cz-expertise-heading { display:grid; margin:0 0 64px; font-size:clamp(36px,4.5vw,64px); font-weight:500; line-height:1.15; letter-spacing:-.04em; }
+    .cz-expertise-inner { max-width:1520px; margin:0 auto; }
+    .cz-expertise-intro { display:flex; justify-content:space-between; gap:20px; align-items:center; margin-bottom:28px; font-size:12px; font-weight:500; letter-spacing:.04em; }
+    .cz-expertise-intro > span:first-child { display:flex; align-items:center; gap:10px; letter-spacing:.14em; }
+    .cz-expertise-intro > span:first-child::before { content:""; width:7px; height:7px; border-radius:50%; background:#000; }
+    #cz-expertise-heading { display:grid; margin:0 0 60px; font-size:clamp(40px,6.4vw,92px); font-weight:500; line-height:1.05; letter-spacing:-.06em; }
     #cz-expertise-heading > span { grid-area:1 / 1; }
     #cz-expertise-typed::after, #cz-expertise-heading .cz-statement-space::after { content:""; display:inline-block; width:2px; height:.9em; margin-left:6px; background:currentColor; vertical-align:-.08em; }
     #cz-expertise-typed::after { animation:cz-blink 1s step-end infinite; }
-    .cz-expertise-list { list-style:none; margin:0; padding:0; }
-    .cz-expertise-row { display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:24px; padding:42px 0; align-items:center; }
-    .cz-expertise-skill { grid-column:span 4; display:flex; align-items:center; gap:clamp(14px,1.6vw,26px); padding-right:20px; }
-    .cz-expertise-number { flex-shrink:0; font-size:clamp(42px,4vw,60px); font-weight:900; line-height:1; letter-spacing:-.055em; font-variant-numeric:tabular-nums; }
-    .cz-expertise-skill h3 { margin:0; font-size:clamp(26px,2.3vw,36px); font-weight:800; line-height:1.12; letter-spacing:-.035em; overflow-wrap:break-word; }
-    .cz-expertise-row > p { grid-column:span 8; margin:0; color:#000; font-size:18px; font-weight:400; line-height:1.75; text-align:justify; text-align-last:left; }
+    .cz-expertise-list { list-style:none; margin:0; padding:0; display:grid; gap:18px; }
+    .cz-expertise-row { position:relative; display:grid; grid-template-columns:repeat(12,minmax(0,1fr)); column-gap:clamp(16px,2vw,32px); padding:clamp(28px,3.2vw,48px); align-items:center; background:#f6f6f6; border-radius:24px; transition:background .35s ease, box-shadow .35s ease; }
+    .cz-expertise-row:nth-child(even) { background:#fafafa; }
+    .cz-expertise-skill { grid-column:span 4; display:flex; align-items:center; gap:clamp(14px,1.6vw,26px); }
+    .cz-expertise-number { display:grid; place-items:center; flex:0 0 clamp(68px,6.5vw,98px); height:clamp(84px,8vw,120px); border-radius:18px; color:#000; background:#e8e8e8; font-size:clamp(44px,4.2vw,64px); font-weight:900; line-height:1; letter-spacing:-.055em; font-variant-numeric:tabular-nums; transition:background .35s ease,color .35s ease,transform .45s cubic-bezier(.22,1,.36,1); }
+    .cz-expertise-skill h3 { margin:0; min-width:0; font-size:clamp(24px,2.05vw,32px); font-weight:800; line-height:1.14; letter-spacing:-.04em; overflow-wrap:break-word; }
+    .cz-expertise-row > p { grid-column:span 8; margin:0; color:#000; font-size:17px; font-weight:400; line-height:1.75; text-align:justify; text-align-last:left; }
+    @media (hover:hover) {
+      .cz-expertise-row:hover { background:#f0f0f0; box-shadow:0 14px 40px #00000008; }
+      .cz-expertise-row:hover .cz-expertise-number { color:#fff; background:#000; transform:rotate(-4deg) translateY(-3px); }
+    }
     .cz-expertise-row strong { color:#000; font-weight:650; }
     @media (max-width:900px) {
       #expertise { padding:80px 6vw; }
       #cz-expertise-heading { margin-bottom:40px; }
-      .cz-expertise-row { grid-template-columns:1fr; gap:22px; padding:32px 0; }
+      .cz-expertise-intro { align-items:flex-start; flex-direction:column; gap:10px; }
+      .cz-expertise-row { grid-template-columns:1fr; gap:22px; padding:28px 24px; border-radius:20px; }
       .cz-expertise-skill, .cz-expertise-row > p { grid-column:1; }
       .cz-expertise-skill { padding-right:0; }
       .cz-expertise-row > p { font-size:16px; }
     }
+    @media (max-width:420px) {
+      .cz-expertise-row { padding:26px 18px; }
+      .cz-expertise-skill { gap:14px; }
+      .cz-expertise-number { flex-basis:58px; height:76px; border-radius:14px; font-size:42px; }
+      .cz-expertise-skill h3 { font-size:24px; }
+      .cz-expertise-row > p { hyphens:auto; }
+    }
     @media (prefers-reduced-motion:reduce) {
       #cz-expertise-typed::after { animation:none; }
+      .cz-expertise-row, .cz-expertise-number { transition:none; }
+      .cz-expertise-row:hover .cz-expertise-number { transform:none; }
     }
 
     /* Original-color floating tools, on a clean white stage. */
