@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="web-project-gallery.css">
 <link rel="stylesheet" href="mobile-project-gallery.css">
 <link rel="stylesheet" href="particle-cta.css">
+<link rel="stylesheet" href="achievements.css">
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -370,6 +371,25 @@
       <div id="cz-keyboard-canvas"></div>
     </div>
     <p id="cz-keyboard-active" aria-live="polite" aria-atomic="true"><span id="cz-keyboard-label"></span></p>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements" aria-labelledby="cz-achievements-heading">
+    <div class="cz-achievements-layout">
+      <div class="cz-achievements-intro">
+        <p class="cz-achievements-eyebrow">Achievements &amp; recognition</p>
+        <h2 id="cz-achievements-heading" aria-label="Milestones made through learning, creativity, and collaboration."><span class="cz-achievements-title-space" aria-hidden="true">Milestones made through learning, creativity, and collaboration.</span><span class="cz-achievements-typed" aria-hidden="true">Milestones made through learning, creativity, and collaboration.</span></h2>
+        <p class="cz-achievements-summary">From data mining competitions and startup showcases to consistent academic honors, these moments reflect the work, curiosity, and teamwork behind my growth.</p>
+        <span class="cz-achievements-total">03 achievements. Many shared moments.</span>
+      </div>
+      <div class="cz-award-preview-wrap">
+        <button class="cz-award-preview" type="button" aria-haspopup="dialog" aria-controls="cz-awards-gallery" aria-expanded="false" aria-label="Explore achievements and photo albums">
+          <span class="cz-award-preview-images"><img src="assets/awards/datamining1.jpg" alt="IT Olympiad 2026 team with their certificates" width="2048" height="1536" loading="lazy"><img alt="" aria-hidden="true" width="2048" height="1536"></span>
+          <span class="cz-award-preview-overlay"><span class="cz-award-preview-label">IT Olympiad 2026 · Data Mining</span><span class="cz-award-preview-action">Explore achievements <span aria-hidden="true">↗</span></span></span>
+        </button>
+        <button class="cz-award-autoplay" type="button" aria-label="Pause photo slideshow">Pause slideshow</button>
+      </div>
+    </div>
   </section>
 
   <!-- PARTICLE CALL TO ACTION -->
@@ -989,6 +1009,7 @@
 <script src="app.js"></script>
 <script type="module" src="laptop-scene.js"></script>
 <script type="module" src="web-project-gallery.js"></script>
+<script type="module" src="achievements.js"></script>
 <script type="module" src="phone-scene.js"></script>
 <script type="module" src="mobile-project-gallery.js"></script>
 <script type="module" src="keyboard-scene.js"></script>

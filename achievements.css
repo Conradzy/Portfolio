@@ -1,0 +1,72 @@
+#achievements { background:#fff; color:#080808; padding:clamp(75px,9vw,140px) clamp(20px,5vw,80px); scroll-margin-top:80px; }
+.cz-achievements-layout { max-width:1440px; margin:auto; display:grid; grid-template-columns:1fr 1.15fr; gap:clamp(35px,6vw,100px); align-items:center; }
+.cz-achievements-eyebrow { margin:0 0 24px; font-size:12px; font-weight:500; letter-spacing:.13em; text-transform:uppercase; }
+#cz-achievements-heading { display:grid; margin:0; font-size:clamp(30px,3vw,44px); font-weight:400; line-height:1.15; letter-spacing:-.035em; }
+#cz-achievements-heading > span { grid-area:1 / 1; }
+.cz-achievements-title-space { visibility:hidden; }
+.cz-achievements-typed::after { content:''; display:inline-block; height:.85em; border-right:2px solid currentColor; margin-left:4px; animation:cz-award-caret 1s steps(1) infinite; }
+.cz-achievements-summary { margin:26px 0; max-width:520px; font-size:16px; line-height:1.7; text-align:justify; }
+.cz-achievements-total { font-size:12px; color:#555; }
+.cz-award-preview-wrap { position:relative; min-width:0; }
+.cz-award-preview { display:block; position:relative; width:100%; aspect-ratio:1.12; padding:0; border:0; border-radius:24px; overflow:hidden; background:#111; color:#fff; text-align:left; font:inherit; box-shadow:0 24px 60px #00000015; }
+.cz-award-preview-images { position:absolute; inset:0; }
+.cz-award-preview-images img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity 1s ease, transform 1.2s ease; }
+.cz-award-preview-images img:first-child { opacity:1; }
+.cz-award-preview:hover img { transform:scale(1.025); }
+.cz-award-preview-overlay { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:flex-end; align-items:flex-start; gap:16px; padding:28px; background:linear-gradient(transparent 45%,#000b); }
+.cz-award-preview-label { font-size:14px; }
+.cz-award-preview-action { display:flex; gap:28px; border-radius:999px; padding:12px 18px; background:#fff; color:#000; font-size:14px; }
+.cz-award-autoplay { display:block; margin:12px 0 0 auto; background:none; border:0; padding:4px; color:#555; font:400 11px 'Inter Tight',sans-serif; }
+#achievements button:focus-visible { outline:2px solid #111; outline-offset:5px; }
+#cz-awards-gallery { position:fixed; inset:0; width:100%; height:100dvh; max-width:none; max-height:none; margin:0; padding:0; border:0; background:#080808; color:#fff; overflow:auto; overscroll-behavior:contain; font-family:'Inter Tight',sans-serif; opacity:0; transform:translateY(12px); transition:opacity .25s,transform .35s; }
+#cz-awards-gallery.is-open { opacity:1; transform:none; }
+#cz-awards-gallery::backdrop { background:#000c; }
+.cz-awards-shell { display:flex; flex-direction:column; height:100%; min-height:720px; }
+.cz-awards-track { --award-width:min(86vw,1320px); position:relative; display:flex; flex:1; min-height:0; gap:5vw; padding:24px max(20px,calc((100% - var(--award-width))/2)); overflow-x:auto; overflow-y:hidden; scrollbar-width:none; overscroll-behavior-x:contain; touch-action:pan-x pan-y; }
+.cz-awards-track::-webkit-scrollbar { display:none; }
+.cz-award-card { flex:0 0 var(--award-width); min-width:0; height:100%; }
+.cz-award-content { display:grid; grid-template-columns:1.35fr 1fr; align-items:center; gap:clamp(24px,4vw,65px); height:100%; transform:scale(var(--award-scale,.92)); opacity:var(--award-opacity,.6); transform-origin:center; }
+.cz-award-album { min-width:0; display:flex; flex-direction:column; gap:14px; }
+.cz-award-photo { position:relative; display:grid; width:100%; height:clamp(250px,48vh,580px); border-radius:18px; overflow:hidden; background:#151515; }
+.cz-award-photo img { width:100%; height:100%; min-height:0; object-fit:contain; grid-area:1 / 1; }
+.cz-award-photo img.is-changing { animation:cz-award-photo-in .4s ease both; }
+.cz-award-thumbnails { display:flex; gap:8px; flex-wrap:wrap; }
+.cz-award-thumbnail { width:clamp(40px,5vw,64px); height:44px; padding:2px; border:1px solid transparent; border-radius:7px; background:transparent; opacity:.5; transition:opacity .2s,border-color .2s; }
+.cz-award-thumbnail img { display:block; width:100%; height:100%; object-fit:cover; border-radius:4px; }
+.cz-award-thumbnail[aria-pressed="true"],.cz-award-thumbnail:hover { opacity:1; border-color:#fff; }
+.cz-award-photo-count { margin:0; color:#999; font-size:11px; }
+.cz-award-copy { min-width:0; }
+.cz-award-subtitle { margin:0 0 14px; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:#aaa; line-height:1.6; }
+.cz-award-copy h3 { font-size:clamp(36px,4.4vw,66px); font-weight:400; letter-spacing:-.045em; line-height:1.05; margin:0 0 20px; }
+.cz-award-result { display:inline-block; border:1px solid #ffffff40; border-radius:16px; padding:10px 14px; font-size:13px; line-height:1.7; margin:0 0 22px; }
+.cz-award-description { font-size:clamp(14px,1.3vw,17px); line-height:1.7; color:#c2c2c2; text-align:justify; margin:0 0 22px; }
+.cz-award-institution { margin:0; font-size:12px; color:#888; }
+.cz-award-academic { height:clamp(300px,52vh,600px); border-radius:20px; background:#f4f4ef; color:#111; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:30px; }
+.cz-award-academic strong { font-size:clamp(100px,13vw,190px); line-height:1; font-weight:500; letter-spacing:-.07em; }
+.cz-award-academic span { font-size:12px; letter-spacing:.2em; text-transform:uppercase; margin:16px 0 32px; }
+.cz-award-academic p { font-size:20px; margin:0; }
+.cz-award-academic small { margin-top:12px; color:#555; line-height:1.6; }
+#cz-awards-gallery .cz-awards-footer { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:16px clamp(20px,4vw,64px) 24px; background:transparent !important; border:0; flex-shrink:0; }
+#cz-awards-gallery button:focus-visible,.cz-awards-track:focus-visible { outline:2px solid #fff; outline-offset:3px; }
+@keyframes cz-award-caret { 50% { opacity:0; } }
+@keyframes cz-award-photo-in { from { opacity:.3; transform:scale(.985); } to { opacity:1; transform:none; } }
+@media(max-width:800px) {
+  .cz-achievements-layout { grid-template-columns:1fr; gap:36px; }
+  .cz-achievements-summary { max-width:none; }
+  .cz-award-preview { aspect-ratio:4 / 3; }
+  .cz-awards-shell { height:auto; min-height:100%; }
+  .cz-awards-track { --award-width:88vw; padding-block:16px; flex:1 0 auto; }
+  .cz-award-card { height:auto; }
+  .cz-award-content { grid-template-columns:1fr; gap:26px; align-content:start; }
+  .cz-award-photo { height:clamp(240px,36vh,360px); }
+  .cz-award-thumbnail { width:40px; height:34px; }
+  .cz-award-copy h3 { font-size:36px; margin-bottom:16px; }
+  .cz-award-description { font-size:14px; }
+  .cz-award-academic { height:300px; }
+  .cz-award-academic strong { font-size:110px; }
+  #cz-awards-gallery .cz-awards-footer { gap:10px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  #cz-awards-gallery,.cz-award-preview-images img { transition:none; }
+  .cz-achievements-typed::after,.cz-award-photo img.is-changing { animation:none; }
+}
