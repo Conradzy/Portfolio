@@ -1,0 +1,26 @@
+#contact.cz-contact { position:relative; background:#fff !important; color:#111 !important; padding:clamp(80px,9vw,140px) 24px clamp(65px,7vw,110px); scroll-margin-top:80px; }
+.cz-contact-inner { width:100%; max-width:1000px; margin:auto; text-align:center; }
+#contact .cz-contact-eyebrow { margin:0 0 24px; font-size:11px; font-weight:400; letter-spacing:.2em; }
+#cz-contact-heading { margin:0; font-size:clamp(36px,5.5vw,76px); font-weight:400; line-height:1.08; letter-spacing:-.045em; }
+#contact .cz-contact-intro { margin:20px 0 0; font-size:clamp(15px,1.5vw,18px); font-weight:400; line-height:1.6; }
+.cz-contact-socials { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(12px,4vw,60px); max-width:880px; margin:48px auto 0; }
+#contact .cz-contact-social { display:flex; flex-direction:column; align-items:center; min-width:0; padding:12px 8px 16px; border:0; border-radius:20px; background:transparent !important; color:#111 !important; text-decoration:none; font:400 17px 'Inter Tight',sans-serif; cursor:pointer; -webkit-tap-highlight-color:transparent; }
+.cz-contact-social img { display:block; width:clamp(100px,13vw,160px); max-width:100%; height:auto; aspect-ratio:1; object-fit:contain; margin-bottom:14px; transition:transform .45s cubic-bezier(.22,1,.36,1),filter .45s; }
+.cz-contact-name { font-weight:400; line-height:1.5; }
+.cz-contact-name > span { display:inline-block; font-size:13px; margin-left:3px; transition:transform .3s; }
+.cz-contact-detail { font-size:12px; color:#666; margin-top:6px; font-weight:400; }
+.cz-contact-social:hover img,.cz-contact-social:focus-visible img { transform:translateY(-7px) rotate(-2deg); filter:drop-shadow(0 10px 9px #00000012); }
+.cz-contact-social:hover .cz-contact-name > span { transform:translate(2px,-2px); }
+#contact .cz-contact-social:focus-visible { outline:2px solid #222; outline-offset:4px; }
+#contact #cz-email-status { min-height:24px; margin:28px 0 0; font-size:14px; line-height:24px; font-weight:400; }
+#contact #cz-email-manual { margin:8px 0 0; font-size:13px; overflow-wrap:anywhere; }
+.cz-contact-email { user-select:all; }
+@media(max-width:600px) {
+  .cz-contact-socials { grid-template-columns:repeat(2,minmax(0,1fr)); max-width:380px; gap:24px 20px; margin-top:32px; }
+  .cz-contact-social img { width:126px; margin-bottom:8px; }
+  #contact.cz-contact { padding-inline:20px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .cz-contact-social img,.cz-contact-name > span { transition:none; }
+  .cz-contact-social:hover img,.cz-contact-social:focus-visible img { transform:none; }
+}

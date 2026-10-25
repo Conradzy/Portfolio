@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="mobile-project-gallery.css">
 <link rel="stylesheet" href="particle-cta.css">
 <link rel="stylesheet" href="achievements.css">
+<link rel="stylesheet" href="contact.css">
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -405,28 +406,33 @@
   </section>
 
   <!-- CONTACT -->
-  <section id="contact" style="position:relative; padding:clamp(70px,9vw,130px) clamp(20px,5vw,64px); background:radial-gradient(80% 70% at 50% 100%, rgba(117,117,117,.32) 0%, rgba(33,33,33,0) 55%), linear-gradient(170deg,#0e0e0e 0%, #161616 50%, #0a0a0a 100%); overflow:hidden;">
-    <div style="position:absolute; inset:0; background:radial-gradient(80% 60% at 50% 0%, rgba(117,117,117,.35), rgba(5,5,5,0) 60%);"></div>
-    <div style="position:relative; max-width:980px; margin:0 auto; text-align:center;">
+  <section id="contact" class="cz-contact" aria-labelledby="cz-contact-heading">
+    <div class="cz-contact-inner">
       <div data-reveal>
-        <span style="font-size:13px; font-weight:700; letter-spacing:.22em; color:var(--accent2);">06 — GET IN TOUCH</span>
-        <h2 style="margin:18px auto 0; max-width:760px; font-size:clamp(30px,4.2vw,52px); font-weight:800; letter-spacing:-.03em; line-height:1.06;">Let's build something practical, intelligent, and visually sharp.</h2>
+        <p class="cz-contact-eyebrow">GET IN TOUCH</p>
+        <h2 id="cz-contact-heading">Let’s stay connected.</h2>
+        <p class="cz-contact-intro">For projects, collaborations, or just a hello.</p>
       </div>
-      <div data-reveal style="display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:34px 0 40px;">
-        <a href="mailto:raymondnapinas12@gmail.com" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e3e3e3; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e3e3e3'">✉ Email</a>
-        <a href="https://github.com/Conradzy" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e3e3e3; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e3e3e3'">⌥ GitHub</a>
-        <a href="https://www.facebook.com/raymond.napinas" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e3e3e3; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e3e3e3'">f Facebook</a>
-        <a href="https://www.linkedin.com/in/raymond-napinas-a7a258390" target="_blank" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:12px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#e3e3e3; font-size:14px; font-weight:500; transition:all .2s;" onmouseover="this.style.borderColor='var(--accent2)';this.style.color='#fff'" onmouseout="this.style.borderColor='rgba(255,255,255,.12)';this.style.color='#e3e3e3'">in LinkedIn</a>
+      <div class="cz-contact-socials" data-reveal>
+        <button class="cz-contact-social" id="cz-copy-email" type="button" aria-label="Copy email address: raymondnapinas12@gmail.com" aria-describedby="cz-email-status">
+          <img src="assets/contact/gmail.png" alt="" width="160" height="160" loading="lazy">
+          <span class="cz-contact-name">Gmail</span><span class="cz-contact-detail">Copy email</span>
+        </button>
+        <a class="cz-contact-social" href="https://github.com/Conradzy" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">
+          <img src="assets/contact/github.png" alt="" width="160" height="160" loading="lazy">
+          <span class="cz-contact-name">GitHub <span aria-hidden="true">↗</span></span><span class="cz-contact-detail">Conradzy</span>
+        </a>
+        <a class="cz-contact-social" href="https://www.facebook.com/raymond.napinas" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)">
+          <img src="assets/contact/facebook.png" alt="" width="160" height="160" loading="lazy">
+          <span class="cz-contact-name">Facebook <span aria-hidden="true">↗</span></span><span class="cz-contact-detail">Say hello</span>
+        </a>
+        <a class="cz-contact-social" href="https://www.linkedin.com/in/raymond-napinas-a7a258390" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">
+          <img src="assets/contact/linkedin.png" alt="" width="160" height="160" loading="lazy">
+          <span class="cz-contact-name">LinkedIn <span aria-hidden="true">↗</span></span><span class="cz-contact-detail">Let’s connect</span>
+        </a>
       </div>
-      <form id="cz-form" data-reveal style="max-width:620px; margin:0 auto; text-align:left; display:grid; gap:16px;">
-        <div class="cz-formrow" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-          <input name="name" type="text" placeholder="Name" required style="width:100%; padding:15px 18px; border-radius:13px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#fff; font-size:15px; font-family:inherit; outline:none; transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent2)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
-          <input name="email" type="email" placeholder="Email" required style="width:100%; padding:15px 18px; border-radius:13px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#fff; font-size:15px; font-family:inherit; outline:none; transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent2)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'">
-        </div>
-        <textarea name="message" placeholder="Message" rows="4" required style="width:100%; padding:15px 18px; border-radius:13px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.12); color:#fff; font-size:15px; font-family:inherit; outline:none; resize:vertical; transition:border-color .2s;" onfocus="this.style.borderColor='var(--accent2)'" onblur="this.style.borderColor='rgba(255,255,255,.12)'"></textarea>
-        <button type="submit" style="cursor:pointer; padding:16px; border-radius:13px; border:none; font-family:inherit; font-size:15px; font-weight:700; color:#fff; background:linear-gradient(135deg,var(--accent),var(--accentDeep)); box-shadow:0 12px 34px rgba(53,53,53,.32); transition:transform .2s, box-shadow .2s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 18px 44px rgba(53,53,53,.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 12px 34px rgba(53,53,53,.32)'">Send Message</button>
-        <div id="cz-formmsg" style="display:none; text-align:center; font-size:14px; color:#d0d0d0; font-weight:500;">Thanks — your message has been noted. I'll get back to you soon.</div>
-      </form>
+      <p id="cz-email-status" role="status" aria-live="polite" aria-atomic="true"></p>
+      <p id="cz-email-manual" hidden><span>Copy manually: </span><span class="cz-contact-email">raymondnapinas12@gmail.com</span></p>
     </div>
   </section>
 
@@ -1010,6 +1016,7 @@
 <script type="module" src="laptop-scene.js"></script>
 <script type="module" src="web-project-gallery.js"></script>
 <script type="module" src="achievements.js"></script>
+<script type="module" src="contact.js"></script>
 <script type="module" src="phone-scene.js"></script>
 <script type="module" src="mobile-project-gallery.js"></script>
 <script type="module" src="keyboard-scene.js"></script>
