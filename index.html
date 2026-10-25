@@ -89,7 +89,7 @@
   <!-- NAVBAR -->
   <nav id="cz-nav" style="position:fixed; top:0; left:0; width:100%; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:22px clamp(20px,5vw,64px); transition:background .35s, backdrop-filter .35s, padding .35s, border-color .35s; background:transparent; border-bottom:1px solid rgba(255,255,255,0);">
     <a href="#home" class="cz-navbar-logo" aria-label="Conradzz — Home" style="text-decoration:none; display:flex; align-items:center; color:#111;">
-      Conradzz
+      <img class="cz-navbar-mark" src="assets/cz-navbar-mark.png" alt="" width="44" height="30"><span>Conradzz</span>
     </a>
     <div id="cz-navlinks" style="display:flex; gap:clamp(18px,3.2vw,46px); align-items:center;">
       <a href="#home" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Home</a>
@@ -478,12 +478,13 @@
     }
     #cz-nav a { color:#fff !important; }
     #cz-nav .cz-navbar-logo {
-      gap:0;
-      font-size:clamp(24px,2.2vw,31px);
+      gap:8px;
+      font-size:clamp(18px,1.6vw,22px);
       font-weight:400;
       letter-spacing:-.055em;
       line-height:1;
     }
+    #cz-nav .cz-navbar-mark { display:block; width:44px; height:30px; object-fit:contain; flex-shrink:0; filter:brightness(0) invert(1); }
     #cz-nav .cz-getintouch {
       color:#111 !important;
       border:1px solid rgba(53,53,53,.18);
