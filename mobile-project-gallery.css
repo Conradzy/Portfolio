@@ -1,0 +1,35 @@
+#cz-phone-stage { cursor:pointer; }
+#cz-phone-stage .cz-phone-hint { bottom:74px; }
+.cz-mobile-gallery-open {
+  position:absolute; z-index:2; bottom:20px; left:50%; transform:translateX(-50%);
+  display:inline-flex; align-items:center; gap:24px; white-space:nowrap;
+  padding:12px 20px; border:1px solid #0002; border-radius:999px;
+  background:#111; color:#fff; font:500 14px 'Inter Tight',sans-serif;
+  cursor:pointer; transition:background .2s,box-shadow .2s;
+}
+.cz-mobile-gallery-open:hover { background:#333; box-shadow:0 6px 24px #0003; }
+.cz-mobile-gallery-open:focus-visible { outline:2px solid #111; outline-offset:4px; }
+.cz-gallery-phone .cz-web-gallery-track { --project-width:min(84vw,1150px); }
+.cz-gallery-phone .cz-web-project-scale {
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:clamp(16px,3vw,48px); align-items:center;
+}
+.cz-gallery-phone .cz-project-laptop { height:100%; min-height:300px; max-height:none; }
+.cz-gallery-phone .cz-project-laptop-glow { inset:8% 0 0; }
+.cz-gallery-phone .cz-project-laptop-shadow { left:22%; right:22%; bottom:7%; height:5%; background:radial-gradient(ellipse,#ffffff24,transparent 70%); }
+.cz-gallery-phone .cz-project-laptop-fallback {
+  left:50%; top:12%; transform:translateX(-50%); height:72%; width:auto; max-width:80%;
+  aspect-ratio:922/2048; border-radius:24px; object-fit:cover;
+}
+.cz-gallery-phone .cz-project-copy { padding:24px 12px 24px 0; }
+.cz-gallery-credit { flex-shrink:0; margin:0; padding:0 20px 16px; text-align:center; color:#999; font:400 10px/1.5 'Inter Tight',sans-serif; }
+.cz-gallery-credit a { color:inherit; text-underline-offset:3px; }
+@media (max-width:700px) {
+  .cz-gallery-phone .cz-web-gallery-shell { min-height:880px; }
+  .cz-gallery-phone .cz-web-gallery-track { --project-width:88vw; --project-gap:4vw; }
+  .cz-gallery-phone .cz-web-project-scale { display:flex; flex-direction:column; gap:0; }
+  .cz-gallery-phone .cz-project-laptop { flex:1; width:100%; min-height:280px; max-height:48%; }
+  .cz-gallery-phone .cz-project-copy { padding:0 5px 14px; }
+  .cz-gallery-phone .cz-project-laptop-fallback { top:7%; height:80%; }
+  .cz-gallery-phone .cz-project-laptop-shadow { left:32%; right:32%; bottom:4%; }
+}

@@ -195,7 +195,7 @@ async function initLaptop() {
 }
 
 if (stage && host) {
-  document.addEventListener('cz:web-gallery', event => {
+  document.addEventListener('cz:project-gallery', event => {
     galleryOpen = event.detail.open;
     renderScene();
   });

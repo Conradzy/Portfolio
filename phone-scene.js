@@ -2,7 +2,7 @@
 const stage = document.getElementById('cz-phone-stage');
 const host = document.getElementById('cz-phone-canvas');
 const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-let visible = false, started = false;
+let visible = false, started = false, galleryOpen = false;
 let renderScene = () => {};
 
 async function initPhone() {
@@ -98,7 +98,7 @@ async function initPhone() {
     let raf = 0, previous = 0, elapsed = 0;
     const render = time => {
       raf = 0;
-      if (!visible || document.hidden) { previous = 0; return; }
+      if (!visible || document.hidden || galleryOpen) { previous = 0; return; }
       const delta = previous ? Math.min(time - previous, 50) / 1000 : 1 / 60;
       elapsed += delta;
       previous = time;
@@ -115,7 +115,7 @@ async function initPhone() {
       if (!motion.matches) raf = requestAnimationFrame(render);
     };
     renderScene = () => {
-      if (!visible || document.hidden) {
+      if (!visible || document.hidden || galleryOpen) {
         cancelAnimationFrame(raf);
         raf = 0;
         previous = 0;
@@ -127,7 +127,7 @@ async function initPhone() {
     const canvas = renderer.domElement;
     canvas.tabIndex = 0;
     canvas.setAttribute('role', 'img');
-    canvas.setAttribute('aria-label', 'Interactive SagingAI iPhone. Drag to rotate and tilt. Arrow keys rotate and tilt; Home resets the view.');
+    canvas.setAttribute('aria-label', 'Interactive SagingAI iPhone. Click or press Enter to explore mobile projects. Drag to rotate and tilt. Arrow keys rotate and tilt; Home resets the view.');
     canvas.setAttribute('aria-keyshortcuts', 'ArrowLeft ArrowRight ArrowUp ArrowDown Home');
     let drag = null;
     const resetView = () => { targetYaw = -.22; targetPitch = .04; renderScene(); };
@@ -193,6 +193,10 @@ async function initPhone() {
 }
 
 if (stage && host) {
+  document.addEventListener('cz:project-gallery', event => {
+    galleryOpen = event.detail.open;
+    renderScene();
+  });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => {
       visible = entries[0].isIntersecting;

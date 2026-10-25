@@ -193,7 +193,7 @@ async function initParticles() {
 }
 
 if (panel && host) {
-  document.addEventListener('cz:web-gallery', event => { galleryOpen = event.detail.open; wake(); });
+  document.addEventListener('cz:project-gallery', event => { galleryOpen = event.detail.open; wake(); });
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => {
       visible = entries[0].isIntersecting;
