@@ -1,0 +1,23 @@
+/* Scoped to the page footer so modal gallery footers keep their own appearance. */
+#cz-portfolio-footer { background:#fff !important; color:#111 !important; border:0; padding:0; font-family:'Inter Tight',sans-serif; }
+#cz-portfolio-footer p,#cz-portfolio-footer div,#cz-portfolio-footer a { color:#111 !important; font-weight:400; }
+#cz-portfolio-footer .cz-footer-wordmark { margin:0; padding:clamp(28px,4vw,76px) 3vw clamp(36px,5vw,96px); text-align:center; font-size:clamp(56px,20vw,380px); font-weight:400; line-height:1.08; letter-spacing:-.055em; }
+.cz-footer-letters { display:inline-flex; justify-content:center; white-space:nowrap; }
+.cz-footer-letter { display:inline-block; }
+.cz-footer-letter > span { display:inline-block; transition:transform .5s cubic-bezier(.22,1,.36,1); will-change:transform; }
+@media(hover:hover) {
+  .cz-footer-letter:hover > span { transform:translateY(clamp(-16px,-1vw,-5px)); }
+}
+#cz-portfolio-footer .cz-footer-bottom { display:flex; align-items:center; justify-content:space-between; gap:28px; border-top:1px solid #ececec; padding:32px clamp(24px,7.8vw,150px) 36px; }
+#cz-portfolio-footer .cz-footer-credit { margin:0; color:#555 !important; font-size:13px; line-height:1.6; }
+.cz-footer-links { display:flex; flex-wrap:wrap; gap:14px 24px; }
+#cz-portfolio-footer .cz-footer-links a { font-size:13px; line-height:1.6; text-decoration:none; text-underline-offset:5px; color:#555 !important; }
+#cz-portfolio-footer .cz-footer-links a:hover { color:#111 !important; text-decoration:underline; }
+.cz-footer-links a:focus-visible { outline:2px solid #111; outline-offset:6px; border-radius:2px; }
+@media(max-width:800px) {
+  #cz-portfolio-footer .cz-footer-bottom { flex-direction:column; align-items:flex-start; gap:20px; padding:28px 24px 34px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .cz-footer-letter > span { transition:none; }
+  .cz-footer-letter:hover > span { transform:none; }
+}
