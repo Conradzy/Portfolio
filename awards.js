@@ -29,6 +29,9 @@ export const awards = [
     id: 'deans-list', title: 'Dean’s List', subtitle: 'Consistent First Honors',
     institution: 'Davao del Norte State College', result: '1st year — 3rd year, second semester',
     description: 'I consistently earned First Honors on the Dean’s List at Davao del Norte State College from my first year through the second semester of my third year. This recognition reflects my commitment to academic excellence, disciplined learning, and steady growth throughout my Information Technology studies.',
-    photos: []
+    photos: [
+      photo('deanslist.jpg', 'Students celebrating academic recognition with their honors certificates at Davao del Norte State College'),
+      photo('deanslist2.jpg', 'Students on stage during the academic honors recognition ceremony at Davao del Norte State College')
+    ]
   }
 ];

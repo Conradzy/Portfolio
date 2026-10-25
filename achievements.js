@@ -186,7 +186,7 @@ async function advancePreview() {
   scheduleSlideshow();
 }
 const canPlay = () => visible && !paused && !hovered && !focused && !document.hidden && !dialog.open;
-function scheduleSlideshow() { clearTimeout(slideshowTimer); if (canPlay()) slideshowTimer = setTimeout(advancePreview, 4500); }
+function scheduleSlideshow() { clearTimeout(slideshowTimer); if (canPlay()) slideshowTimer = setTimeout(advancePreview, 2000); }
 function updateAutoplay() { autoplayButton.textContent = paused ? 'Play slideshow' : 'Pause slideshow'; autoplayButton.setAttribute('aria-label', paused ? 'Play photo slideshow' : 'Pause photo slideshow'); scheduleSlideshow(); }
 autoplayButton.addEventListener('click', () => { paused = !paused; previewToken++; updateAutoplay(); });
 trigger.addEventListener('mouseenter', () => { hovered = true; previewToken++; scheduleSlideshow(); });
