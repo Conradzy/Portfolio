@@ -1,7 +1,7 @@
 /* Scoped to the page footer so modal gallery footers keep their own appearance. */
 #cz-portfolio-footer { background:#fff !important; color:#111 !important; border:0; padding:0; font-family:'Inter Tight',sans-serif; }
 #cz-portfolio-footer p,#cz-portfolio-footer div,#cz-portfolio-footer a { color:#111 !important; font-weight:400; }
-#cz-portfolio-footer .cz-footer-wordmark { margin:0; padding:clamp(28px,4vw,76px) 3vw clamp(36px,5vw,96px); text-align:center; font-size:clamp(56px,20vw,380px); font-weight:400; line-height:1.08; letter-spacing:-.055em; }
+#cz-portfolio-footer .cz-footer-wordmark { margin:0; padding:clamp(14px,2vw,38px) 3vw clamp(36px,5vw,96px); text-align:center; font-size:clamp(56px,20vw,380px); font-weight:400; line-height:1.08; letter-spacing:-.055em; }
 .cz-footer-letters { display:inline-flex; justify-content:center; white-space:nowrap; }
 .cz-footer-letter { display:inline-block; }
 .cz-footer-letter > span { display:inline-block; transition:transform .5s cubic-bezier(.22,1,.36,1); will-change:transform; }
