@@ -19,6 +19,7 @@
 <link rel="stylesheet" href="achievements.css">
 <link rel="stylesheet" href="contact.css">
 <link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="video-gallery.css">
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -254,10 +255,13 @@
 
   <!-- VIDEO EDITING SAMPLES -->
   <section id="video-samples" aria-labelledby="cz-video-heading">
+    <div class="cz-video-section-header">
     <h2 id="cz-video-heading" aria-label="Video Editing Samples">
       <span class="cz-statement-space" aria-hidden="true">Video Editing Samples</span>
       <span id="cz-video-typed" aria-hidden="true">Video Editing Samples</span>
     </h2>
+    <button id="cz-video-gallery-open" type="button" aria-haspopup="dialog" aria-controls="cz-video-gallery" aria-expanded="false">See all <span aria-hidden="true">↗</span></button>
+    </div>
     <div id="cz-video-stage">
       <div id="cz-video-frame">
         <iframe id="cz-video-player" src="https://www.youtube-nocookie.com/embed/4rumCv7gjeE?rel=0&amp;playsinline=1&amp;autoplay=0&amp;mute=1&amp;enablejsapi=1"
@@ -1008,6 +1012,7 @@
 <script type="module" src="web-project-gallery.js"></script>
 <script type="module" src="achievements.js"></script>
 <script type="module" src="contact.js"></script>
+<script type="module" src="video-gallery.js"></script>
 <script type="module" src="phone-scene.js"></script>
 <script type="module" src="mobile-project-gallery.js"></script>
 <script type="module" src="keyboard-scene.js"></script>

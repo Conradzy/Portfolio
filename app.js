@@ -154,8 +154,9 @@ class CZPortfolio {
     const stage = document.getElementById('cz-video-stage');
     const iframe = document.getElementById('cz-video-player');
     if (!stage || !iframe || !('IntersectionObserver' in window)) return;
-    let visible = false, ready = false, loading = false, disposed = false, player;
-    const shouldPlay = () => visible && !document.hidden && !disposed;
+    let visible = false, ready = false, loading = false, disposed = false, galleryOpen = false, player;
+    const shouldPlay = () => visible && !document.hidden && !disposed && !galleryOpen;
+    const galleryChange = event => { galleryOpen = event.detail.open; sync(); };
     const sync = () => {
       if (!ready || disposed) return;
       if (shouldPlay()) player.playVideo();
@@ -206,10 +207,12 @@ class CZPortfolio {
     }, { threshold:[0, .2] });
     observer.observe(stage);
     document.addEventListener('visibilitychange', sync);
+    document.addEventListener('cz:project-gallery', galleryChange);
     this._videoPlaybackCleanup = () => {
       disposed = true;
       observer.disconnect();
       document.removeEventListener('visibilitychange', sync);
+      document.removeEventListener('cz:project-gallery', galleryChange);
       if (player && ready) player.pauseVideo();
     };
   }
