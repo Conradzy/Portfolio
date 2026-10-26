@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="contact.css">
 <link rel="stylesheet" href="footer.css">
 <link rel="stylesheet" href="video-gallery.css">
+<link rel="stylesheet" href="navbar.css">
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -92,12 +93,22 @@
     <a href="#home" class="cz-navbar-logo" aria-label="Conradzz — Home" style="text-decoration:none; display:flex; align-items:center; color:#111;">
       <img class="cz-navbar-mark" src="assets/cz-navbar-mark.png" alt="" width="44" height="30"><span>Conradzz</span>
     </a>
-    <div id="cz-navlinks" style="display:flex; gap:clamp(18px,3.2vw,46px); align-items:center;">
-      <a href="#home" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Home</a>
-      <a href="#about" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">About</a>
-      <a href="#skills" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Skills</a>
-      <a href="#journey" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Websites</a>
-      <a href="#projects" style="text-decoration:none; color:rgba(255,255,255,.85); font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:15px; font-weight:500; transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.85)'">Projects</a>
+    <button class="cz-nav-toggle" type="button" aria-label="Open navigation" aria-controls="cz-navlinks" aria-expanded="false"><span></span><span></span></button>
+    <div id="cz-navlinks">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#tools">Tools</a>
+      <div class="cz-nav-projects">
+        <button id="cz-projects-toggle" type="button" aria-expanded="false" aria-controls="cz-projects-dropdown">Projects <span aria-hidden="true">⌄</span></button>
+        <div id="cz-projects-dropdown" inert>
+          <a href="#video-samples" data-video-nav>Video edits <span aria-hidden="true">↗</span></a>
+          <a href="#journey">Website <span aria-hidden="true">↗</span></a>
+          <a href="#projects">Mobile app <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <a href="#education">Education</a>
+      <a href="#expertise">Skills</a>
+      <a href="#tech-stack">Tech stack</a>
     </div>
     <a href="#contact" class="cz-getintouch" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:6px 6px 6px 22px; border-radius:999px; color:#040404; font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:14.5px; font-weight:600; background:#fff; box-shadow:0 8px 26px rgba(255,255,255,.18); transition:transform .2s, box-shadow .2s; white-space:nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(255,255,255,.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 26px rgba(255,255,255,.18)'">
       <span class="cz-getintouch-label">Get in touch</span>
@@ -475,10 +486,11 @@
     #cz-root { background:#fff !important; }
 
     #cz-nav {
-      background:#000 !important;
-      border-bottom-color:rgba(255,255,255,.15) !important;
-      box-shadow:0 10px 36px rgba(12,12,12,.1);
-      backdrop-filter:blur(16px) !important;
+      background:rgba(10,10,10,.64) !important;
+      border-bottom-color:rgba(255,255,255,.08) !important;
+      box-shadow:0 4px 24px rgba(12,12,12,.04);
+      backdrop-filter:blur(20px) !important;
+      -webkit-backdrop-filter:blur(20px) !important;
     }
     #cz-nav a { color:#fff !important; }
     #cz-nav .cz-navbar-logo {
@@ -987,7 +999,6 @@
       #cz-nav > div { gap: 12px !important; }
     }
     @media (max-width: 760px) {
-      #cz-navlinks { display:none !important; }
       section#home[data-sec="cz-hero"] { min-height: 880px !important; }
       .cz-rightslogan { display:none !important; }
       .cz-heroh1 { bottom: 230px !important; }
@@ -1013,6 +1024,7 @@
 <script type="module" src="achievements.js"></script>
 <script type="module" src="contact.js"></script>
 <script type="module" src="video-gallery.js"></script>
+<script type="module" src="navbar.js"></script>
 <script type="module" src="phone-scene.js"></script>
 <script type="module" src="mobile-project-gallery.js"></script>
 <script type="module" src="keyboard-scene.js"></script>

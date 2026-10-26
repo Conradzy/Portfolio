@@ -1,6 +1,6 @@
 .cz-video-section-header { position:relative; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:24px; margin:0 30px 64px; }
 #video-samples .cz-video-section-header #cz-video-heading { grid-column:2; margin:0; padding:0; }
-#cz-video-gallery-open { justify-self:end; margin-right:20px; border:0; border-bottom:1px solid #bbb; padding:8px 0; background:none; color:#111; font:400 15px 'Inter Tight',sans-serif; cursor:pointer; white-space:nowrap; }
+#cz-video-gallery-open { justify-self:end; margin-right:30px; border:0; border-bottom:1px solid #bbb; padding:8px 0; background:none; color:#111; font:400 17px 'Inter Tight',sans-serif; cursor:pointer; white-space:nowrap; }
 #cz-video-gallery-open span { display:inline-block; margin-left:12px; transition:transform .25s; }
 #cz-video-gallery-open:hover span { transform:translate(2px,-2px); }
 #cz-video-gallery-open:focus-visible { outline:2px solid #111; outline-offset:6px; }
@@ -25,7 +25,7 @@
 @media(max-width:760px) {
   .cz-video-section-header { grid-template-columns:minmax(0,1fr) auto; margin:0 20px 44px; gap:20px; }
   #video-samples .cz-video-section-header #cz-video-heading { grid-column:1; text-align:left; font-size:clamp(27px,5.5vw,40px); }
-  #cz-video-gallery-open { font-size:14px; }
+  #cz-video-gallery-open { font-size:16px; }
   .cz-video-gallery-track { --video-width:88vw; padding-block:30px; }
   .cz-video-preview { border-radius:12px; }
   .cz-video-card p { font-size:14px; }
