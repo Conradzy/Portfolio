@@ -381,49 +381,9 @@ class CZPortfolio {
 
   initLoader() {
     const lo = this.el.loader; if (!lo) return;
-    document.body.style.overflow = 'hidden';
-    const bar = document.getElementById('cz-loader-bar');
-    const pct = document.getElementById('cz-loader-pct');
-    const status = document.getElementById('cz-loader-status');
-    const sub = document.getElementById('cz-loader-sub');
-    const task = document.getElementById('cz-loader-task');
-    const dots = document.getElementById('cz-loader-dots');
-    const phases = [
-      { at: 0,   status: 'INITIALIZING SYSTEM',   sub: 'handshake_complete › decrypting_assets', task: 'mounting_components' },
-      { at: 18,  status: 'LOADING ASSETS',         sub: 'fetching: fonts, portraits, projects', task: 'preload_images' },
-      { at: 42,  status: 'COMPILING SHADERS',      sub: 'particles › gradient › blend_modes',   task: 'gpu_warmup' },
-      { at: 64,  status: 'LINKING MODULES',        sub: 'router · timeline · carousel · modal',  task: 'wiring_handlers' },
-      { at: 85,  status: 'CALIBRATING UI',         sub: 'reveal_observer › type_engine › nav',   task: 'final_paint' },
-      { at: 100, status: 'SYSTEM READY',           sub: 'welcome, Conradzz', task: 'handoff' }
-    ];
-    let p = 0; const start = performance.now(); const dur = 2800;
-    const step = (t) => {
-      const el = Math.min(1, (t - start) / dur);
-      const eased = 1 - Math.pow(1 - el, 1.6);
-      p = Math.round(eased * 100);
-      if (bar) bar.style.width = p + '%';
-      if (pct) pct.textContent = String(p).padStart(3, '0') + '%';
-      const ph = phases.filter(x => p >= x.at).pop();
-      if (ph) {
-        if (status && status.dataset.s !== ph.status) { status.dataset.s = ph.status; if (status.firstChild) status.firstChild.textContent = ph.status; }
-        if (sub) sub.textContent = ph.sub;
-        if (task) task.textContent = ph.task;
-      }
-      if (el < 1) this._loaderRAF = requestAnimationFrame(step);
-      else this.finishLoader();
-    };
-    this._loaderRAF = requestAnimationFrame(step);
-  }
-
-  finishLoader() {
-    const lo = this.el.loader; if (!lo) return;
-    const dots = document.getElementById('cz-loader-dots');
-    if (dots) dots.style.opacity = '0';
-    lo.style.transition = 'opacity .55s ease, transform .55s cubic-bezier(.7,0,.2,1)';
-    lo.style.opacity = '0';
-    lo.style.transform = 'translateY(-12px)';
-    document.body.style.overflow = '';
-    setTimeout(() => { lo.style.display = 'none'; }, 620);
+    // The separate animation owns its resources and always releases the page.
+    this._loaderCleanup = window.startCZLoader?.(lo);
+    if (!this._loaderCleanup) lo.remove();
   }
 
   componentDidUpdate() { if (this.el) this.applyAccent(); }
@@ -809,6 +769,7 @@ class CZPortfolio {
 
   componentWillUnmount() {
     (this._typingCleanups || []).forEach(cleanup => cleanup());
+    if (this._loaderCleanup) this._loaderCleanup();
     if (this._videoCleanup) this._videoCleanup();
     if (this._videoPlaybackCleanup) this._videoPlaybackCleanup();
     if (this._toolsCleanup) this._toolsCleanup();

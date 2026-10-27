@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="footer.css">
 <link rel="stylesheet" href="video-gallery.css">
 <link rel="stylesheet" href="navbar.css">
+<link rel="stylesheet" href="loader.css">
 <style>
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -50,37 +51,16 @@
 <body>
 <div id="cz-root" style="--accent:#353535; --accent2:#575757; --accentDeep:#1e1e1e; position:relative; width:100%; background:#050505;">
 
-  <!-- LOADING SCREEN -->
-  <div id="cz-loader" style="position:fixed; inset:0; z-index:9999; background:radial-gradient(120% 80% at 50% 50%, #080808 0%, #050505 60%, #000 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:40px; overflow:hidden;">
-    <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(87,87,87,.04) 0px, rgba(87,87,87,.04) 1px, transparent 1px, transparent 3px); pointer-events:none;"></div>
-    <div style="position:absolute; left:0; right:0; height:2px; background:linear-gradient(90deg, transparent, rgba(87,87,87,.55), transparent); animation:cz-scan 3s linear infinite; pointer-events:none;"></div>
-    <div style="position:absolute; top:24px; left:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#8a8a8a; opacity:.7;">CZ_SYS // v1.0.26</div>
-    <div style="position:absolute; top:24px; right:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#8a8a8a; opacity:.7;">SECURE BOOT • ENCRYPTED</div>
-    <div style="position:absolute; bottom:24px; left:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#8a8a8a; opacity:.5;">© 2026 RAYMOND CONRAD S. NAPIÑAS</div>
-    <div style="position:absolute; bottom:24px; right:24px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.18em; color:#8a8a8a; opacity:.5;">CREATIVE TECHNOLOGIST</div>
-
-    <div style="position:relative; width:120px; height:120px; display:grid; place-items:center;">
-      <div style="position:absolute; inset:0; border:1px solid rgba(87,87,87,.18); border-top-color:#575757; border-radius:50%; animation:cz-loaderspin 1.6s linear infinite;"></div>
-      <div style="position:absolute; inset:14px; border:1px solid rgba(87,87,87,.12); border-bottom-color:#353535; border-radius:50%; animation:cz-loaderspin 2.4s linear infinite reverse;"></div>
-      <img src="assets/cz-logo.png" alt="CZ" style="width:64px; height:64px; object-fit:contain; filter:drop-shadow(0 0 18px rgba(53,53,53,.55)); animation:cz-glitch 4s infinite;">
+  <!-- Particle intro: the canvas resolves into the same CZ mark used in the navbar. -->
+  <div id="cz-loader" role="status" aria-label="Opening Conradzz portfolio">
+    <canvas id="cz-loader-canvas" aria-hidden="true"></canvas>
+    <div class="cz-loader-brand" aria-hidden="true">
+      <img id="cz-loader-mark" src="assets/cz-navbar-mark.png" alt="" fetchpriority="high">
+      <span>Conradzz</span>
     </div>
-
-    <div style="text-align:center;">
-      <div id="cz-loader-status" style="font-family:'JetBrains Mono', ui-monospace, monospace; font-size:13px; letter-spacing:.18em; color:#fff;">INITIALIZING SYSTEM<span id="cz-loader-dots"><span style="display:inline-block; animation:cz-dotpulse 1.4s infinite;">.</span><span style="display:inline-block; animation:cz-dotpulse 1.4s infinite .2s;">.</span><span style="display:inline-block; animation:cz-dotpulse 1.4s infinite .4s;">.</span></span></div>
-      <div style="margin-top:8px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.16em; color:#a4a4a4; opacity:.7;" id="cz-loader-sub">handshake_complete › decrypting_assets</div>
-    </div>
-
-    <div style="display:flex; flex-direction:column; align-items:center; gap:10px;">
-      <div style="width:min(560px, 70vw); height:6px; background:rgba(87,87,87,.12); border:1px solid rgba(87,87,87,.25); border-radius:999px; overflow:hidden; position:relative;">
-        <div id="cz-loader-bar" style="height:100%; width:0%; background:linear-gradient(90deg,#1e1e1e,#575757); box-shadow:0 0 14px rgba(87,87,87,.7); transition:width .12s linear;"></div>
-      </div>
-      <div style="display:flex; gap:20px; font-family:'JetBrains Mono', ui-monospace, monospace; font-size:11px; letter-spacing:.16em; color:#8a8a8a;">
-        <span id="cz-loader-pct">000%</span>
-        <span style="opacity:.5;">|</span>
-        <span id="cz-loader-task">mounting_components</span>
-      </div>
-    </div>
+    <button id="cz-loader-skip" type="button">Skip intro <span aria-hidden="true">↗</span></button>
   </div>
+  <noscript><style>#cz-loader { display:none; }</style></noscript>
 
   <div style="position:fixed; top:0; left:0; height:3px; width:100%; z-index:120; background:transparent;">
     <div id="cz-progress" style="height:100%; width:0%; background:linear-gradient(90deg,var(--accentDeep),var(--accent2)); box-shadow:0 0 14px var(--accent);"></div>
@@ -1018,6 +998,7 @@
 <script type="importmap">
 {"imports":{"three":"./assets/vendor/three/three.module.js","three/addons/":"./assets/vendor/three/"}}
 </script>
+<script src="loader.js"></script>
 <script src="app.js"></script>
 <script type="module" src="laptop-scene.js"></script>
 <script type="module" src="web-project-gallery.js"></script>

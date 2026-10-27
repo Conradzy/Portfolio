@@ -1,0 +1,14 @@
+#cz-loader {
+  position:fixed; inset:0; z-index:9999; overflow:hidden; background:#050505;
+  color:#fff; opacity:1; transition:opacity .5s ease; isolation:isolate;
+}
+#cz-loader.is-leaving { opacity:0; pointer-events:none; }
+#cz-loader-canvas { position:absolute; inset:0; width:100%; height:100%; }
+.cz-loader-brand { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:var(--loader-logo-width,320px); text-align:center; pointer-events:none; }
+#cz-loader-mark { display:block; width:100%; height:auto; filter:brightness(0) invert(1); opacity:var(--loader-logo-opacity,0); }
+.cz-loader-brand > span { position:absolute; left:0; right:0; top:calc(100% + 16px); font:400 clamp(20px,4vw,26px) 'Inter Tight',sans-serif; letter-spacing:-.04em; opacity:var(--loader-name-opacity,0); transform:translateY(calc((1 - var(--loader-name-opacity,0))*8px)); }
+#cz-loader-skip { position:absolute; right:clamp(24px,4vw,60px); bottom:max(28px,env(safe-area-inset-bottom)); padding:10px 0; border:0; background:none; color:#aaa; font:400 13px 'Inter Tight',sans-serif; cursor:pointer; transition:color .2s; }
+#cz-loader-skip span { margin-left:12px; }
+#cz-loader-skip:hover { color:#fff; }
+#cz-loader-skip:focus-visible { outline:2px solid white; outline-offset:6px; }
+@media(prefers-reduced-motion:reduce) { #cz-loader { transition:opacity .15s; } .cz-loader-brand > span { transform:none; } }
