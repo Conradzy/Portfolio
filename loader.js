@@ -15,7 +15,7 @@ window.startCZLoader = function startCZLoader(overlay) {
   const clamp = value => Math.max(0,Math.min(1,value));
   const ease = value => { const t=clamp(value); return t*t*(3-2*t); };
   const mix = (a,b,t) => a+(b-a)*t;
-  const watchdog = setTimeout(finish,5500);
+  const watchdog = setTimeout(finish,6500);
 
   function release() {
     if (removed) return;
@@ -67,8 +67,14 @@ window.startCZLoader = function startCZLoader(overlay) {
     for(let i=points.length-1;i>0;i--) { const j=Math.floor(Math.random()*(i+1)); [points[i],points[j]]=[points[j],points[i]]; }
     particles=points.slice(0,width<600?1000:1700).map(point => ({
       ...point, angle:Math.random()*Math.PI*2, radius:.12+Math.random()*.55,
-      depth:.45+Math.random()*.55, turn:1.1+Math.random()*.6,
-      size:.55+Math.random()*.8, delay:Math.random()*.12,
+      depth:.35+Math.random()*.65, turn:.65+Math.random()*1.2,
+      size:.5+Math.random(), delay:Math.random()*.3,
+      pullDuration:1.1+Math.random()*.35, formDuration:.7+Math.random()*.25,
+      driftSpeed:.18+Math.random()*.45, driftDirection:Math.random()<.5?-1:1,
+      phaseX:Math.random()*Math.PI*2, phaseY:Math.random()*Math.PI*2,
+      wander:12+Math.random()*32, frequency:.5+Math.random()*.8,
+      tilt:(Math.random()-.5)*.8, stretch:.55+Math.random()*.4,
+      bend:(Math.random()-.5)*100,
       lastX:null,lastY:null
     }));
     mask.width=mask.height=1;
@@ -77,12 +83,12 @@ window.startCZLoader = function startCZLoader(overlay) {
     if (leaving || removed) return;
     if (!started) started=time;
     const seconds=(time-started)/1000;
-    const pull=ease((seconds-.65)/1.55);
-    const form=ease((seconds-2.15)/1.15);
-    const solid=ease((seconds-3.05)/.5);
-    overlay.dataset.phase=seconds<.65?'scatter':seconds<2.15?'vortex':seconds<3.3?'forming':'logo';
+    const pull=ease((seconds-.8)/1.65);
+    const form=ease((seconds-2.3)/1.25);
+    const solid=ease((seconds-3.55)/.4);
+    overlay.dataset.phase=seconds<.8?'scatter':seconds<2.3?'vortex':seconds<3.65?'forming':'logo';
     overlay.style.setProperty('--loader-logo-opacity',solid.toFixed(3));
-    overlay.style.setProperty('--loader-name-opacity',ease((seconds-3.2)/.45).toFixed(3));
+    overlay.style.setProperty('--loader-name-opacity',ease((seconds-3.7)/.35).toFixed(3));
     context.clearRect(0,0,width,height);
     const cx=width/2, cy=height/2, extent=Math.max(width,height);
     // A soft central halo grows with the inward motion, then recedes behind the logo.
@@ -91,15 +97,28 @@ window.startCZLoader = function startCZLoader(overlay) {
     glow.addColorStop(0,`rgba(235,242,255,${glowAlpha})`); glow.addColorStop(1,'rgba(255,255,255,0)');
     context.fillStyle=glow; context.fillRect(0,0,width,height);
     particles.forEach(p => {
-      const localPull=ease((seconds-.65-p.delay)/1.43);
-      const radius=mix(p.radius*extent,8+p.depth*15,localPull);
-      const angle=p.angle+seconds*.24+localPull*Math.PI*2*p.turn;
-      const drift=Math.sin(seconds*1.5+p.angle)*8*(1-localPull);
-      const vx=Math.cos(angle)*radius, vy=Math.sin(angle)*radius*.7*p.depth;
-      const localForm=ease((seconds-2.15-p.delay)/1.03);
-      const x=cx+mix(vx+drift,p.x*logoWidth,localForm);
-      const y=cy+mix(vy,p.y*logoHeight,localForm);
-      const opacity=(.25+p.depth*.65)*ease(seconds/.3)*(1-solid);
+      // Each particle has its own clock and orbit. Smooth waves provide coherent
+      // wandering rather than new random jitter on every animation frame.
+      const progress=clamp((seconds-.8-p.delay)/p.pullDuration);
+      const localPull=ease(progress*progress);
+      const localForm=ease((seconds-2.3-p.delay)/p.formDuration);
+      const wander=(1-localPull)*p.wander;
+      const driftX=(Math.sin(seconds*p.frequency+p.phaseX)+.35*Math.sin(seconds*.43+p.phaseY))*wander;
+      const driftY=(Math.cos(seconds*p.frequency*.73+p.phaseY)+.3*Math.sin(seconds*.61+p.phaseX))*wander;
+      const radius=mix(p.radius*extent,6+p.depth*12,localPull);
+      // Cubic angular travel starts gently and accelerates as the radius collapses.
+      const angle=p.angle+seconds*p.driftSpeed*p.driftDirection*(1-localPull)
+        +Math.pow(progress,3)*Math.PI*2*p.turn;
+      const orbitX=Math.cos(angle)*radius;
+      const orbitY=Math.sin(angle)*radius*p.stretch*p.depth;
+      const vx=orbitX*Math.cos(p.tilt)-orbitY*Math.sin(p.tilt)+driftX;
+      const vy=orbitX*Math.sin(p.tilt)+orbitY*Math.cos(p.tilt)+driftY;
+      // Different curved approach paths decelerate to an exact, still silhouette.
+      const bend=Math.sin(localForm*Math.PI)*p.bend;
+      const x=cx+mix(vx,p.x*logoWidth,localForm)+bend*Math.cos(p.phaseX);
+      const y=cy+mix(vy,p.y*logoHeight,localForm)+bend*Math.sin(p.phaseX);
+      const twinkle=.88+.12*Math.sin(seconds*p.frequency+p.phaseY);
+      const opacity=(.25+p.depth*.65)*twinkle*ease(seconds/.3)*(1-solid);
       if (p.lastX!==null && localPull>.02 && localForm<.95 && Math.hypot(x-p.lastX,y-p.lastY)<90) {
         context.strokeStyle=`rgba(235,242,255,${opacity*.28})`;
         context.lineWidth=p.size*.7; context.beginPath(); context.moveTo(p.lastX,p.lastY); context.lineTo(x,y); context.stroke();
@@ -108,7 +127,7 @@ window.startCZLoader = function startCZLoader(overlay) {
       context.beginPath(); context.arc(x,y,p.size*(1+form*.25),0,Math.PI*2); context.fill();
       p.lastX=x; p.lastY=y;
     });
-    if(seconds>=4) finish(); else raf=requestAnimationFrame(draw);
+    if(seconds>=4.4) finish(); else raf=requestAnimationFrame(draw);
   }
   skip.addEventListener('click',finish,{signal:events.signal});
   window.addEventListener('keydown',event => { if(event.key==='Escape') finish(); },{signal:events.signal});
