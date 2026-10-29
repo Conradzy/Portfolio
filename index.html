@@ -9,7 +9,7 @@
 <meta property="og:title" content="Conradzz · Creative Technologist">
 <meta property="og:description" content="Building intelligent systems & clean interfaces — from machine learning to motion design.">
 <meta property="og:type" content="website">
-<link rel="icon" type="image/png" href="assets/cz-navbar-mark.png?v=2">
+<link rel="icon" type="image/svg+xml" sizes="any" href="assets/cz-favicon-white.svg?v=3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,700&family=Poppins:wght@700&display=swap" rel="stylesheet">
@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="particle-cta.css">
 <link rel="stylesheet" href="achievements.css">
 <link rel="stylesheet" href="contact.css">
+<link rel="stylesheet" href="about.css">
 <link rel="stylesheet" href="footer.css">
 <link rel="stylesheet" href="video-gallery.css">
 <link rel="stylesheet" href="navbar.css">
@@ -77,18 +78,18 @@
     <div id="cz-navlinks">
       <a href="#home">Home</a>
       <a href="#about">About</a>
-      <a href="#tools">Tools</a>
       <div class="cz-nav-projects">
         <button id="cz-projects-toggle" type="button" aria-expanded="false" aria-controls="cz-projects-dropdown">Projects <span aria-hidden="true">⌄</span></button>
         <div id="cz-projects-dropdown" inert>
-          <a href="#video-samples" data-video-nav>Video edits <span aria-hidden="true">↗</span></a>
           <a href="#journey">Website <span aria-hidden="true">↗</span></a>
           <a href="#projects">Mobile app <span aria-hidden="true">↗</span></a>
+          <a href="#video-samples" data-video-nav>Video edits <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <a href="#education">Education</a>
       <a href="#expertise">Skills</a>
+      <a href="#tools">Tools</a>
       <a href="#tech-stack">Tech stack</a>
+      <a href="#education">Education</a>
     </div>
     <a href="#contact" class="cz-getintouch" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; padding:6px 6px 6px 22px; border-radius:999px; color:#040404; font-family:'Space Grotesk','Inter Tight',sans-serif; font-size:14.5px; font-weight:600; background:#fff; box-shadow:0 8px 26px rgba(255,255,255,.18); transition:transform .2s, box-shadow .2s; white-space:nowrap;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 12px 32px rgba(255,255,255,.28)'" onmouseout="this.style.transform='';this.style.boxShadow='0 8px 26px rgba(255,255,255,.18)'">
       <span class="cz-getintouch-label">Get in touch</span>
@@ -174,16 +175,125 @@
       <div class="cz-about" style="display:grid; grid-template-columns:1.12fr .88fr; gap:64px; align-items:center;">
         <div data-reveal>
           <h2 style="margin:0 0 22px; font-size:clamp(28px,3.6vw,44px); font-weight:800; letter-spacing:-.025em; line-height:1.08;">Driven by <span style="color:var(--accent);">technology</span>, shaped by <span style="color:var(--accent);">creativity</span>.</h2>
-          <p style="margin:0 0 18px; font-size:16px; line-height:1.72; color:#212121; text-align:justify; text-justify:inter-word;">Hi! I'm <strong>Raymond Conrad S. Napiñas</strong>, a fourth-year Information Technology student and a consistent academic honor student with a strong passion for technology and creativity. I am highly adaptable, hardworking, and capable of working under pressure, with hands-on experience in <strong>video editing, AI-assisted web development, machine learning, data mining, basic graphic design, and motion graphics</strong>. I continuously strive to improve my technical and creative skills while delivering quality work.</p>
-          <p style="margin:0; font-size:16px; line-height:1.72; color:#212121; text-align:justify; text-justify:inter-word;">I am a dedicated and open-minded individual who values continuous learning, professionalism, and personal growth. I willingly embrace new challenges, welcome constructive criticism, and view mistakes and failures as opportunities to learn and improve. My goal is to contribute my skills, gain meaningful experience, and consistently deliver reliable and high-quality results.</p>
+          <p class="cz-about-summary">Hi, I'm Raymond Conrad S. Napiñas, a fourth-year Information Technology student at Davao del Norte State College and a consistent academic honor student. I build web and mobile applications, explore machine learning and data mining, and create video and motion graphics. I bring curiosity, adaptability, and a commitment to thoughtful, reliable work to every project.</p>
+          <nav class="cz-about-socials" aria-label="Connect with Raymond">
+            <a href="https://github.com/Conradzy" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in a new tab)">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="https://www.linkedin.com/in/raymond-napinas-a7a258390" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in a new tab)">LinkedIn <span aria-hidden="true">↗</span></a>
+            <a href="https://www.facebook.com/raymond.napinas" target="_blank" rel="noopener noreferrer" aria-label="Facebook (opens in a new tab)">Facebook <span aria-hidden="true">↗</span></a>
+            <button id="cz-about-copy-email" type="button" aria-label="Copy email address: raymondnapinas12@gmail.com" aria-describedby="cz-about-email-status">Email <span aria-hidden="true">⧉</span></button>
+          </nav>
+          <p id="cz-about-email-status" role="status" aria-live="polite" aria-atomic="true"></p>
+          <p id="cz-about-email-manual" hidden>Copy manually: <span class="cz-contact-email">raymondnapinas12@gmail.com</span></p>
         </div>
         <div data-reveal class="cz-about-portrait" aria-label="Portrait of Raymond Conrad S. Napiñas">
           <div class="cz-about-photo-wrap">
-            <img src="assets/raymond.png" alt="Raymond Conrad S. Napiñas" class="cz-about-photo">
+            <button class="cz-about-portrait-button" type="button" aria-label="Tilt Raymond’s portrait" aria-pressed="false"><img src="assets/raymond.png" alt="Raymond Conrad S. Napiñas" class="cz-about-photo"></button>
           </div>
           <div class="cz-about-shadow" aria-hidden="true"></div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- WEBSITE SHOWCASE -->
+  <section id="journey" aria-labelledby="cz-websites-statement">
+    <div class="cz-websites-layout">
+      <h2 id="cz-websites-statement" aria-label="A showcase of websites built through creativity, dedication, technical expertise, and AI-assisted development, where human ingenuity meets innovation.">
+        <span class="cz-statement-space" aria-hidden="true">A showcase of websites built through creativity, dedication, technical expertise, and AI-assisted development, where human ingenuity meets innovation.</span>
+        <span id="cz-websites-typed" aria-hidden="true">A showcase of websites built through creativity, dedication, technical expertise, and AI-assisted development, where human ingenuity meets innovation.</span>
+      </h2>
+      <div id="cz-laptop-stage" role="group" aria-label="Floating 3D laptop. Click to explore web projects or drag to rotate." aria-haspopup="dialog" aria-controls="cz-web-gallery" aria-expanded="false" data-reveal>
+        <div class="cz-laptop-glow" aria-hidden="true"></div>
+        <div class="cz-laptop-shadow" aria-hidden="true"></div>
+        <img class="cz-laptop-fallback" src="assets/anitime-screen.png" alt="" loading="lazy" width="1919" height="913">
+        <div id="cz-laptop-canvas"></div>
+        <span class="cz-laptop-hint" aria-hidden="true">Drag to rotate &amp; tilt · Click to explore</span>
+        <button class="cz-web-gallery-open" type="button" aria-haspopup="dialog" aria-controls="cz-web-gallery">Explore 7 projects <span aria-hidden="true">↗</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS — BLACK -->
+  <section id="projects" aria-labelledby="cz-mobile-statement">
+    <div class="cz-mobile-layout">
+      <div class="cz-phone-viewer">
+        <div id="cz-phone-stage" role="group" aria-label="Interactive SagingAI iPhone. Click to explore mobile projects or drag to rotate." aria-haspopup="dialog" aria-controls="cz-mobile-gallery" aria-expanded="false" data-reveal>
+          <div class="cz-phone-shadow" aria-hidden="true"></div>
+          <img class="cz-phone-fallback" src="assets/sagingai-screen.jpeg" alt="SagingAI: Smart Banana Disease and Ripeness Assistant" loading="lazy" width="922" height="2048">
+          <div id="cz-phone-canvas"></div>
+          <span class="cz-phone-hint" aria-hidden="true">Drag to rotate &amp; tilt · Click to explore</span>
+          <button class="cz-mobile-gallery-open" type="button" aria-haspopup="dialog" aria-controls="cz-mobile-gallery">Explore 2 apps <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="cz-phone-credit">iPhone 12 Pro by <a href="https://sketchfab.com/3d-models/iphone-12-pro-05dfc991665e45c68c8b7062136c0c6e" target="_blank" rel="noopener noreferrer">DatSketch</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> · Screen adapted</div>
+      </div>
+      <h2 id="cz-mobile-statement" aria-label="A collection of mobile applications crafted with passion, precision, and innovative thinking, combining practical development skills with modern technologies to deliver intuitive and meaningful user experiences.">
+        <span class="cz-statement-space" aria-hidden="true">A collection of mobile applications crafted with passion, precision, and innovative thinking, combining practical development skills with modern technologies to deliver intuitive and meaningful user experiences.</span>
+        <span id="cz-mobile-typed" aria-hidden="true">A collection of mobile applications crafted with passion, precision, and innovative thinking, combining practical development skills with modern technologies to deliver intuitive and meaningful user experiences.</span>
+      </h2>
+    </div>
+  </section>
+
+  <!-- VIDEO EDITING SAMPLES -->
+  <section id="video-samples" aria-labelledby="cz-video-heading">
+    <div class="cz-video-section-header">
+    <h2 id="cz-video-heading" aria-label="Video Editing Samples">
+      <span class="cz-statement-space" aria-hidden="true">Video Editing Samples</span>
+      <span id="cz-video-typed" aria-hidden="true">Video Editing Samples</span>
+    </h2>
+    <button id="cz-video-gallery-open" type="button" aria-haspopup="dialog" aria-controls="cz-video-gallery" aria-expanded="false">See all <span aria-hidden="true">↗</span></button>
+    </div>
+    <div id="cz-video-stage">
+      <div id="cz-video-frame">
+        <iframe id="cz-video-player" src="https://www.youtube-nocookie.com/embed/4rumCv7gjeE?rel=0&amp;playsinline=1&amp;autoplay=0&amp;mute=1&amp;enablejsapi=1"
+          title="Video Editing Sample — YouTube player"
+          width="1920" height="1080" loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </div>
+    <p class="cz-video-link"><a href="https://www.youtube.com/watch?v=4rumCv7gjeE" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
+  </section>
+
+  <!-- AREAS OF EXPERTISE -->
+  <section id="expertise" aria-labelledby="cz-expertise-heading">
+    <div class="cz-expertise-inner">
+      <div class="cz-expertise-intro"><span>CREATIVE × TECHNICAL</span><span>05 areas. One curious mind.</span></div>
+      <h2 id="cz-expertise-heading" aria-label="Areas of Expertise">
+        <span class="cz-statement-space" aria-hidden="true">Areas of Expertise</span>
+        <span id="cz-expertise-typed" aria-hidden="true">Areas of Expertise</span>
+      </h2>
+      <ol class="cz-expertise-list">
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">01</span><h3>Video Editing</h3></div>
+          <p>With several years of experience in video editing, I specialize in motion graphics, short-form content, educational videos, and promotional materials. As an intermediate <strong>CapCut Pro</strong> editor, I combine creativity and technical skills to produce engaging, high-quality video content.</p>
+        </li>
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">02</span><h3>Full-stack Web App Development</h3></div>
+          <p>I have developed several full-stack web applications showcased on GitHub, covering frontend, backend, and database development. My primary tech stack includes <strong>Next.js, PHP, PostgreSQL, Supabase, and JavaScript</strong>, enabling me to build responsive, functional, and user-friendly applications.</p>
+        </li>
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">03</span><h3>Mobile App Development</h3></div>
+          <p>I have developed mobile applications using <strong>Flutter Dart, React, and Firebase</strong>, with experience in building responsive interfaces, implementing app functionality, and managing cloud-based databases to deliver seamless and user-friendly mobile experiences.</p>
+        </li>
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">04</span><h3>AI/Machine Learning &amp; Data Mining</h3></div>
+          <p>I have hands-on experience in <strong>data mining, machine learning, and AI</strong>, using Python, Google Colab, Jupyter Notebook, Scikit-learn, NumPy, Pandas, and PyTorch. My skills include regression, forecasting, predictive modeling, clustering, classification, and relationship analysis to extract meaningful insights from datasets. I have also integrated data mining techniques into several projects.</p>
+        </li>
+        <li class="cz-expertise-row" data-reveal>
+          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">05</span><h3>Basic Graphic Design</h3></div>
+          <p>I have experience in basic graphic design using <strong>Canva</strong>, applying color theory, proper contrast, and harmonious color combinations to create visually appealing and creative designs. I focus on producing engaging, well-balanced, and aesthetically pleasing visual content.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- SKILLS STATEMENT -->
+  <section id="skills" aria-labelledby="cz-skills-statement">
+    <div class="cz-skills-container">
+      <h2 id="cz-skills-statement" aria-label="From development and data analysis to design and editing, these are the tools and technologies I use to turn ideas into working projects.">
+        <span class="cz-statement-space" aria-hidden="true">From development and data analysis to design and editing, these are the tools and technologies I use to turn ideas into working projects.</span>
+        <span id="cz-skills-typed" aria-hidden="true">From development and data analysis to design and editing, these are the tools and technologies I use to turn ideas into working projects.</span>
+      </h2>
     </div>
   </section>
 
@@ -234,73 +344,19 @@
     </div>
   </section>
 
-  <!-- SKILLS STATEMENT -->
-  <section id="skills" aria-labelledby="cz-skills-statement">
-    <div class="cz-skills-container">
-      <h2 id="cz-skills-statement" aria-label="A diverse range of technical and creative skills, shaped by hands-on experience, continuous learning, and a passion for innovation.">
-        <span class="cz-statement-space" aria-hidden="true">A diverse range of technical and creative skills, shaped by hands-on experience, continuous learning, and a passion for innovation.</span>
-        <span id="cz-skills-typed" aria-hidden="true">A diverse range of technical and creative skills, shaped by hands-on experience, continuous learning, and a passion for innovation.</span>
-      </h2>
-    </div>
-  </section>
-
-  <!-- VIDEO EDITING SAMPLES -->
-  <section id="video-samples" aria-labelledby="cz-video-heading">
-    <div class="cz-video-section-header">
-    <h2 id="cz-video-heading" aria-label="Video Editing Samples">
-      <span class="cz-statement-space" aria-hidden="true">Video Editing Samples</span>
-      <span id="cz-video-typed" aria-hidden="true">Video Editing Samples</span>
+  <!-- INTERACTIVE TECH STACK -->
+  <section id="tech-stack" aria-labelledby="cz-stack-heading">
+    <h2 id="cz-stack-heading" aria-label="Tech Stack">
+      <span class="cz-statement-space" aria-hidden="true">Tech Stack</span>
+      <span id="cz-stack-typed" aria-hidden="true">Tech Stack</span>
     </h2>
-    <button id="cz-video-gallery-open" type="button" aria-haspopup="dialog" aria-controls="cz-video-gallery" aria-expanded="false">See all <span aria-hidden="true">↗</span></button>
+    <div id="cz-keyboard-stage">
+      <div class="cz-keyboard-glow" aria-hidden="true"></div>
+      <div class="cz-keyboard-shadow" aria-hidden="true"></div>
+      <img class="cz-keyboard-fallback" src="assets/keyboard/reference.png" alt="Developer keyboard with 29 tools: PHP, JavaScript, TypeScript, Python, HTML, CSS, Dart, C++, NumPy, Pandas, Scikit-learn, PyTorch, Matplotlib, Laravel, Next.js, Django, FastAPI, Flutter, Google Cloud, PostgreSQL, Supabase, WAMP, phpMyAdmin, Firebase, Figma, Arduino, Cisco, Bootstrap, and Vercel." width="1783" height="881" loading="lazy">
+      <div id="cz-keyboard-canvas"></div>
     </div>
-    <div id="cz-video-stage">
-      <div id="cz-video-frame">
-        <iframe id="cz-video-player" src="https://www.youtube-nocookie.com/embed/4rumCv7gjeE?rel=0&amp;playsinline=1&amp;autoplay=0&amp;mute=1&amp;enablejsapi=1"
-          title="Video Editing Sample — YouTube player"
-          width="1920" height="1080" loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-    </div>
-    <p class="cz-video-link"><a href="https://www.youtube.com/watch?v=4rumCv7gjeE" target="_blank" rel="noopener noreferrer">Watch on YouTube ↗</a></p>
-  </section>
-
-  <!-- WEBSITE SHOWCASE -->
-  <section id="journey" aria-labelledby="cz-websites-statement">
-    <div class="cz-websites-layout">
-      <h2 id="cz-websites-statement" aria-label="A showcase of websites built through creativity, dedication, technical expertise, and AI-assisted development, where human ingenuity meets innovation.">
-        <span class="cz-statement-space" aria-hidden="true">A showcase of websites built through creativity, dedication, technical expertise, and AI-assisted development, where human ingenuity meets innovation.</span>
-        <span id="cz-websites-typed" aria-hidden="true">A showcase of websites built through creativity, dedication, technical expertise, and AI-assisted development, where human ingenuity meets innovation.</span>
-      </h2>
-      <div id="cz-laptop-stage" role="group" aria-label="Floating 3D laptop. Click to explore web projects or drag to rotate." aria-haspopup="dialog" aria-controls="cz-web-gallery" aria-expanded="false" data-reveal>
-        <div class="cz-laptop-glow" aria-hidden="true"></div>
-        <div class="cz-laptop-shadow" aria-hidden="true"></div>
-        <img class="cz-laptop-fallback" src="assets/anitime-screen.png" alt="" loading="lazy" width="1919" height="913">
-        <div id="cz-laptop-canvas"></div>
-        <span class="cz-laptop-hint" aria-hidden="true">Drag to rotate &amp; tilt · Click to explore</span>
-        <button class="cz-web-gallery-open" type="button" aria-haspopup="dialog" aria-controls="cz-web-gallery">Explore 7 projects <span aria-hidden="true">↗</span></button>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROJECTS — BLACK -->
-  <section id="projects" aria-labelledby="cz-mobile-statement">
-    <div class="cz-mobile-layout">
-      <div class="cz-phone-viewer">
-        <div id="cz-phone-stage" role="group" aria-label="Interactive SagingAI iPhone. Click to explore mobile projects or drag to rotate." aria-haspopup="dialog" aria-controls="cz-mobile-gallery" aria-expanded="false" data-reveal>
-          <div class="cz-phone-shadow" aria-hidden="true"></div>
-          <img class="cz-phone-fallback" src="assets/sagingai-screen.jpeg" alt="SagingAI: Smart Banana Disease and Ripeness Assistant" loading="lazy" width="922" height="2048">
-          <div id="cz-phone-canvas"></div>
-          <span class="cz-phone-hint" aria-hidden="true">Drag to rotate &amp; tilt · Click to explore</span>
-          <button class="cz-mobile-gallery-open" type="button" aria-haspopup="dialog" aria-controls="cz-mobile-gallery">Explore 2 apps <span aria-hidden="true">↗</span></button>
-        </div>
-        <div class="cz-phone-credit">iPhone 12 Pro by <a href="https://sketchfab.com/3d-models/iphone-12-pro-05dfc991665e45c68c8b7062136c0c6e" target="_blank" rel="noopener noreferrer">DatSketch</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a> · Screen adapted</div>
-      </div>
-      <h2 id="cz-mobile-statement" aria-label="A collection of mobile applications crafted with passion, precision, and innovative thinking, combining practical development skills with modern technologies to deliver intuitive and meaningful user experiences.">
-        <span class="cz-statement-space" aria-hidden="true">A collection of mobile applications crafted with passion, precision, and innovative thinking, combining practical development skills with modern technologies to deliver intuitive and meaningful user experiences.</span>
-        <span id="cz-mobile-typed" aria-hidden="true">A collection of mobile applications crafted with passion, precision, and innovative thinking, combining practical development skills with modern technologies to deliver intuitive and meaningful user experiences.</span>
-      </h2>
-    </div>
+    <p id="cz-keyboard-active" aria-live="polite" aria-atomic="true"><span id="cz-keyboard-label"></span></p>
   </section>
 
   <!-- EDUCATION -->
@@ -320,54 +376,6 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- AREAS OF EXPERTISE -->
-  <section id="expertise" aria-labelledby="cz-expertise-heading">
-    <div class="cz-expertise-inner">
-      <div class="cz-expertise-intro"><span>CREATIVE × TECHNICAL</span><span>05 areas. One curious mind.</span></div>
-      <h2 id="cz-expertise-heading" aria-label="Areas of Expertise">
-        <span class="cz-statement-space" aria-hidden="true">Areas of Expertise</span>
-        <span id="cz-expertise-typed" aria-hidden="true">Areas of Expertise</span>
-      </h2>
-      <ol class="cz-expertise-list">
-        <li class="cz-expertise-row" data-reveal>
-          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">01</span><h3>Video Editing</h3></div>
-          <p>With several years of experience in video editing, I specialize in motion graphics, short-form content, educational videos, and promotional materials. As an intermediate <strong>CapCut Pro</strong> editor, I combine creativity and technical skills to produce engaging, high-quality video content.</p>
-        </li>
-        <li class="cz-expertise-row" data-reveal>
-          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">02</span><h3>Full-stack Web App Development</h3></div>
-          <p>I have developed several full-stack web applications showcased on GitHub, covering frontend, backend, and database development. My primary tech stack includes <strong>Next.js, PHP, PostgreSQL, Supabase, and JavaScript</strong>, enabling me to build responsive, functional, and user-friendly applications.</p>
-        </li>
-        <li class="cz-expertise-row" data-reveal>
-          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">03</span><h3>Mobile App Development</h3></div>
-          <p>I have developed mobile applications using <strong>Flutter Dart, React, and Firebase</strong>, with experience in building responsive interfaces, implementing app functionality, and managing cloud-based databases to deliver seamless and user-friendly mobile experiences.</p>
-        </li>
-        <li class="cz-expertise-row" data-reveal>
-          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">04</span><h3>AI/Machine Learning &amp; Data Mining</h3></div>
-          <p>I have hands-on experience in <strong>data mining, machine learning, and AI</strong>, using Python, Google Colab, Jupyter Notebook, Scikit-learn, NumPy, Pandas, and PyTorch. My skills include regression, forecasting, predictive modeling, clustering, classification, and relationship analysis to extract meaningful insights from datasets. I have also integrated data mining techniques into several projects.</p>
-        </li>
-        <li class="cz-expertise-row" data-reveal>
-          <div class="cz-expertise-skill"><span class="cz-expertise-number" aria-hidden="true">05</span><h3>Basic Graphic Design</h3></div>
-          <p>I have experience in basic graphic design using <strong>Canva</strong>, applying color theory, proper contrast, and harmonious color combinations to create visually appealing and creative designs. I focus on producing engaging, well-balanced, and aesthetically pleasing visual content.</p>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- INTERACTIVE TECH STACK -->
-  <section id="tech-stack" aria-labelledby="cz-stack-heading">
-    <h2 id="cz-stack-heading" aria-label="Tech Stack">
-      <span class="cz-statement-space" aria-hidden="true">Tech Stack</span>
-      <span id="cz-stack-typed" aria-hidden="true">Tech Stack</span>
-    </h2>
-    <div id="cz-keyboard-stage">
-      <div class="cz-keyboard-glow" aria-hidden="true"></div>
-      <div class="cz-keyboard-shadow" aria-hidden="true"></div>
-      <img class="cz-keyboard-fallback" src="assets/keyboard/reference.png" alt="Developer keyboard with 29 tools: PHP, JavaScript, TypeScript, Python, HTML, CSS, Dart, C++, NumPy, Pandas, Scikit-learn, PyTorch, Matplotlib, Laravel, Next.js, Django, FastAPI, Flutter, Google Cloud, PostgreSQL, Supabase, WAMP, phpMyAdmin, Firebase, Figma, Arduino, Cisco, Bootstrap, and Vercel." width="1783" height="881" loading="lazy">
-      <div id="cz-keyboard-canvas"></div>
-    </div>
-    <p id="cz-keyboard-active" aria-live="polite" aria-atomic="true"><span id="cz-keyboard-label"></span></p>
   </section>
 
   <!-- ACHIEVEMENTS -->
@@ -1004,6 +1012,7 @@
 <script type="module" src="web-project-gallery.js"></script>
 <script type="module" src="achievements.js"></script>
 <script type="module" src="contact.js"></script>
+<script type="module" src="about.js"></script>
 <script type="module" src="video-gallery.js"></script>
 <script type="module" src="navbar.js"></script>
 <script type="module" src="phone-scene.js"></script>

@@ -1,6 +1,8 @@
-const copyButton = document.getElementById('cz-copy-email');
-const status = document.getElementById('cz-email-status');
-const manual = document.getElementById('cz-email-manual');
+function setupEmailCopy(buttonId, statusId, manualId) {
+const copyButton = document.getElementById(buttonId);
+const status = document.getElementById(statusId);
+const manual = document.getElementById(manualId);
+if (!copyButton || !status || !manual) return;
 const email = 'raymondnapinas12@gmail.com';
 let copying = false, clearTimer = 0;
 
@@ -31,3 +33,7 @@ copyButton.addEventListener('click', async () => {
   copying = false;
   if (copied) clearTimer = setTimeout(() => { status.textContent = ''; }, 4000);
 });
+}
+
+setupEmailCopy('cz-copy-email', 'cz-email-status', 'cz-email-manual');
+setupEmailCopy('cz-about-copy-email', 'cz-about-email-status', 'cz-about-email-manual');
