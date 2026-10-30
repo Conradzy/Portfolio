@@ -372,11 +372,6 @@ class CZPortfolio {
       });
       card.addEventListener('mouseleave', () => { card.style.transform = 'none'; card.style.borderColor = 'rgba(255,255,255,.08)'; card.style.boxShadow = 'none'; card.style.background = 'linear-gradient(165deg,rgba(255,255,255,.045),rgba(255,255,255,.01))'; });
     });
-    document.querySelectorAll('.cz-stat').forEach(s => {
-      s.style.transition = 'transform .3s cubic-bezier(.2,.8,.2,1)';
-      s.addEventListener('mouseenter', () => { s.style.transform = 'translateY(-6px)'; const big = s.querySelector('[data-count]'); if (big) big.style.textShadow = '0 0 18px rgba(117,117,117,.6)'; });
-      s.addEventListener('mouseleave', () => { s.style.transform = ''; const big = s.querySelector('[data-count]'); if (big) big.style.textShadow = ''; });
-    });
   }
 
   initLoader() {
@@ -442,7 +437,7 @@ class CZPortfolio {
     // Sniper-lock state on interactive elements
     if (scope) {
       this._scopeOver = (e) => {
-        const t = e.target.closest('a,button,[data-interactive],.cz-card,.cz-chip,.cz-stat,input,textarea,[data-filter]');
+        const t = e.target.closest('a,button,[data-interactive],.cz-card,.cz-chip,input,textarea,[data-filter]');
         if (t) { scope.style.width='72px'; scope.style.height='72px'; scope.style.margin='-36px 0 0 -36px'; scope.style.filter='drop-shadow(0 0 14px rgba(87,87,87,.9))'; }
         else { scope.style.width='54px'; scope.style.height='54px'; scope.style.margin='-27px 0 0 -27px'; scope.style.filter='drop-shadow(0 0 6px rgba(87,87,87,.55))'; }
       };
@@ -483,7 +478,6 @@ class CZPortfolio {
     const reveal = (el, delay = 0) => {
       el.style.setProperty('--reveal-delay', delay + 'ms');
       el.classList.replace('cz-reveal-pending', 'cz-reveal-visible');
-      el.querySelectorAll('[data-count]').forEach(c => this.countUp(c));
     };
     this._revealElement = reveal;
     if ('IntersectionObserver' in window) {
@@ -509,18 +503,6 @@ class CZPortfolio {
     el.classList.add('cz-reveal-pending');
     if (this._io && !this._reduceMotion.matches) this._io.observe(el);
     else this._revealElement(el);
-  }
-
-  countUp(el) {
-    if (el._done) return; el._done = true;
-    const target = parseInt(el.getAttribute('data-count'), 10) || 0;
-    const dur = 1100, start = performance.now();
-    const step = (t) => {
-      const p = Math.min(1, (t - start) / dur);
-      el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target);
-      if (p < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
   }
 
   initParticles() {
